@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Towards Intelligent Models: Definitions, Measures and Implementations of Model Intelligence</title>
+  <meta name="description"
+    content="Companion page for a survey of definitions, measures, and implementations of model intelligence.">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <style>
+    :root {
+      --text: #222;
+      --muted: #555;
+      --rule: #e6e6e6;
+      --soft: #f5f5f5;
+      --link: hsl(204, 86%, 53%);
+      --link-hover: hsl(204, 86%, 38%);
+      --max-width: 960px;
+      --content-width: 768px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: #fff;
+      font-family: "Noto Sans", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.58;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .navbar {
+      min-height: 3.25rem;
+      background: #fff;
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      padding: 0;
+    }
+
+    .navbar-item,
+    .navbar-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 3.25rem;
+      padding: 0.5rem 0.95rem;
+      color: #4a4a4a;
+      font-size: 1rem;
+    }
+
+    .navbar-item:hover,
+    .navbar-link:hover {
+      background: #fafafa;
+      color: #3273dc;
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 44px 0 28px;
+      background: #fff;
+      text-align: center;
+    }
+
+    .title {
+      max-width: 940px;
+      margin: 0 auto 18px;
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+      font-size: clamp(2.25rem, 5.2vw, 3.85rem);
+      line-height: 1.08;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 840px;
+      margin: 0 auto 20px;
+      color: #333;
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+      font-size: clamp(1.18rem, 2vw, 1.45rem);
+      line-height: 1.35;
+    }
+
+    .authors,
+    .affiliation {
+      margin: 5px 0;
+      color: var(--muted);
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 8px 17px;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      background: #363636;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+
+    .button:hover {
+      background: #4a4a4a;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .teaser {
+      padding: 0 0 38px;
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+      text-align: center;
+    }
+
+    .teaser .subtitle {
+      color: #333;
+      font-size: clamp(1.25rem, 2vw, 1.55rem);
+    }
+
+    section {
+      padding: 48px 0;
+    }
+
+    h2,
+    h3 {
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 30px 0 8px;
+      font-size: 1.35rem;
+      font-weight: 400;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    .note {
+      margin: 18px 0 0;
+      padding: 16px 18px;
+      border-radius: 10px;
+      background: var(--soft);
+      color: #3b434d;
+    }
+
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .toc-group {
+      padding-top: 2px;
+    }
+
+    .toc-group strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .toc-group a {
+      display: block;
+      margin: 3px 0;
+      color: #39424e;
+      font-size: 0.93rem;
+    }
+
+    .taxonomy {
+      padding-top: 34px;
+    }
+
+    .taxonomy .container {
+      max-width: 1120px;
+    }
+
+    .taxonomy-intro {
+      max-width: 780px;
+      margin: 0 auto 22px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .taxonomy-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.75fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .taxonomy-tree {
+      overflow-x: auto;
+      padding: 6px 2px 14px;
+    }
+
+    .tree-row {
+      display: grid;
+      grid-template-columns: 230px 225px minmax(390px, 1fr);
+      gap: 22px;
+      align-items: start;
+      min-width: 860px;
+    }
+
+    .tree-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .tree-col.programmes {
+      gap: 8px;
+    }
+
+    .tree-group {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .tree-group::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      bottom: 20px;
+      border-left: 1px solid #c9c9c9;
+    }
+
+    .tree-group::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 16px;
+      border-top: 1px solid #c9c9c9;
+    }
+
+    .tree-node {
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 12px;
+      border: 1px solid #cfcfcf;
+      border-radius: 7px;
+      background: #fff;
+      color: #222;
+      font-family: "Google Sans", "Noto Sans", sans-serif;
+      font-size: 0.94rem;
+      line-height: 1.22;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .tree-node:hover,
+    .tree-node:focus {
+      outline: 0;
+      border-color: #777;
+      box-shadow: 0 0 0 2px rgba(50, 115, 220, 0.12);
+    }
+
+    .tree-node.is-active {
+      border-color: #222;
+      box-shadow: inset 0 0 0 1px #222;
+    }
+
+    .tree-node.root {
+      margin-top: 158px;
+      border-color: #4a4a4a;
+      background: #f7f7f7;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .tree-node.question {
+      background: #f5f5f5;
+      font-weight: 600;
+    }
+
+    .tree-node .meta {
+      display: block;
+      margin-top: 2px;
+      color: #666;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 0.78rem;
+    }
+
+    .programme-set {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .programme-set.is-visible {
+      display: flex;
+    }
+
+    .programmes .tree-node {
+      min-height: 36px;
+      font-size: 0.9rem;
+    }
+
+    .tree-node.c-beh {
+      background: #eef6fc;
+      border-color: #91c7e8;
+      color: #1f5d84;
+    }
+
+    .tree-node.c-opt {
+      background: #f2f2fb;
+      border-color: #aaa8df;
+      color: #4d4b88;
+    }
+
+    .tree-node.c-pred {
+      background: #eef8f2;
+      border-color: #8dc9a1;
+      color: #2c6e46;
+    }
+
+    .tree-node.c-causal {
+      background: #fff4e9;
+      border-color: #dfb174;
+      color: #8a561c;
+    }
+
+    .tree-node.c-comp {
+      background: #f8eef8;
+      border-color: #d7a0d4;
+      color: #7b3a78;
+    }
+
+    .tree-node.c-sym {
+      background: #fdf0f0;
+      border-color: #dc9a9a;
+      color: #873d3d;
+    }
+
+    .tree-node.c-psy {
+      background: #eef5ff;
+      border-color: #9bbbe5;
+      color: #385d89;
+    }
+
+    .tree-node.c-anti {
+      background: #f3f3f3;
+      border-color: #aaa;
+      color: #555;
+    }
+
+    .taxonomy-detail {
+      position: sticky;
+      top: 18px;
+      padding: 20px 22px;
+      border-radius: 10px;
+      background: #f5f5f5;
+    }
+
+    .taxonomy-detail h3 {
+      margin-top: 0;
+      font-size: 1.35rem;
+    }
+
+    .taxonomy-detail p {
+      color: #444;
+    }
+
+    .taxonomy-detail ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+
+    .taxonomy-detail li {
+      margin: 6px 0;
+    }
+
+    .detail-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 4px;
+    }
+
+    .detail-links a {
+      display: inline-flex;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #fff;
+      color: #333;
+      font-size: 0.86rem;
+    }
+
+    .detail-links a:hover {
+      color: #3273dc;
+      text-decoration: none;
+    }
+
+    .paper-list {
+      margin: 10px 0 0;
+      padding-left: 22px;
+    }
+
+    .paper-list li {
+      margin: 6px 0;
+    }
+
+    .paper-list strong {
+      font-weight: 650;
+    }
+
+    .book-list {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px 24px;
+    }
+
+    .book-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .book-cover {
+      flex: 0 0 auto;
+      height: 92px;
+      width: auto;
+      border-radius: 3px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+    }
+
+    .book-meta {
+      font-size: 0.93rem;
+    }
+
+
+    .section-intro {
+      max-width: 760px;
+      color: var(--muted);
+    }
+
+    #abstract .container,
+    #survey-map .container,
+    #bibliography .container,
+    #dialectic .container,
+    #BibTeX .container {
+      max-width: var(--content-width);
+    }
+
+    #abstract {
+      text-align: center;
+    }
+
+    #abstract p,
+    #dialectic p,
+    #survey-map,
+    #bibliography,
+    #BibTeX {
+      text-align: left;
+    }
+
+    #abstract h2 {
+      text-align: center;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0 8px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th,
+    td {
+      padding: 10px 12px;
+      border: 1px solid var(--rule);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--soft);
+      font-weight: 650;
+    }
+
+    .caption {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    footer {
+      padding: 48px 0 58px;
+      background: #fafafa;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 1.25rem 1.5rem;
+      border-radius: 4px;
+      background: #f5f5f5;
+      color: #4a4a4a;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        font-size: 15px;
+      }
+
+      .hero {
+        padding-top: 30px;
+      }
+
+      .navbar .container {
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .taxonomy-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .taxonomy-detail {
+        position: static;
+      }
+
+      .links {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .button {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#taxonomy">Taxonomy</a>
+      <a class="navbar-item" href="#survey-map">Survey Map</a>
+      <a class="navbar-item" href="#bibliography">Bibliography</a>
+      <a class="navbar-item" href="#dialectic">Dialectic</a>
+      <a class="navbar-item" href="#resources">Resources</a>
+      <a class="navbar-item" href="#BibTeX">BibTeX</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container">
+      <h1 class="title">Towards Intelligent Models</h1>
+      <p class="subtitle">A Survey of Definitions, Measures and Implementations of Model Intelligence</p>
+      <p class="authors">  </p>
+      <p class="affiliation"></p>
+    </div>
+  </header>
+
+  <main>
+    <section id="abstract">
+      <div class="container">
+        <h2>Abstract</h2>
+                <p>
+          Intelligence is one of the most widely used but least clearly defined concepts in artificial intelligence. Although the field is built around the idea of intelligent machines, there is still little agreement on what intelligence is, how it should be measured, or what evidence is sufficient to claim that a system possesses it. This survey traces how these questions have been approached, from their origins in philosophy and psychometrics to contemporary machine learning. We organize the literature using a two-axis taxonomy that combines four fundamental questions, what intelligence is, whether machines can possess it, how it should be measured, and how it can be built, with eight major research programmes that answer these questions in different ways. Across these programmes, we review the main theories, the empirical evidence supporting and challenging them, and the evaluation methods used to study intelligent systems, including behavioural tests, formal and psychometric measures, benchmark-based evaluation, and the main strategies used to build intelligent systems. Looking across this literature reveals a recurring pattern that the claims about machine capabilities are often based on benchmark performance, later challenged by evidence that models rely on memorization or superficial cues, and eventually give way to a deeper question of whether the benchmark actually measures the intended capability. Stronger models may improve benchmark scores, but they do not answer that question. The survey concludes by discussing the implications for future evaluation and identifying directions for developing more reliable measures of machine intelligence.
+        </p>
+      </div>
+    </section>
+
+    <section id="taxonomy" class="taxonomy">
+      <div class="container">
+        <h2 style="text-align: center;">Taxonomy</h2>
+        <p class="taxonomy-intro">
+          The rows divide the four questions that the term intelligence is used to answer. The colours group
+          views by research programme. Select a question or programme to show the corresponding survey sections
+          and representative papers.
+        </p>
+        <div class="taxonomy-layout">
+          <div class="taxonomy-tree" aria-label="Taxonomy tree">
+            <div class="tree-row">
+              <div class="tree-col">
+                <button class="tree-node root is-active" type="button" data-taxonomy="root">
+                  Definitions and Measures<br>of Model Intelligence
+                </button>
+              </div>
+              <div class="tree-col">
+                <div class="tree-group">
+                  <button class="tree-node question" type="button" data-taxonomy="concept">I. Concept <span
+                      class="meta">What intelligence is</span></button>
+                </div>
+                <div class="tree-group">
+                  <button class="tree-node question" type="button" data-taxonomy="possibility">II. Possibility <span
+                      class="meta">Whether machines could have it</span></button>
+                </div>
+                <div class="tree-group">
+                  <button class="tree-node question" type="button" data-taxonomy="criterion">III. Criterion <span
+                      class="meta">How it would be measured</span></button>
+                </div>
+                <div class="tree-group">
+                  <button class="tree-node question" type="button" data-taxonomy="implementation">IV. Implementation
+                    <span class="meta">How it is built</span></button>
+                </div>
+              </div>
+              <div class="tree-col programmes">
+                <div class="programme-set is-visible" data-programmes="concept">
+                  <button class="tree-node c-pred" type="button" data-taxonomy="concept-predictive">Predictive
+                    processing <span class="meta">Friston; Clark; Hawkins</span></button>
+                  <button class="tree-node c-causal" type="button" data-taxonomy="concept-causal">Causality <span
+                      class="meta">Pearl: ladder of causation</span></button>
+                  <button class="tree-node c-sym" type="button" data-taxonomy="concept-symbolic">Symbolic and nativist
+                    <span class="meta">Newell &amp; Simon; Chomsky; Fodor; Marcus</span></button>
+                  <button class="tree-node c-comp" type="button" data-taxonomy="concept-compositional">Compositional and
+                    analogical <span class="meta">Fodor: systematicity; Hofstadter: analogy</span></button>
+                  <button class="tree-node c-psy" type="button" data-taxonomy="concept-psychometric">Psychometric <span
+                      class="meta">Spearman; Gardner</span></button>
+                  <button class="tree-node c-beh" type="button" data-taxonomy="concept-behavioural">Behavioural and
+                    functional <span class="meta">Dennett</span></button>
+                </div>
+                <div class="programme-set" data-programmes="possibility">
+                  <button class="tree-node c-anti" type="button" data-taxonomy="poss-anti">Anti-computationalist
+                    <span class="meta">Dreyfus: embodied coping; Searle: Chinese Room</span></button>
+                </div>
+                <div class="programme-set" data-programmes="criterion">
+                  <button class="tree-node c-beh" type="button" data-taxonomy="crit-behavioural">Behavioural <span
+                      class="meta">Turing: imitation game</span></button>
+                  <button class="tree-node c-psy" type="button" data-taxonomy="crit-psychometric">Psychometric <span
+                      class="meta">Chollet: ARC; Hernandez-Orallo: universal psychometrics / IRT</span></button>
+                  <button class="tree-node c-opt" type="button" data-taxonomy="crit-optimization">Formal measure <span
+                      class="meta">Legg &amp; Hutter: universal intelligence; AIXI</span></button>
+                </div>
+                <div class="programme-set" data-programmes="implementation">
+                  <button class="tree-node c-opt" type="button" data-taxonomy="impl-optimization">Formal optimization
+                    <span class="meta">Russell &amp; Norvig: rational agents; Schmidhuber; Ma; Silver: reward is enough</span></button>
+                  <button class="tree-node c-causal" type="button" data-taxonomy="impl-causal">Causal representation
+                    <span class="meta">Pearl: do-calculus / SCMs; Scholkopf</span></button>
+                  <button class="tree-node c-pred" type="button" data-taxonomy="impl-predictive">Predictive and world
+                    models <span class="meta">Ha &amp; Schmidhuber: world models; LeCun: JEPA</span></button>
+                  <button class="tree-node c-comp" type="button" data-taxonomy="impl-compositional">Compositional <span
+                      class="meta">Lake: meta-learning for compositionality</span></button>
+                  <button class="tree-node c-sym" type="button" data-taxonomy="impl-symbolic">Neuro-symbolic <span
+                      class="meta">Marcus</span></button>
+                  <button class="tree-node c-anti" type="button" data-taxonomy="impl-anti">Anti-representational <span
+                      class="meta">Brooks: situated robotics</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <aside class="taxonomy-detail" aria-live="polite">
+            <h3 id="taxonomy-title">Definitions and Measures of Model Intelligence</h3>
+            <p id="taxonomy-description">The survey is organized by four questions: concept, possibility, criterion, and
+              implementation.</p>
+            <div class="detail-links" id="taxonomy-links">
+              <a href="#concept">Concept</a>
+              <a href="#possibility">Possibility</a>
+              <a href="#criterion">Criterion</a>
+              <a href="#implementation">Implementation</a>
+            </div>
+            <ul id="taxonomy-papers">
+              <li>Use the tree to inspect the research programmes and their representative papers.</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="survey-map">
+      <div class="container">
+        <h2>Survey Map</h2>
+        <div class="toc">
+          <div class="toc-group">
+            <strong><a href="#concept">Question I: Concept</a></strong>
+            <a href="#predictive-processing">Predictive processing</a>
+            <a href="#causal">Causality</a>
+            <a href="#symbolic-nativist">Symbolic and nativist</a>
+            <a href="#compositional-analogical">Compositional and analogical</a>
+            <a href="#psychometric-concept">Psychometric</a>
+            <a href="#behavioural-functional">Behavioural and functional</a>
+            <a href="#formal-optimization">Formal optimization</a>
+            <a href="#anti-computationalist">Anti-computationalist</a>
+          </div>
+          <div class="toc-group">
+            <strong><a href="#possibility">Question II: Possibility</a></strong>
+            <a href="#meaning-grounding">Meaning and model understanding</a>
+            <a href="#embodiment">Grounding and embodiment</a>
+          </div>
+          <div class="toc-group">
+            <strong><a href="#criterion">Question III: Criterion</a></strong>
+            <a href="#turing-variants">Behavioural criterion</a>
+            <a href="#formal-measures">Formal measure</a>
+            <a href="#psychometric-measurement">Universal psychometrics and ARC</a>
+            <a href="#benchmarks">Benchmark validity crisis</a>
+          </div>
+          <div class="toc-group">
+            <strong><a href="#implementation">Question IV: Implementation</a></strong>
+            <a href="#scaling">Scaling</a>
+            <a href="#neurosymbolic">Compositional and neuro-symbolic</a>
+            <a href="#world-models">Generative world models</a>
+            <a href="#jepa">JEPA</a>
+            <a href="#causal-representation">Causal representation learning</a>
+            <a href="#computational-rationality">Computational rationality</a>
+            <a href="#reward">Reward-based mechanisms</a>
+            <a href="#white-box">White-box mechanisms</a>
+            <a href="#object-centric">Object-centric world models</a>
+            <a href="#embodied-vla">Embodied VLA</a>
+            <a href="#icl-interpretability">In-context learning</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bibliography">
+      <div class="container">
+        <h2>Bibliography</h2>
+        <p class="section-intro">Representative papers and books from the companion survey, listed in survey order.</p>
+      </div>
+    </section>
+
+    <section id="foundations">
+      <div class="container">
+        <h2>Foundations and Framing</h2>
+        <ul class="paper-list">
+          <li><a href="https://arxiv.org/abs/1911.01547"><strong>On the Measure of Intelligence</strong></a> &mdash; Chollet, 2019.</li>
+          <li><a href="https://doi.org/10.1017/9781316594179"><strong>The Measure of All Minds: Evaluating Natural and Artificial Intelligence</strong></a> &mdash; Hernandez-Orallo, Cambridge University Press, 2017.</li>
+          <li><a href="https://doi.org/10.1145/3641289"><strong>A Survey on Evaluation of Large Language Models</strong></a> &mdash; Chang et al., <em>ACM TIST</em>, 2024.</li>
+          <li><a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html"><strong>The Bitter Lesson</strong></a> &mdash; Sutton, 2019.</li>
+          <li><a href="https://openreview.net/forum?id=yzkSU5zdwD"><strong>Emergent Abilities of Large Language Models</strong></a> &mdash; Wei et al., <em>TMLR</em>, 2022.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="concept">
+      <div class="container">
+        <h2>Question I: Concept &mdash; What Intelligence Is</h2>
+        <p class="section-intro">For each programme the survey states the constitutive claim, its strongest
+          operationalization in current machine learning, and the main line of resistance.</p>
+
+        <h3 id="predictive-processing">Predictive Processing</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1038/nrn2787"><strong>The Free-Energy Principle: A Unified Brain Theory?</strong></a> &mdash; Friston, <em>Nature Reviews Neuroscience</em>, 2010.</li>
+          <li><a href="https://doi.org/10.1017/S0140525X12000477"><strong>Whatever Next? Predictive Brains, Situated Agents, and the Future of Cognitive Science</strong></a> &mdash; Clark, <em>BBS</em>, 2013.</li>
+          <li><a href="https://openlibrary.org/isbn/9781541675810"><strong>A Thousand Brains: A New Theory of Intelligence</strong></a> &mdash; Hawkins, 2021.</li>
+          <li><a href="https://arxiv.org/abs/1312.6114"><strong>Auto-Encoding Variational Bayes</strong></a> &mdash; Kingma and Welling, 2014.</li>
+          <li><strong>The Math Is Not the Territory: Navigating the Free Energy Principle</strong> &mdash; Andrews, <em>Biology &amp; Philosophy</em>, 2021.</li>
+          <li><a href="https://doi.org/10.1017/S0140525X21002351"><strong>The Emperor's New Markov Blankets</strong></a> &mdash; Bruineberg et al., <em>BBS</em>, 2022.</li>
+        </ul>
+
+        <h3 id="causal">Causality</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1017/CBO9780511803161"><strong>Causality: Models, Reasoning, and Inference</strong></a> &mdash; Pearl, Cambridge University Press, 2009.</li>
+          <li><a href="https://openlibrary.org/isbn/9780465097609"><strong>The Book of Why: The New Science of Cause and Effect</strong></a> &mdash; Pearl and Mackenzie, 2018.</li>
+          <li><a href="http://jmlr.org/papers/v9/shpitser08a.html"><strong>Complete Identification Methods for the Causal Hierarchy</strong></a> &mdash; Shpitser and Pearl, <em>JMLR</em>, 2008.</li>
+          <li><strong>Causal Identification under Markov Equivalence</strong> &mdash; Jaber, Ribeiro, Zhang, Bareinboim, <em>NeurIPS</em>, 2022.</li>
+          <li><a href="https://arxiv.org/abs/2312.04350"><strong>CLadder: Assessing Causal Reasoning in Language Models</strong></a> &mdash; Jin et al., <em>NeurIPS</em>, 2023.</li>
+          <li><a href="https://arxiv.org/abs/2306.05836"><strong>Can Large Language Models Infer Causation from Correlation?</strong></a> &mdash; Jin et al., 2024.</li>
+          <li><strong>LLMs Are Prone to Fallacies in Causal Inference</strong> &mdash; Joshi et al., <em>EMNLP</em>, 2024.</li>
+        </ul>
+
+        <h3 id="symbolic-nativist">Symbolic and Nativist</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1145/360018.360022"><strong>Computer Science as Empirical Inquiry: Symbols and Search</strong></a> &mdash; Newell and Simon, <em>CACM</em>, 1976.</li>
+          <li><a href="https://doi.org/10.1016/0010-0277(88)90031-5"><strong>Connectionism and Cognitive Architecture: A Critical Analysis</strong></a> &mdash; Fodor and Pylyshyn, <em>Cognition</em>, 1988.</li>
+          <li><a href="https://openlibrary.org/isbn/9780262530071"><strong>Aspects of the Theory of Syntax</strong></a> &mdash; Chomsky, MIT Press, 1965.</li>
+          <li><a href="https://arxiv.org/abs/2002.06177"><strong>The Next Decade in AI: Four Steps Towards Robust Artificial Intelligence</strong></a> &mdash; Marcus, 2020.</li>
+          <li><a href="https://aclanthology.org/2021.conll-1.49/"><strong>BabyBERTa: Learning More Grammar With Small-Scale Child-Directed Language</strong></a> &mdash; Huebner et al., <em>CoNLL</em>, 2021.</li>
+          <li><strong>The BabyLM Challenge</strong> &mdash; Warstadt et al., <em>CoNLL</em>, 2023.</li>
+          <li><strong>Physics of Language Models, Part 1: Learning Hierarchical Language Structures</strong> &mdash; Zeyuan Allen-Zhu and Yuanzhi Li, 2023.</li>
+        </ul>
+
+        <h3 id="compositional-analogical">Compositional and Analogical</h3>
+        <ul class="paper-list">
+          <li><strong>Analogy as the Core of Cognition</strong> &mdash; Hofstadter, 2001.</li>
+          <li><a href="https://doi.org/10.1207/s15516709cog0702_3"><strong>Structure-Mapping: A Theoretical Framework for Analogy</strong></a> &mdash; Gentner, <em>Cognitive Science</em>, 1983.</li>
+          <li><strong>Analogical Mapping by Constraint Satisfaction</strong> &mdash; Holyoak and Thagard, 1989.</li>
+          <li><strong>The Copycat Project: A Model of Mental Fluidity and Analogy-Making</strong> &mdash; Hofstadter and Mitchell, 1995.</li>
+          <li><a href="https://doi.org/10.1111/nyas.14619"><strong>Abstraction and Analogy-Making in Artificial Intelligence</strong></a> &mdash; Mitchell, <em>Annals NYAS</em>, 2021.</li>
+          <li><a href="https://doi.org/10.1126/science.aab3050"><strong>Human-Level Concept Learning through Probabilistic Program Induction</strong></a> &mdash; Lake et al., <em>Science</em>, 2015.</li>
+          <li><strong>Geometric Signatures of Compositionality Across a Language Model's Lifetime</strong> &mdash; Lee et al., <em>ACL</em>, 2025.</li>
+        </ul>
+
+        <h3 id="psychometric-concept">Psychometric</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.2307/1412107"><strong>"General Intelligence," Objectively Determined and Measured</strong></a> &mdash; Spearman, 1904.</li>
+          <li><strong>Item Response Theory for Psychologists</strong> &mdash; Embretson and Reise, 2000.</li>
+          <li><a href="https://openlibrary.org/isbn/9780465025107"><strong>Frames of Mind: The Theory of Multiple Intelligences</strong></a> &mdash; Gardner, 1983.</li>
+          <li><a href="https://openlibrary.org/isbn/9780393314250"><strong>The Mismeasure of Man</strong></a> &mdash; Gould, 1996.</li>
+          <li><a href="https://arxiv.org/abs/2306.10062"><strong>Revealing the Structure of Language Model Capabilities</strong></a> &mdash; Burnell et al., 2023.</li>
+          <li><a href="https://arxiv.org/abs/2505.08245"><strong>Large Language Model Psychometrics: A Systematic Review</strong></a> &mdash; Ye et al., 2026.</li>
+        </ul>
+
+        <h3 id="behavioural-functional">Behavioural and Functional</h3>
+        <ul class="paper-list">
+          <li><a href="https://openlibrary.org/isbn/9780262540537"><strong>The Intentional Stance</strong></a> &mdash; Dennett, MIT Press, 1987.</li>
+          <li><a href="https://doi.org/10.1017/CBO9780511625251.011"><strong>The Nature of Mental States</strong></a> &mdash; Putnam, 1967.</li>
+          <li><strong>Psychologism and Behaviorism</strong> &mdash; Block, <em>Philosophical Review</em>, 1981.</li>
+          <li><a href="https://doi.org/10.1145/3624724"><strong>Talking About Large Language Models</strong></a> &mdash; Shanahan, <em>CACM</em>, 2024.</li>
+        </ul>
+
+        <h3 id="formal-optimization">Formal Optimization</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1016/j.artint.2021.103535"><strong>Reward Is Enough</strong></a> &mdash; Silver, Singh, Precup, Sutton, <em>Artificial Intelligence</em>, 2021.</li>
+          <li><a href="https://doi.org/10.1007/s11023-007-9079-x"><strong>Universal Intelligence: A Definition of Machine Intelligence</strong></a> &mdash; Legg and Hutter, <em>Minds and Machines</em>, 2007.</li>
+          <li><a href="https://doi.org/10.1109/TAMD.2010.2056368"><strong>Formal Theory of Creativity, Fun, and Intrinsic Motivation</strong></a> &mdash; Schmidhuber, <em>IEEE TAMD</em>, 2010.</li>
+          <li><strong>On the Principles of Parsimony and Self-Consistency for the Emergence of Intelligence</strong> &mdash; Ma, Tsao, Shum, 2022.</li>
+          <li><a href="https://openreview.net/forum?id=jznbgiynus"><strong>Language Modeling Is Compression</strong></a> &mdash; Deletang et al., <em>ICLR</em>, 2024.</li>
+          <li><strong>Physics of Language Models, Part 3.3: Knowledge Capacity Scaling Laws</strong> &mdash; Zeyuan Allen-Zhu and Yuanzhi Li, 2024.</li>
+          <li><a href="https://openreview.net/forum?id=SHMj84U5SH"><strong>Compression Represents Intelligence Linearly</strong></a> &mdash; Huang et al., <em>COLM</em>, 2024.</li>
+        </ul>
+
+        <h3 id="anti-computationalist">Anti-computationalist and Anti-representational</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1017/S0140525X00005756"><strong>Minds, Brains, and Programs</strong></a> &mdash; Searle, <em>BBS</em>, 1980.</li>
+          <li><a href="https://openlibrary.org/isbn/9780060110826"><strong>What Computers Can't Do: A Critique of Artificial Reason</strong></a> &mdash; Dreyfus, 1972.</li>
+          <li><a href="https://doi.org/10.1016/0004-3702(91)90053-M"><strong>Intelligence Without Representation</strong></a> &mdash; Brooks, <em>Artificial Intelligence</em>, 1991.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="possibility">
+      <div class="container">
+        <h2>Question II: Possibility &mdash; Can a Machine Be Genuinely Intelligent?</h2>
+        <p class="section-intro">The Chinese Room concedes every behavioural result in advance and so has no empirical
+          face. The embodiment argument does, and it has been tested.</p>
+
+        <h3 id="meaning-grounding">Meaning and Model Understanding</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1017/S0140525X00005756"><strong>Minds, Brains, and Programs</strong></a> &mdash; Searle, <em>BBS</em>, 1980.</li>
+          <li><a href="https://doi.org/10.1016/0167-2789(90)90087-6"><strong>The Symbol Grounding Problem</strong></a> &mdash; Harnad, <em>Physica D</em>, 1990.</li>
+          <li><a href="https://aclanthology.org/2020.acl-main.463/"><strong>Climbing Towards NLU: On Meaning, Form, and Understanding in the Age of Data</strong></a> &mdash; Bender and Koller, <em>ACL</em>, 2020.</li>
+          <li><a href="https://doi.org/10.33735/phimisci.2026.12307"><strong>The Vector Grounding Problem</strong></a> &mdash; Coelho Mollo and Milliere, 2026.</li>
+          <li><a href="https://openreview.net/forum?id=nRkJEwmZnM"><strong>Meaning Without Reference in Large Language Models</strong></a> &mdash; Piantadosi and Hill, 2022.</li>
+          <li><a href="https://doi.org/10.1098/rsta.2022.0041"><strong>Symbols and Grounding in Large Language Models</strong></a> &mdash; Pavlick, 2023.</li>
+          <li><a href="https://aclanthology.org/2021.conll-1.9/"><strong>Can Language Models Encode Perceptual Structure Without Grounding? A Case Study in Color</strong></a> &mdash; Abdou et al., 2021.</li>
+          <li><a href="https://openreview.net/forum?id=gJcEM8sxHK"><strong>Mapping Language Models to Grounded Conceptual Spaces</strong></a> &mdash; Patel and Pavlick, 2022.</li>
+        </ul>
+
+        <h3 id="embodiment">Grounding and Embodiment</h3>
+        <ul class="paper-list">
+          <li><a href="https://openlibrary.org/isbn/9780060110826"><strong>What Computers Can't Do: A Critique of Artificial Reason</strong></a> &mdash; Dreyfus, 1972.</li>
+          <li><a href="https://arxiv.org/abs/2411.02385"><strong>How Far Is Video Generation from World Model: A Physical Law Perspective</strong></a> &mdash; Kang et al., <em>ICML</em>, 2025.</li>
+          <li><a href="https://arxiv.org/abs/1910.01442"><strong>CLEVRER: CoLlision Events for Video REpresentation and Reasoning</strong></a> &mdash; Yi et al., <em>ICLR</em>, 2020.</li>
+          <li><a href="https://arxiv.org/abs/2106.08261"><strong>Physion: Evaluating Physical Prediction from Vision in Humans and Machines</strong></a> &mdash; Bear et al., 2022.</li>
+          <li><a href="https://openreview.net/forum?id=5Exz7eaBXH"><strong>Physion++: Evaluating Physical Scene Understanding that Requires Online Inference of Different Physical Properties</strong></a> &mdash; Tung et al., <em>NeurIPS D&amp;B</em>, 2023.</li>
+          <li><a href="https://arxiv.org/abs/2501.16411"><strong>PhysBench: Benchmarking and Enhancing Vision-Language Models for Physical World Understanding</strong></a> &mdash; Chow et al., 2025.</li>
+          <li><strong>Do Multimodal LLMs and Humans Ground Language Similarly?</strong> &mdash; Jones et al., <em>Computational Linguistics</em>, 2024.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="criterion">
+      <div class="container">
+        <h2>Question III: Criterion &mdash; How Intelligence Is Measured</h2>
+        <p class="section-intro">Any criterion answers two questions at once, whether a result counts as evidence and
+          what exactly it is evidence for. The field has been far more confident about the first than the second.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Criterion</th>
+                <th>Intrinsic difficulty</th>
+                <th>Contamination-resistant</th>
+                <th>Stated construct</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Imitation game (Turing 1950)</td>
+                <td>No</td>
+                <td>No</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Legg-Hutter measure (Legg and Hutter 2007)</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>Universal psychometrics (Hernandez-Orallo 2017)</td>
+                <td>Partial</td>
+                <td>No</td>
+                <td>Partial</td>
+              </tr>
+              <tr>
+                <td>Skill-acquisition efficiency (ARC-AGI, Chollet 2019)</td>
+                <td>Partial</td>
+                <td>Yes</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <td>Challenging benchmarks (LiveBench, HLE)</td>
+                <td>No</td>
+                <td>Partial</td>
+                <td>No</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">
+          Construct validity conditions satisfied by the criteria of this section. Each condition is met by at least one
+          criterion, and none meets all three. The criterion that comes closest is the one that cannot be computed, and
+          the benchmarks marketed as the most challenging supply the fewest conditions.
+        </p>
+
+        <h3 id="turing-variants">Behavioural Criterion and Turing-Test Variants</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1093/mind/LIX.236.433"><strong>Computing Machinery and Intelligence</strong></a> &mdash; Turing, <em>Mind</em>, 1950.</li>
+          <li><strong>The Mechanization of Causal Inference: A Mini Turing Test</strong> &mdash; Pearl, ACM, 2012.</li>
+          <li><a href="https://proceedings.mlr.press/v139/devlin21a.html"><strong>Navigation Turing Test (NTT): Learning to Evaluate Human-Like Navigation</strong></a> &mdash; Devlin et al., <em>ICML</em>, 2021.</li>
+          <li><a href="https://arxiv.org/abs/2205.05268"><strong>The Meta-Turing Test</strong></a> &mdash; Walsh, 2022.</li>
+          <li><a href="https://doi.org/10.1145/3715275.3732108"><strong>People Cannot Distinguish GPT-4 from a Human in a Turing Test</strong></a> &mdash; Jones et al., <em>FAccT</em>, 2025.</li>
+          <li><a href="https://doi.org/10.1073/pnas.2524472123"><strong>LLMs Pass a Standard Three-Party Turing Test</strong></a> &mdash; Jones and Bergen, <em>PNAS</em>, 2026.</li>
+          <li><a href="https://aclanthology.org/2025.acl-long.293/"><strong>X-Turing</strong></a> &mdash; Wu, Wu, Zhao, <em>ACL</em>, 2025.</li>
+          <li><a href="https://arxiv.org/abs/2605.10851"><strong>The Generalized Turing Test</strong></a> &mdash; Mitropolsky et al., 2026.</li>
+        </ul>
+
+        <h3 id="formal-measures">Formal Measure and Algorithmic Information Theory</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1016/S0019-9958(64)90223-2"><strong>A Formal Theory of Inductive Inference</strong></a> &mdash; Solomonoff, <em>Information and Control</em>, 1964.</li>
+          <li><a href="https://www.tandfonline.com/doi/abs/10.1080/00207166808803030"><strong>Three Approaches to the Quantitative Definition of Information</strong></a> &mdash; Kolmogorov, 1968.</li>
+          <li><a href="https://doi.org/10.1007/b138233"><strong>Universal Artificial Intelligence: Sequential Decisions Based on Algorithmic Probability</strong></a> &mdash; Hutter, Springer, 2005.</li>
+          <li><a href="https://proceedings.mlr.press/v40/Leike15.html"><strong>Bad Universal Priors and Notions of Optimality</strong></a> &mdash; Leike and Hutter, <em>COLT</em>, 2015.</li>
+          <li><a href="https://arxiv.org/abs/0909.0801"></a><strong>A Monte-Carlo AIXI Approximation</strong></a> &mdash; Veness et al., <em>JAIR</em>, 2011.</li>
+          <li><a href="https://arxiv.org/abs/2503.13992"><strong>The KoLMogorov Test: Compression by Code Generation</strong></a> &mdash; Yoran et al., <em>ICLR</em>, 2025.</li>
+        </ul>
+
+        <h3 id="psychometric-measurement">Universal Psychometrics and Skill-Acquisition Efficiency</h3>
+        <ul class="paper-list">
+          <li><a href="https://openlibrary.org/isbn/9780807722152"><strong>The Measurement of Intelligence</strong></a> &mdash; Thorndike et al., 1926.</li>
+          <li><a href="https://www.sciencedirect.com/science/article/pii/S0004370210001554"><strong>Measuring Universal Intelligence: Towards an Anytime Intelligence Test</strong></a> &mdash; Hernandez-Orallo and Dowe, <em>Artificial Intelligence</em>, 2010.</li>
+          <li><a href="https://doi.org/10.1016/j.cogsys.2013.06.001"><strong>Universal Psychometrics: Measuring Cognitive Abilities in the Machine Kingdom</strong></a> &mdash; Hernandez-Orallo, Dowe, Hernandez-Lloreda, 2014.</li>
+          <li><a href="https://www.sciencedirect.com/science/article/pii/S0004370219300220"><strong>Item Response Theory in AI: Analysing Machine Learning Classifiers at the Instance Level</strong></a> &mdash; Martinez-Plumed et al., <em>Artificial Intelligence</em>, 2019.</li>
+          <li><a href="https://link.springer.com/chapter/10.1007/978-3-642-22887-2_13"><strong>Comparing Humans and AI Agents</strong></a> &mdash; Insa-Cabrera et al., <em>AGI</em>, 2011.</li>
+          <li><a href="https://arxiv.org/abs/1911.01547"><strong>On the Measure of Intelligence</strong></a> &mdash; Chollet, 2019.</li>
+          <li><a href="https://arxiv.org/abs/2505.11831"><strong>ARC-AGI-2: A New Challenge for Frontier AI Reasoning Systems</strong></a> &mdash; Chollet et al., 2026.</li>
+          <li><a href="https://arxiv.org/abs/2603.24621"><strong>ARC-AGI-3</strong></a> &mdash; ARC Prize Foundation, 2026.</li>
+          <li><a href="https://arxiv.org/abs/2512.21329"><strong>Your Reasoning Benchmark May Not Test Reasoning: Revealing Perception Bottleneck in Abstract Reasoning Benchmarks</strong></a> &mdash; Wang et al., 2026.</li>
+          <li><a href="https://arxiv.org/abs/2511.14761"><strong>ARC Is a Vision Problem!</strong></a> &mdash; Hu et al., <em>CVPR</em>, 2026.</li>
+          <li><a href="https://ojs.aaai.org/index.php/AAAI/article/view/40814"><strong>Lost in Benchmarks? Rethinking Large Language Model Benchmarking with Item Response Theory</strong></a> &mdash; Zhou et al., <em>AAAI</em>, 2026.</li>
+          <li><a href="https://arxiv.org/abs/2510.18212"><strong>A Definition of AGI</strong></a> &mdash; Dan Hendrycks, Dawn Song, Christian Szegedy, Honglak Lee, Yarin Gal, Erik Brynjolfsson, Sharon Li, Andy Zou, Lionel Levine, Bo Han, Jie Fu, Ziwei Liu, Jinwoo Shin, Kimin Lee, Mantas Mazeika, Long Phan, George Ingebretsen, Adam Khoja, Cihang Xie, Olawale Salaudeen, Matthias Hein, Kevin Zhao, Alexander Pan, David Duvenaud, Bo Li, Steve Omohundro, Gabriel Alfour, Max Tegmark, Kevin McGrew, Gary Marcus, Jaan Tallinn, Eric Schmidt, and Yoshua Bengio, 2025.</li>
+          <li><a href="https://arxiv.org/abs/2605.28405"><strong>Measuring Progress Toward AGI: A Cognitive Framework</strong></a> &mdash; Ryan Burnell, Yumeya Yamamori, Orhan Firat, Kate Olszewska, Steph Hughes-Fitt, Oran Kelly, Isaac R. Galatzer-Levy, Meredith Ringel Morris, Allan Dafoe, Alison M. Snyder, Noah D. Goodman, Matthew Botvinick, and Shane Legg, 2026.</li>
+        </ul>
+
+        <h3 id="benchmarks">Benchmark-Driven Evaluation and Its Validity Crisis</h3>
+        <ul class="paper-list">
+          <li><a href="https://arxiv.org/abs/2405.00332"><strong>A Careful Examination of Large Language Model Performance on Grade School Arithmetic</strong></a> &mdash; Zhang et al., <em>NeurIPS D&amp;B</em>, 2024.</li>
+          <li><a href="https://openreview.net/forum?id=sKYHBTAxVa"><strong>LiveBench: A Challenging, Contamination-Free LLM Benchmark</strong></a> &mdash; White et al., <em>ICLR</em>, 2025.</li>
+          <li><a href="https://openreview.net/forum?id=mdA5lVvNcU"><strong>Measuring What Matters: Construct Validity in LLM Benchmarks</strong></a> &mdash; Bean et al., <em>NeurIPS D&amp;B</em>, 2026.</li>
+          <li><a href="https://arxiv.org/abs/2309.14316"><strong>Physics of Language Models, Parts 3.1 and 3.2: Knowledge Storage, Extraction, and
+              Manipulation</strong></a> &mdash; Zeyuan Allen-Zhu and Yuanzhi Li, <em>ICML</em> 2024.</li>
+          <li><strong>Large Language Models Are Not Robust Multiple Choice Selectors</strong> &mdash; Zheng et al., <em>ICLR</em>, 2024.</li>
+          <li><strong>Quantifying Language Models' Sensitivity to Spurious Features in Prompt Design</strong> &mdash; Sclar et al., <em>ICLR</em>, 2024.</li>
+          <li><strong>Scaling Laws for Reward Model Overoptimization</strong> &mdash; Gao, Schulman, Hilton, <em>ICML</em>, 2023.</li>
+          <li><a href="https://arxiv.org/abs/2304.15004"><strong>Are Emergent Abilities of Large Language Models a Mirage?</strong></a> &mdash; Schaeffer, Miranda, Koyejo, <em>NeurIPS</em>, 2023.</li>
+          <li><a href="https://doi.org/10.1126/science.adf6369"><strong>Rethink Reporting of Evaluation Results in AI</strong></a> &mdash; Burnell et al., <em>Science</em>, 2023.</li>
+          <li><a href="https://doi.org/10.1038/s41586-025-09962-4"><strong>Humanity's Last Exam</strong></a> &mdash; Phan et al., <em>Nature</em>, 2026.</li>
+          <li><a href="https://openreview.net/forum?id=uyTL5Bvosj"><strong>Beyond the Imitation Game: Quantifying and Extrapolating the Capabilities of Language Models</strong></a> &mdash; Srivastava et al., <em>TMLR</em>, 2023.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="implementation">
+      <div class="container">
+        <h2>Question IV: Implementation &mdash; How Intelligence Is Built</h2>
+
+        <h3 id="scaling">Scaling as the Mechanism-Neutral Baseline</h3>
+        <ul class="paper-list">
+          <li><a href="https://arxiv.org/abs/2001.08361"><strong>Scaling Laws for Neural Language Models</strong></a> &mdash; Kaplan et al., 2020.</li>
+          <li><a href="https://arxiv.org/abs/2203.15556"><strong>Training Compute-Optimal Large Language Models</strong></a> &mdash; Hoffmann et al., 2022.</li>
+          <li><a href="https://arxiv.org/abs/2501.19393"><strong>s1: Simple Test-Time Scaling</strong></a> &mdash; Muennighoff et al., 2025.</li>
+          <li><a href="https://arxiv.org/abs/2412.16720"><strong>OpenAI o1 System Card</strong></a> &mdash; OpenAI, 2026.</li>
+        </ul>
+
+        <h3 id="neurosymbolic">Compositional and Neuro-Symbolic Mechanisms</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1007/s10462-023-10448-w"><strong>Neurosymbolic AI: The 3rd Wave</strong></a> &mdash; d'Avila Garcez and Lamb, <em>AI Review</em>, 2023.</li>
+          <li><strong>From Statistical Relational to Neurosymbolic Artificial Intelligence: A Survey</strong> &mdash; Marra et al., <em>Artificial Intelligence</em>, 2024.</li>
+          <li><a href="https://arxiv.org/abs/1511.02799"><strong>Neural Module Networks</strong></a> &mdash; Andreas et al., <em>CVPR</em>, 2016.</li>
+          <li><a href="https://arxiv.org/abs/1904.12584"><strong>The Neuro-Symbolic Concept Learner: Interpreting Scenes, Words, and Sentences From Natural Supervision</strong></a> &mdash; Mao et al., <em>ICLR</em>, 2019.</li>
+          <li><strong>DeepProbLog: Neural Probabilistic Logic Programming</strong> &mdash; Manhaeve et al., 2018.</li>
+          <li><a href="https://doi.org/10.1098/rsta.2022.0050"><strong>DreamCoder: Growing Generalizable, Interpretable Knowledge with Wake-Sleep Bayesian Program Learning</strong></a> &mdash; Ellis et al., <em>Phil. Trans. R. Soc. A</em>, 2023.</li>
+          <li><a href="https://doi.org/10.1038/s41586-023-06747-5"><strong>Solving Olympiad Geometry Without Human Demonstrations (AlphaGeometry)</strong></a> &mdash; Trinh et al., <em>Nature</em>, 2024.</li>
+          <li><strong>Not All Neuro-Symbolic Concepts Are Created Equal: Analysis and Mitigation of Reasoning Shortcuts</strong> &mdash; Marconato et al., <em>NeurIPS</em>, 2023.</li>
+          <li><a href="https://doi.org/10.1613/jair.1.11674"><strong>Compositionality Decomposed: How Do Neural Networks Generalise?</strong></a> &mdash; Hupkes et al., <em>IJCAI</em>, 2020.</li>
+          <li><a href="https://aclanthology.org/2021.emnlp-main.49/"><strong>The Devil Is in the Detail: Simple Tricks Improve Systematic Generalization of Transformers</strong></a> &mdash; Csordas, Irie, Schmidhuber, <em>EMNLP</em>, 2021.</li>
+          <li><a href="https://doi.org/10.1038/s41586-023-06668-3"><strong>Human-Like Systematic Generalization Through a Meta-Learning Neural Network</strong></a> &mdash; Lake and Baroni, <em>Nature</em>, 2023.</li>
+        </ul>
+
+        <h3 id="world-models">Generative and World-Model Mechanisms</h3>
+        <ul class="paper-list">
+          <li><a href="https://arxiv.org/abs/1809.01999"><strong>Recurrent World Models Facilitate Policy Evolution</strong></a> &mdash; Ha and Schmidhuber, <em>NeurIPS</em>, 2018.</li>
+          <li><a href="https://arxiv.org/abs/1912.01603"><strong>Dream to Control: Learning Behaviors by Latent Imagination</strong></a> &mdash; Hafner et al., 2020.</li>
+          <li><a href="https://arxiv.org/abs/2402.15391"><strong>Genie: Generative Interactive Environments</strong></a> &mdash; Bruce et al., <em>ICML</em>, 2024.</li>
+          <li><a href="https://openai.com/research/video-generation-models-as-world-simulators"><strong>Video Generation Models as World Simulators</strong></a> &mdash; OpenAI, 2024.</li>
+          <li><a href="https://arxiv.org/abs/2501.03575"><strong>Cosmos World Foundation Model Platform for Physical AI</strong></a> &mdash; NVIDIA, 2025.</li>
+          <li><a href="https://arxiv.org/abs/2501.09038"><strong>Do Generative Video Models Understand Physical Principles?</strong></a> &mdash; Motamed et al., 2026.</li>
+          <li><a href="https://arxiv.org/abs/2503.06800"><strong>VideoPhy-2</strong></a> &mdash; Bansal et al., <em>ICLR</em>, 2026.</li>
+          <li><a href="https://www.nature.com/articles/s41562-022-01394-8"><strong>Intuitive Physics Learning in a Deep-Learning Model</strong></a> &mdash; Piloto et al., <em>Nature Human Behaviour</em>, 2022.</li>
+        </ul>
+
+        <h3 id="jepa">Joint-Embedding Predictive Architectures</h3>
+        <ul class="paper-list">
+          <li><a href="https://openreview.net/forum?id=BZ5a1r-kVsf"><strong>A Path Towards Autonomous Machine Intelligence</strong></a> &mdash; LeCun, 2022.</li>
+          <li><a href="https://doi.org/10.1088/1742-5468/ad292b"><strong>Introduction to Latent Variable Energy-Based Models: A Path Towards Autonomous Machine Intelligence</strong></a> &mdash; Dawid and LeCun, 2024.</li>
+          <li><a href="https://arxiv.org/abs/2301.08243"><strong>Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture (I-JEPA)</strong></a> &mdash; Assran et al., 2023.</li>
+          <li><a href="https://arxiv.org/abs/2506.09985"><strong>V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning</strong></a> &mdash; Assran et al., 2025.</li>
+          <li><a href="https://arxiv.org/abs/2105.04906"><strong>VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning</strong></a> &mdash; Bardes, Ponce, LeCun, <em>ICLR</em>, 2022.</li>
+          <li><strong>Understanding Dimensional Collapse in Contrastive Self-Supervised Learning</strong> &mdash; Jing et al., <em>ICLR</em>, 2022.</li>
+          <li><a href="https://arxiv.org/abs/2511.08544"><strong>LeJEPA</strong></a> &mdash; Balestriero and LeCun, 2025.</li>
+          <li><strong>When Does LeJEPA Learn a World Model?</strong> &mdash; Klindt, LeCun, Balestriero, 2026.</li>
+          <li><a href="https://arxiv.org/abs/2606.27014"><strong>A Generalization Theory for JEPA-Based World Models</strong></a> &mdash; Cui et al., 2026.</li>
+        </ul>
+
+        <h3 id="causal-representation">Causal Representation Learning</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1109/JPROC.2021.3058954"><strong>Toward Causal Representation Learning</strong></a> &mdash; Scholkopf et al., <em>Proc. IEEE</em>, 2021.</li>
+          <li><a href="https://doi.org/10.1016/S0893-6080(98)00140-3"><strong>Nonlinear Independent Component Analysis: Existence and Uniqueness Results</strong></a> &mdash; Hyvarinen and Pajunen, 1999.</li>
+          <li><strong>Challenging Common Assumptions in the Unsupervised Learning of Disentangled Representations</strong> &mdash; Locatello et al., <em>ICML</em>, 2019.</li>
+          <li><a href="https://proceedings.mlr.press/v202/ahuja23a.html"><strong>Interventional Causal Representation Learning</strong></a> &mdash; Ahuja et al., <em>ICML</em>, 2023.</li>
+          <li><a href="https://proceedings.mlr.press/v80/parascandolo18a.html"><strong>Learning Independent Causal Mechanisms</strong></a> &mdash; Parascandolo et al., <em>ICML</em>, 2018.</li>
+          <li><a href="https://arxiv.org/abs/2510.14049"><strong>CausalVerse</strong></a> &mdash; Chen et al., <em>NeurIPS</em>, 2025.</li>
+          <li><a href="https://openreview.net/forum?id=tv46tCzs83"><strong>Causal Parrots: Large Language Models May Talk Causality But Are Not Causal</strong></a> &mdash; Zecevic et al., <em>TMLR</em>, 2023.</li>
+        </ul>
+
+        <h3 id="computational-rationality">Computational Rationality and Metareasoning</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.2307/1884852"><strong>A Behavioral Model of Rational Choice</strong></a> &mdash; Herbert A. Simon, <em>Quarterly Journal of Economics</em>, 1955.</li>
+          <li><a href="https://doi.org/10.1016/0004-3702(91)90015-C"><strong>Principles of Metareasoning</strong></a> &mdash; Stuart Russell and Eric Wefald, <em>Artificial Intelligence</em>, 1991.</li>
+          <li><a href="https://doi.org/10.1613/jair.133"><strong>Provably Bounded-Optimal Agents</strong></a> &mdash; Stuart J. Russell and Devika Subramanian, <em>JAIR</em>, 1995.</li>
+          <li><a href="https://doi.org/10.1126/science.aac6076"><strong>Computational Rationality: A Converging Paradigm for Intelligence in Brains, Minds, and
+              Machines</strong></a> &mdash; Samuel J. Gershman, Eric J. Horvitz, and Joshua B. Tenenbaum, <em>Science</em>, 2015.</li>
+          <li><a href="https://doi.org/10.1017/S0140525X1900061X"><strong>Resource-Rational Analysis</strong></a> &mdash; Falk Lieder and Thomas L. Griffiths, <em>Behavioral and Brain Sciences</em>, 2020.</li>
+          <li><a href="https://arxiv.org/abs/2410.05563"><strong>Rational Metareasoning for Large Language Models</strong></a> &mdash; C. Nicol&ograve; De Sabbata, Theodore R. Sumers, and Thomas L. Griffiths, NeurIPS 2024.</li>
+          <li><a href="https://doi.org/10.1073/pnas.2520077122"><strong>The Cost of Thinking Is Similar Between Large Reasoning Models and Humans</strong></a> &mdash; Andrea Gregor de Varda, Ferdinando Pio D'Elia, Hope Kean, Andrew Lampinen, and Evelina Fedorenko, <em>PNAS</em> 122(47), 2025.</li>
+          <li><a href="https://arxiv.org/abs/2510.10930"><strong>Evaluating Language Models' Evaluations of Games</strong></a> &mdash; Katherine M. Collins, Cedegao E. Zhang, Graham Todd, Lance Ying, Mauricio Barba da Costa, Ryan Liu, Prafull Sharma, Adrian Weller, Ionatan Kuperwajs, Lionel Wong, Joshua B. Tenenbaum, and Thomas L. Griffiths, 2025.</li>
+        </ul>
+
+        <h3 id="reward">Reward-Based Mechanisms</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1038/nature16961"><strong>Mastering the Game of Go with Deep Neural Networks and Tree Search (AlphaGo)</strong></a> &mdash; Silver et al., <em>Nature</em>, 2016.</li>
+          <li><a href="https://arxiv.org/abs/2203.02155"><strong>Training Language Models to Follow Instructions with Human Feedback (InstructGPT)</strong></a> &mdash; Ouyang et al., 2022.</li>
+          <li><strong>On the Expressivity of Markov Reward</strong> &mdash; Abel et al., <em>NeurIPS</em>, 2021.</li>
+          <li><strong>Scalar Reward Is Not Enough: A Response to Silver, Singh, Precup and Sutton</strong> &mdash; Vamplew et al., <em>AAMAS</em>, 2023.</li>
+          <li><a href="https://arxiv.org/abs/2212.10420"><strong>Settling the Reward Hypothesis</strong></a> &mdash; Bowling, Martin, Abel, Dabney, <em>ICML</em>, 2023.</li>
+          <li><a href="https://arxiv.org/abs/1605.09674"><strong>VIME: Variational Information Maximizing Exploration</strong></a> &mdash; Houthooft et al., 2017.</li>
+          <li><strong>Deep Active Inference Agents Using Monte-Carlo Methods</strong> &mdash; Fountas et al., <em>NeurIPS</em>, 2020.</li>
+        </ul>
+
+        <h3 id="white-box">Optimization-Derived White-Box Mechanisms</h3>
+        <ul class="paper-list">
+          <li><a href="http://jmlr.org/papers/v23/21-0631.html"><strong>ReduNet: A White-Box Deep Network from the Principle of Maximizing Rate Reduction</strong></a> &mdash; Chan et al., <em>JMLR</em>, 2022.</li>
+          <li><strong>Emergence of Segmentation with Minimalistic White-Box Transformers</strong> &mdash; Yu et al., <em>CPAL</em>, 2023.</li>
+          <li><strong>Closed-Loop Transcription via Convolutional Sparse Coding</strong> &mdash; Dai et al., <em>CPAL</em>, 2023.</li>
+          <li><strong>Scaling White-Box Transformers for Vision</strong> &mdash; Jinrui Yang, Xianhang Li, Druv Pai, and colleagues, 2024.</li>
+          <li><strong>Simplifying DINO via Coding Rate Regularization</strong> &mdash; Wu et al., <em>ICML</em>, 2025.</li>
+          <li><a href="https://arxiv.org/abs/2606.06624"><strong>Principles and Practice of Deep Representation Learning</strong></a> &mdash; Buchanan, Pai, Wang, Ma, 2026.</li>
+        </ul>
+
+        <h3 id="object-centric">Object-Centric and Compositional World Models</h3>
+        <ul class="paper-list">
+          <li><strong>On the Binding Problem in Artificial Neural Networks</strong> &mdash; Greff, van Steenkiste, Schmidhuber, 2020.</li>
+          <li><a href="https://arxiv.org/abs/2006.15055"><strong>Object-Centric Learning with Slot Attention</strong></a> &mdash; Locatello et al., <em>NeurIPS</em>, 2020.</li>
+          <li><strong>Contrastive Learning of Structured World Models</strong> &mdash; Kipf et al., <em>ICLR</em>, 2020.</li>
+          <li><strong>Provably Learning Object-Centric Representations</strong> &mdash; Brady et al., <em>ICML</em>, 2023.</li>
+          <li><strong>Bridging the Gap to Real-World Object-Centric Learning</strong> &mdash; Seitzer et al., <em>ICLR</em>, 2023.</li>
+          <li><a href="https://arxiv.org/abs/2107.00637"><strong>Generalization and Robustness Implications in Object-Centric Learning</strong></a> &mdash; Dittadi et al., 2022.</li>
+          <li><strong>When Does Compositional Structure Yield Compositional Generalization? A Kernel Theory</strong> &mdash; Lippl and Stachenfeld, <em>ICLR</em>, 2025.</li>
+        </ul>
+
+        <h3 id="embodied-vla">Embodied and Vision-Language-Action</h3>
+        <ul class="paper-list">
+          <li><a href="https://doi.org/10.1016/0004-3702(91)90053-M"><strong>Intelligence Without Representation</strong></a> &mdash; Brooks, <em>Artificial Intelligence</em>, 1991.</li>
+          <li><a href="https://arxiv.org/abs/2307.15818"><strong>RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control</strong></a> &mdash; Brohan et al., 2023.</li>
+          <li><a href="https://arxiv.org/abs/2406.09246"><strong>OpenVLA: An Open-Source Vision-Language-Action Model</strong></a> &mdash; Kim et al., 2024.</li>
+          <li><a href="https://arxiv.org/abs/2503.14734"><strong>GR00T N1: An Open Foundation Model for Generalist Humanoid Robots</strong></a> &mdash; NVIDIA, 2025.</li>
+        </ul>
+
+        <h3 id="icl-interpretability">In-Context Learning and Mechanistic Interpretability</h3>
+        <ul class="paper-list">
+          <li><a href="https://arxiv.org/abs/1703.03400"><strong>Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks (MAML)</strong></a> &mdash; Finn, Abbeel, Levine, 2017.</li>
+          <li><strong>Why Can GPT Learn In-Context? Language Models Secretly Perform Gradient Descent as Meta-Optimizers</strong> &mdash; Dai et al., <em>ACL Findings</em>, 2023.</li>
+          <li><a href="https://proceedings.mlr.press/v202/von-oswald23a.html"><strong>Transformers Learn In-Context by Gradient Descent</strong></a> &mdash; von Oswald et al., <em>ICML</em>, 2023.</li>
+          <li><a href="https://arxiv.org/abs/2209.11895"><strong>In-Context Learning and Induction Heads</strong></a> &mdash; Olsson et al., 2022.</li>
+          <li><a href="https://proceedings.mlr.press/v267/yang25c.html"><strong>Emergent Symbolic Mechanisms Support Abstract Reasoning in Large Language Models</strong></a> &mdash; Yang et al., <em>ICML</em>, 2025.</li>
+          <li><a href="https://arxiv.org/abs/2305.04388"><strong>Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting</strong></a> &mdash; Turpin et al., <em>NeurIPS</em>, 2023.</li>
+        </ul>
+      </div>
+    </section>
+
+
+
+    
+
+    <section id="resources">
+      <div class="container">
+        <h2>Additional Useful Resources</h2>
+
+
+        <h3>Books</h3>
+        <ul class="book-list">
+          <li>
+            <a href="https://openlibrary.org/isbn/9780134610993"><img class="book-cover" alt="Cover of Artificial Intelligence: A Modern Approach"
+              src="https://aima.cs.berkeley.edu/cover2.jpg"
+              onerror="this.style.display='none'" loading="lazy"></a>
+            <div class="book-meta"><a href="https://openlibrary.org/isbn/9780134610993"><strong>Artificial Intelligence: A Modern Approach</strong></a> &mdash; Russell and Norvig.</div>
+          </li>
+          <li>
+            <a href="https://openlibrary.org/isbn/9780465097609"><img class="book-cover" alt="Cover of The Book of Why"
+              src="https://www.penguin.co.uk/_next/image?url=https%3A%2F%2Fcdn.penguin.co.uk%2Fdam-assets%2Fbooks%2F9780141982410%2F9780141982410-jacket-large.jpg&w=379&q=100"
+              onerror="this.style.display='none'" loading="lazy"></a>
+            <div class="book-meta"><a href="https://openlibrary.org/isbn/9780465097609"><strong>The Book of Why: The New Science of Cause and Effect</strong></a> &mdash; Pearl and Mackenzie.</div>
+          </li>
+          <li>
+            <a href="https://doi.org/10.1017/9781316594179"><img class="book-cover" alt="Cover of The Measure of All Minds"
+              src="https://assets.cambridge.org/97811071/53011/large_cover/9781107153011i.jpg"
+              onerror="this.style.display='none'" loading="lazy"></a>
+            <div class="book-meta"><a href="https://doi.org/10.1017/9781316594179"><strong>The Measure of All Minds</strong></a> &mdash; Jos&eacute; Hern&aacute;ndez-Orallo.</div>
+          </li>
+          <li>
+            <a href="https://openlibrary.org/isbn/9780374257835"><img class="book-cover" alt="Cover of Artificial Intelligence: A Guide for Thinking Humans"
+              src="https://www.penguin.co.uk/_next/image?url=https%3A%2F%2Fcdn.penguin.co.uk%2Fdam-assets%2Fbooks%2F9780241404836%2F9780241404836-jacket-large.jpg&w=379&q=100"
+              onerror="this.style.display='none'" loading="lazy"></a>
+            <div class="book-meta"><a href="https://openlibrary.org/isbn/9780374257835"><strong>Artificial Intelligence: A Guide for Thinking Humans</strong></a> &mdash; Melanie Mitchell.</div>
+          </li>
+          <li>
+            <a href="https://openlibrary.org/isbn/9781541675810"><img class="book-cover" alt="Cover of A Thousand Brains"
+              src="https://images.booksense.com/images/797/675/9781541675797.jpg"
+              onerror="this.style.display='none'" loading="lazy"></a>
+            <div class="book-meta"><a href="https://openlibrary.org/isbn/9781541675810"><strong>A Thousand Brains: A New Theory of Intelligence</strong></a> &mdash; Jeff Hawkins.</div>
+          </li>
+          <li>
+            <a href="https://doi.org/10.7551/mitpress/12441.001.0001"><img class="book-cover" alt="Cover of Active Inference"
+              src="https://mitp.silverchair-cdn.com/mitp/content_public/books/5299/book/4/m_9780262369978-cover.jpeg?Expires=1787569310&Signature=jqiCSAmlmFln3N8TPy9okSryXXLS708W06Yrvxzg9r5xr8egORG2chSq-bOJfuYjsQkwmxQmywGG6Y1O4oHQSx7JmhyRHoeaLC2d59SpiHui6V253fzZk-zBbGLRHdDmMjRkVXCMLJ6UufznfWKzZHH876ASaDSNmCp8oXuY-JV0cGZywwaaHxYQA~RN~RlNIjNK3hyZrdKfIaq~eS~Tbv25glOKoDKwS0XphhahYiKSR0B8xjsODXS94f-X8MnrSiVW0-EcIxXHY8ge-NZ6sfOL6yVoPlTujwDeIenxWz-79pPqcqwTOQ7MlCx4bK0SaYGgeXWJ9kzzZjOpezuVfw__&Key-Pair-Id=APKAIE5G5CRDK6RD3PGA"
+              onerror="this.style.display='none'" loading="lazy"></a>
+            <div class="book-meta"><a href="https://doi.org/10.7551/mitpress/12441.001.0001"><strong>Active Inference: The Free Energy Principle in Mind, Brain, and Behavior</strong></a> &mdash; Parr, Pezzulo, and Friston.</div>
+          </li>
+          <li>
+            <a href="http://incompleteideas.net/book/the-book-2nd.html"><img class="book-cover" alt="Cover of Reinforcement Learning: An Introduction"
+              src="https://mit-press-new-us.imgix.net/covers/9780262039246.jpg?auto=format&w=298&dpr=1&q=80"
+              onerror="this.style.display='none'" loading="lazy"></a>
+            <div class="book-meta"><a href="http://incompleteideas.net/book/the-book-2nd.html"><strong>Reinforcement Learning: An Introduction</strong></a> &mdash; Sutton and Barto.</div>
+          </li>
+          <li>
+            <a href="https://ma-lab-berkeley.github.io/deep-representation-learning-book/"><img class="book-cover" alt="Cover of Principles and Practice of Deep Representation Learning"
+              src="https://ts3.tc.mm.bing.net/th/id/OIP-C.zxJQb7Iq6BD1UegXjGIf7wHaGt?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+              onerror="this.style.display='none'" loading="lazy"></a>
+            <div class="book-meta"><a href="https://ma-lab-berkeley.github.io/deep-representation-learning-book/"><strong>Principles and Practice of Deep Representation Learning</strong></a> &mdash; Buchanan, Pai, Wang, and Ma.</div>
+          </li>
+          <li>
+            <a href="https://mitpress.mit.edu/9780262632683/the-algebraic-mind/"><img class="book-cover" alt="Cover of The Algebraic Mind: Integrating Connectionism and Cognitive Science"
+              src="https://mit-press-new-us.imgix.net/covers/9780262632683.jpg?auto=format&w=298&dpr=1&q=80"
+              onerror="this.style.display='none'" loading="lazy"></a>
+            <div class="book-meta"><a href="https://mitpress.mit.edu/9780262632683/the-algebraic-mind/"><strong>The Algebraic Mind: Integrating Connectionism and Cognitive Science</strong></a> &mdash; Gary Marcus.</div>
+          </li>
+        </ul>
+
+        <h3>Encyclopedia Entries</h3>
+        <ul class="paper-list">
+          <li><a href="https://plato.stanford.edu/entries/chinese-room/"><strong>The Chinese Room Argument</strong></a> &mdash; Stanford Encyclopedia of Philosophy.</li>
+          <li><a href="https://plato.stanford.edu/entries/turing-test/"><strong>The Turing Test</strong></a> &mdash; Stanford Encyclopedia of Philosophy.</li>
+          <li><a href="https://plato.stanford.edu/entries/computational-mind/"><strong>The Computational Theory of Mind</strong></a> &mdash; Stanford Encyclopedia of Philosophy.</li>
+        </ul>
+
+        <h3>Courses and Lectures</h3>
+        <ul class="paper-list">
+          <li><a href="https://ocw.mit.edu/courses/res-9-003-brains-minds-and-machines-summer-course-summer-2015/video_galleries/introduction/"><strong>Brains, Minds and Machines Summer Course</strong></a> &mdash; MIT OpenCourseWare RES.9-003, Poggio and Kreiman.</li>
+        </ul>
+
+        <h3>Community</h3>
+        <ul class="paper-list">
+          <li><a href="https://arcprize.org"><strong>ARC Prize</strong></a> &mdash; arcprize.org.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="BibTeX">
+      <div class="container">
+        <h2>BibTeX</h2>
+        <pre><code></code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Grouping follows the survey "Towards Intelligent Models: A Survey of Definitions, Measures and Implementations of Model Intelligence." Contributions and corrections are welcome.</p>
+      <p>Website style adapted from the <a href="https://nerfies.github.io/">Nerfies</a> project page.</p>
+    </div>
+  </footer>
+  <script>
+    const taxonomyData = {
+      root: {
+        title: "Definitions and Measures of Model Intelligence",
+        description: "Four questions, crossed with eight research programmes. The apparent dispute over one definition is in fact four separate questions, pursued by traditions with different standards of evidence.",
+        show: "concept",
+        links: [["Concept", "#concept"], ["Possibility", "#possibility"], ["Criterion", "#criterion"], ["Implementation", "#implementation"]],
+        papers: ["Use the tree to inspect the research programmes and their representative papers."]
+      },
+      concept: {
+        title: "Question I: Concept",
+        description: "What intelligence is and how it should be defined. Each programme states a constitutive claim, its strongest operationalization in machine learning, and the main line of resistance.",
+        show: "concept",
+        links: [["Concept section", "#concept"], ["Predictive", "#predictive-processing"], ["Causality", "#causal"], ["Symbolic", "#symbolic-nativist"]],
+        papers: ["Friston: free energy principle", "Pearl: ladder of causation", "Newell and Simon: physical symbol system hypothesis", "Gentner: structure mapping", "Spearman: the general factor g", "Dennett: the intentional stance"]
+      },
+      possibility: {
+        title: "Question II: Possibility",
+        description: "Whether a machine could possess genuine intelligence at all. The Chinese Room concedes every behavioural result in advance and so has no empirical face. The embodiment argument does, and it has been tested.",
+        show: "possibility",
+        links: [["Possibility section", "#possibility"], ["Meaning and grounding", "#meaning-grounding"], ["Embodiment", "#embodiment"]],
+        papers: ["Searle: Chinese Room", "Dreyfus: embodied coping", "Harnad: the symbol grounding problem", "Bender and Koller: form without meaning"]
+      },
+      criterion: {
+        title: "Question III: Criterion",
+        description: "How intelligence would be recognized and measured. Any criterion answers two questions at once, whether a result counts as evidence and what it is evidence for.",
+        show: "criterion",
+        links: [["Criterion section", "#criterion"], ["Turing variants", "#turing-variants"], ["Formal measure", "#formal-measures"], ["Benchmarks", "#benchmarks"]],
+        papers: ["Turing: the imitation game", "Legg and Hutter: universal intelligence", "Hernandez-Orallo: universal psychometrics", "Chollet: skill-acquisition efficiency"]
+      },
+      implementation: {
+        title: "Question IV: Implementation",
+        description: "How intelligence can be built, granting that it can be. The only question with an internal gradient, running from mathematical modeling to algorithmic realization.",
+        show: "implementation",
+        links: [["Implementation section", "#implementation"], ["Scaling", "#scaling"], ["Neuro-symbolic", "#neurosymbolic"], ["JEPA", "#jepa"]],
+        papers: ["Silver and Sutton: reward is enough", "LeCun: world models and JEPA", "Scholkopf and Bengio: causal representation", "Lake: meta-learning for compositionality", "Brooks: situated robotics"]
+      },
+      "concept-predictive": {
+        title: "Concept: Predictive Processing",
+        description: "Cognition is hierarchical prediction, and an agent minimizes variational free energy. The breadth of the claim is also its weakness, since an objective every surviving system satisfies cannot separate a thermostat from a planner.",
+        show: "concept",
+        links: [["Survey section", "#predictive-processing"], ["World models", "#world-models"], ["JEPA", "#jepa"]],
+        papers: ["Friston: the free energy principle", "Clark: predictive brains", "Hawkins: a thousand brains", "Andrews: the falsifiability objection"]
+      },
+      "concept-causal": {
+        title: "Concept: Causality",
+        description: "Genuine understanding requires representing interventions and counterfactuals, not correlations alone. The rungs are not inter-reducible, so observational mastery does not entail the upper two.",
+        show: "concept",
+        links: [["Survey section", "#causal"], ["Causal representation", "#causal-representation"]],
+        papers: ["Pearl: structural causal models and the do-calculus", "Bareinboim et al.: the causal hierarchy theorem", "Jin et al.: CLadder", "Zecevic et al.: causal parrots"]
+      },
+      "concept-symbolic": {
+        title: "Concept: Symbolic and Nativist",
+        description: "Thought is the rule-governed manipulation of structured representations, and the constraints enabling such structure are partly innate. An inductive bias is a prior over hypotheses and a nativist constraint is a prior over grammars.",
+        show: "concept",
+        links: [["Survey section", "#symbolic-nativist"], ["Neuro-symbolic mechanisms", "#neurosymbolic"]],
+        papers: ["Newell and Simon: physical symbol system hypothesis", "Fodor and Pylyshyn: systematicity", "Chomsky: poverty of the stimulus", "Marcus: the algebraic mind", "BabyLM: the prediction tested at child-scale data"]
+      },
+      "concept-compositional": {
+        title: "Concept: Compositionality and Analogy",
+        description: "Intelligence resides in structured representation and its two operations, composition and mapping. The open question is whether relational mapping is a distinct primitive or a special case of structured generalization.",
+        show: "concept",
+        links: [["Survey section", "#compositional-analogical"], ["Mechanisms", "#neurosymbolic"], ["Dialectic", "#dialectic"]],
+        papers: ["Hofstadter: analogy as the core of cognition", "Gentner: structure-mapping theory", "Lake et al.: probabilistic program induction", "Webb et al. and the counterfactual exchange"]
+      },
+      "concept-psychometric": {
+        title: "Concept: Psychometric",
+        description: "Intelligence has a discoverable latent structure of abilities. A dominant factor is consistent with one common cause and equally with many correlated processes, and for models it may reflect shared contamination and format rather than shared ability.",
+        show: "concept",
+        links: [["Survey section", "#psychometric-concept"], ["Measurement", "#psychometric-measurement"]],
+        papers: ["Spearman: the positive manifold and g", "Gardner: multiple intelligences", "Gould: the deflationary reading", "Burnell et al.: the structure of model capabilities"]
+      },
+      "concept-behavioural": {
+        title: "Concept: Behavioural and Functional",
+        description: "Intelligence is fixed at the level of observable competence. The intentional stance is deflationary by design, and the lookup-table objection is what licenses the move from behaviour to mechanism.",
+        show: "concept",
+        links: [["Survey section", "#behavioural-functional"], ["Criterion analogue", "#turing-variants"]],
+        papers: ["Dennett: the intentional stance", "Putnam: multiple realizability", "Block: psychologism and behaviorism", "Shanahan: talking about large language models"]
+      },
+      "concept-anti": {
+        title: "Concept: Anti-computationalist and Anti-representational",
+        description: "Computation alone cannot suffice for genuine intelligence, on grounds of phenomenology or biological constitution. The anti-representational position inverts the others, building agents while rejecting internal world models.",
+        show: "concept",
+        links: [["Survey section", "#anti-computationalist"], ["Possibility", "#possibility"], ["Embodied VLA", "#embodied-vla"]],
+        papers: ["Searle: minds, brains, and programs", "Dreyfus: what computers can't do", "Brooks: intelligence without representation"]
+      },
+      "poss-anti": {
+        title: "Possibility: Meaning and Model Understanding",
+        description: "The Chinese Room grants full behavioural competence and withholds understanding anyway, so it is built to be immune to behavioural evidence. The symbol grounding problem is the tractable reformulation.",
+        show: "possibility",
+        links: [["Meaning and grounding", "#meaning-grounding"], ["Embodiment", "#embodiment"]],
+        papers: ["Searle: Chinese Room", "Harnad: the symbol grounding problem", "Coelho Mollo and Milliere: the vector grounding problem", "Abdou et al.: colour structure without grounding"]
+      },
+      "poss-embodiment": {
+        title: "Possibility: Grounding and Embodiment",
+        description: "The embodiment argument separates into a constitutive thesis and an engineering prediction. The prediction has a testable face, and controlled physical-extrapolation tests have now engaged it directly.",
+        show: "possibility",
+        links: [["Embodiment section", "#embodiment"], ["World models", "#world-models"]],
+        papers: ["Dreyfus: embodied coping", "Kang et al.: how far is video generation from a world model", "CLEVRER, Physion, PhysBench", "Jones et al.: multimodal grounding compared to humans"]
+      },
+      "crit-behavioural": {
+        title: "Criterion: Behavioural Tests",
+        description: "Plain indistinguishability was never enough on its own. GPT-4 now exhibits it, and every variant since adds a constraint the original left unstated.",
+        show: "criterion",
+        links: [["Turing variants", "#turing-variants"], ["Behavioural concept", "#behavioural-functional"]],
+        papers: ["Turing: the imitation game", "Jones and Bergen: passing a three-party Turing test", "X-Turing: long-term dialogue", "The generalized Turing test: reference classes"]
+      },
+      "crit-optimization": {
+        title: "Criterion: Formal Measure",
+        description: "A regulative ideal rather than a usable measure. It states what an unconstrained measure would have to be, and every practical criterion is a constrained approximation to it.",
+        show: "criterion",
+        links: [["Formal measures", "#formal-measures"], ["Formal optimization", "#formal-optimization"]],
+        papers: ["Legg and Hutter: the universal intelligence measure", "Solomonoff: inductive inference", "Kolmogorov complexity", "Leike and Hutter: bad universal priors"]
+      },
+      "crit-psychometric": {
+        title: "Criterion: Ability-Oriented Measurement",
+        description: "Difficulty must be a defined property of the instrument rather than an accident of item collection. The coincidence of algorithmic and empirical difficulty is hoped for rather than established.",
+        show: "criterion",
+        links: [["Psychometric measurement", "#psychometric-measurement"], ["Benchmark validity", "#benchmarks"]],
+        papers: ["Thorndike: the CAVD scale", "Hernandez-Orallo: universal psychometrics", "Martinez-Plumed et al.: item response theory in AI", "Chollet: ARC-AGI and skill-acquisition efficiency"]
+      },
+      "crit-benchmarks": {
+        title: "Criterion: Benchmark Validity Crisis",
+        description: "Contamination, construct invalidity, shortcut exploitation, saturation, and metric artifacts are five mechanisms of one failure. A score is read as evidence for a capability when it is evidence for something else.",
+        show: "criterion",
+        links: [["Benchmark validity", "#benchmarks"], ["Cross-cutting dialectic", "#dialectic"]],
+        papers: ["Bean et al.: measuring what matters", "White et al.: LiveBench", "Schaeffer et al.: are emergent abilities a mirage", "Burnell et al.: rethink reporting of evaluation results"]
+      },
+      "impl-optimization": {
+        title: "Implementation: Formal Optimization",
+        description: "Intelligence is the maximization of a formally specified objective, whether reward, description length, or rate reduction. The demonstrated successes are where a true reward can be written down.",
+        show: "implementation",
+        links: [["Scaling", "#scaling"], ["Reward", "#reward"], ["White-box mechanisms", "#white-box"]],
+        papers: ["Silver et al.: reward is enough", "Abel et al.: on the expressivity of Markov reward", "Schmidhuber: compression and curiosity", "Ma et al.: rate reduction and white-box networks"]
+      },
+      "impl-predictive": {
+        title: "Implementation: Predictive and World Models",
+        description: "Next-frame fidelity is a proxy whose relation to the intended construct is unestablished, and it can improve indefinitely without answering whether the model learned the structure of the world.",
+        show: "implementation",
+        links: [["World models", "#world-models"], ["JEPA", "#jepa"]],
+        papers: ["Ha and Schmidhuber: recurrent world models", "Hafner et al.: Dreamer", "LeCun: a path towards autonomous machine intelligence", "Motamed et al.: realism and physics come apart"]
+      },
+      "impl-causal": {
+        title: "Implementation: Causal Representation Learning",
+        description: "The machinery presupposes the causal variables, but a learner is given only high-dimensional observations. The binding constraint is identifiability, not conception.",
+        show: "implementation",
+        links: [["Causal representation learning", "#causal-representation"], ["Causal concept", "#causal"]],
+        papers: ["Scholkopf et al.: toward causal representation learning", "Hyvarinen and Pajunen: nonlinear ICA is unidentifiable", "Locatello et al.: challenging common assumptions", "Ahuja et al.: interventional CRL"]
+      },
+      "impl-compositional": {
+        title: "Implementation: Compositional Mechanisms",
+        description: "Three routes to systematic generalization: widen the data, install the algebra, or optimize harder. Each recovers some of it, which is why the concept-level question stays open.",
+        show: "implementation",
+        links: [["Neuro-symbolic mechanisms", "#neurosymbolic"], ["Object-centric models", "#object-centric"]],
+        papers: ["Lake and Baroni: meta-learning for compositionality", "Csordas et al.: the devil is in the detail", "Hupkes et al.: compositionality decomposed", "Andreas: compositional data augmentation"]
+      },
+      "impl-symbolic": {
+        title: "Implementation: Neuro-Symbolic",
+        description: "Structure is built in rather than left for the data to provide. The primitives are supplied by the designer, so competence follows from engineered structure without showing the structure was necessary.",
+        show: "implementation",
+        links: [["Neuro-symbolic", "#neurosymbolic"], ["Symbolic concept", "#symbolic-nativist"]],
+        papers: ["Garcez and Lamb: neurosymbolic AI", "DeepProbLog: the differentiable turn", "DreamCoder: learning the vocabulary", "AlphaGeometry: a formalization the system did not learn"]
+      },
+      "impl-anti": {
+        title: "Implementation: Anti-representational",
+        description: "The field kept the embodiment commitment and dropped the anti-representational one. Modern embodied systems attach bodies to exactly the internal representations Brooks argued against.",
+        show: "implementation",
+        links: [["Embodied VLA", "#embodied-vla"], ["Anti-computational concept", "#anti-computationalist"]],
+        papers: ["Brooks: intelligence without representation", "RT-2 and OpenVLA", "GR00T N1"]
+      }
+    };
+
+    const detailTitle = document.getElementById("taxonomy-title");
+    const detailDescription = document.getElementById("taxonomy-description");
+    const detailLinks = document.getElementById("taxonomy-links");
+    const detailPapers = document.getElementById("taxonomy-papers");
+    const taxonomyButtons = Array.from(document.querySelectorAll("[data-taxonomy]"));
+    const programmeSets = Array.from(document.querySelectorAll("[data-programmes]"));
+
+    function setVisibleProgrammes(group) {
+      if (!group) return;
+      programmeSets.forEach((set) => {
+        set.classList.toggle("is-visible", set.dataset.programmes === group);
+      });
+    }
+
+    function renderTaxonomy(id) {
+      const item = taxonomyData[id] || taxonomyData.root;
+      detailTitle.textContent = item.title;
+      detailDescription.textContent = item.description;
+      detailLinks.innerHTML = item.links.map(([label, href]) => `<a href="${href}">${label}</a>`).join("");
+      detailPapers.innerHTML = item.papers.map((paper) => `<li>${paper}</li>`).join("");
+      taxonomyButtons.forEach((button) => {
+        button.classList.toggle("is-active", button.dataset.taxonomy === id);
+      });
+      setVisibleProgrammes(item.show);
+    }
+
+    taxonomyButtons.forEach((button) => {
+      button.addEventListener("click", () => renderTaxonomy(button.dataset.taxonomy));
+    });
+  </script>
+</body>
+
+</html>
