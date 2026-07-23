@@ -65,6 +65,15 @@
       padding: 0;
     }
 
+    .map-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto 0;
+      width: fit-content;
+      max-width: 100%;
+    }
+
     .navbar-item,
     .navbar-link {
       display: inline-flex;
@@ -553,8 +562,8 @@
       background: #000;
       color: #fff; /* so the text is readable too */
       padding: 6px;
-      border-radius: 2px;
-      max-width: 130px;
+      border-radius: 4px;
+      max-width: 134px;
       max-height: 40px;
     }
 
@@ -725,7 +734,7 @@
                 <div class="programme-set" data-programmes="implementation">
                   <button class="tree-node c-opt" type="button" data-taxonomy="impl-optimization">Formal optimization
                     <span class="meta">Russell &amp; Norvig: Rational Agents; Schmidhuber: Compression, Curiosity; Ma:
-                      Rate Reduction, White-box; Silver: Reward is Enough</span></button>
+                      Rate Reduction, White-box; Silver &amp; Sutton: Reward is Enough</span></button>
                   <button class="tree-node c-causal" type="button" data-taxonomy="impl-causal">Causal representation
                     <span class="meta">Pearl: Do-calculus / SCMs; Scholkopf, Bengio: Causal Representational
                       Learning</span></button>
@@ -1530,10 +1539,11 @@
       <p>Grouping follows the survey "Towards Intelligent Models: A Survey of Definitions, Measures and Implementations
         of Model Intelligence." Contributions and corrections are welcome.</p>
       <p>Website style adapted from the <a href="https://nerfies.github.io/">Nerfies</a> project page.</p>
-      <a href="https://mapmyvisitors.com/web/1c6rz" title="Visit tracker"><img
-          src="https://mapmyvisitors.com/map.png?d=HJNpGXmIzaYPzEf9fs5Jqz9H1-in65W0mvcYdTVHT7U&cl=ffffff" /></a>
+      
     </div>
-
+<div class="map-container">
+      <a href="https://mapmyvisitors.com/web/1c6rz" title="Visit tracker"><img
+          src="https://mapmyvisitors.com/map.png?d=HJNpGXmIzaYPzEf9fs5Jqz9H1-in65W0mvcYdTVHT7U&cl=ffffff" height="150px"/></a></div>
   </footer>
   <script>
     const taxonomyData = {
