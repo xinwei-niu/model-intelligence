@@ -4,7 +4,7 @@
 
 ## Survey Map
 
-**[Question I: Concept](#question-i-concept--what-intelligence-is)**
+**[Question I: Ontology](#question-i-ontology--what-intelligence-is)**
 - [Predictive processing](#predictive-processing)
 - [Causality](#causality)
 - [Symbolic and nativist](#symbolic-and-nativist)
@@ -18,7 +18,7 @@
 - [Meaning and model understanding](#meaning-and-model-understanding)
 - [Grounding and embodiment](#grounding-and-embodiment)
 
-**[Question III: Criterion](#question-iii-criterion--how-intelligence-is-measured)**
+**[Question III: Measurement](#question-iii-measure--how-intelligence-is-measured)**
 - [Behavioural criterion](#behavioural-criterion-and-turing-test-variants)
 - [Formal measure](#formal-measure-and-algorithmic-information-theory)
 - [Universal psychometrics and ARC](#universal-psychometrics-and-skill-acquisition-efficiency)
@@ -49,7 +49,7 @@
 
 ---
 
-## Question I: Concept — What Intelligence Is
+## Question I: Ontology — What Intelligence Is
 
 For each programme the survey states the constitutive claim, its strongest operationalization in current machine learning, and the main line of resistance.
 
@@ -154,11 +154,11 @@ The Chinese Room concedes every behavioural result in advance and so has no empi
 
 ---
 
-## Question III: Criterion — How Intelligence Is Measured
+## Question III: Measurement — How Intelligence Is Measured
 
-Any criterion answers two questions at once, whether a result counts as evidence and what exactly it is evidence for. The field has been far more confident about the first than the second.
+Any measure answers two questions at once, whether a result counts as evidence and what exactly it is evidence for. The field has been far more confident about the first than the second.
 
-| Criterion | Intrinsic difficulty | Contamination-resistant | Stated construct |
+| Measure | Intrinsic difficulty | Contamination-resistant | Stated construct |
 | --- | --- | --- | --- |
 | Imitation game (Turing 1950) | No | No | No |
 | Legg-Hutter measure (Legg and Hutter 2007) | Yes | No | Yes |
