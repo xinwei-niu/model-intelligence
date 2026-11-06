@@ -1,0 +1,8 @@
+Checked 2026-11-03
+Source: https://www.youtube.com/watch?v=jvqMEkNNuR4
+Title: Andy Clark on the Extended Mind
+Creator: Howard Rheingold
+Upload date: 2012-09-27
+Original watch-page metadata (Traditional Chinese):
+:"DIALOG"}}]}}]}},"metadataRowContainer":{"metadataRowContainerRenderer":{"rows":[{"metadataRowRenderer":{"title":{"runs":[{"text":"授權"}]},"contents":[{"runs":[{"text":"創用 CC 姓名標示授權 (允許再利用)","navigationEndpoint":{"clickTrackingParams":"CP0BEM2rARgBIhMI85LFk_HrlwMVjvFMAh3GpzNmygEEoXtgKw==","commandMetadata":{"webCommandMetadata":{"url":"https://www.youtube.com/t/creative_commons","webPageType":"WEB_PAGE_TYPE_UNKNOWN","rootVe":83769}},"urlEndpoint":{"url":"https://www.youtube.com/t/creative_commons"}}}]}],"trackingParams":"CP0BEM2rARgBIhMI85LFk_HrlwMVjvFMAh3GpzNm"}}],"collapsedItemCount":0,"trackingParams":"CP0BEM2rARgBIhMI85LFk_HrlwMVjvFMAh3GpzNm"}},"showMoreText":{"simpleText":"更多內容"},"showL
+The metadata reads: Creative Commons Attribution license (reuse allowed).

@@ -1,0 +1,2113 @@
+\documentclass[acmsmall,screen,review,anonymous]{acmart}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{forest}
+\usepackage{tabularx, ragged2e}
+\usepackage{subcaption}
+\usepackage[table]{xcolor}
+
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+\usetikzlibrary{trees,positioning,shapes,shadows,arrows.meta}
+
+
+
+% \title{Towards Intelligent Models:
+% A Survey of Definitions, Measures and Implementations of Model Intelligence}
+% \title{Machine Intelligence: A Survey of Ontology, Possibility, Measurement, and Implementation}
+% Can Machine Intellectually Match Human? A 2026 Survey of What's and How's about Artificial Intelligence
+% 
+\title{What \textit{Is} Artificial Intelligence? A Multidisciplinary Review}
+
+
+
+
+
+
+\author{First Author}
+\email{first.author@university.edu}
+\affiliation{%
+  \institution{University Name}
+  \city{City}
+  \country{Country}
+}
+
+\author{Second Author}
+\email{second.author@university.edu}
+\affiliation{%
+  \institution{University Name}
+  \city{City}
+  \country{Country}
+}
+
+% Optional CSUR metadata
+\acmJournal{CSUR}
+\acmVolume{XX}
+\acmNumber{XX}
+\acmArticle{XX}
+\acmYear{202X}
+\acmDOI{XXXXXXX}
+
+\begin{document}
+
+
+\begin{abstract}
+Intelligence has been studied in many disciplines, yet there is no widely accepted account of what it is, how it should be measured, or what evidence supports a claim that a system possesses it.
+%
+This survey traces these questions from philosophy and psychometrics to contemporary machine learning.
+%
+We organize the literature around two axes: four questions---what intelligence is, how to measure it, whether machines can possess it in the same sense as humans, and how intelligent systems can be built---and eight research programs that approach these questions differently.
+%
+For each program, we examine its central claims, supporting and challenging evidence, and connections to current methods for building and evaluating artificial intelligence.
+%
+A recurring pattern runs through the literature: strong benchmark performance motivates claims about model capabilities, subsequent studies identify alternative explanations such as memorization or reliance on superficial cues, and the debate turns to whether the benchmark measures the intended capability.
+%
+We conclude by discussing what this pattern means for construct validity, future evaluation, and the design of intelligent systems.
+\end{abstract}
+
+
+
+
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10002944.10011122.10002945</concept_id>
+<concept_desc>General and reference~Surveys and overviews</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10010147.10010178</concept_id>
+<concept_desc>Computing methodologies~Artificial intelligence</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10010147.10010257</concept_id>
+<concept_desc>Computing methodologies~Machine learning</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10010147.10010257.10010293</concept_id>
+<concept_desc>Computing methodologies~Machine learning approaches</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+<concept>
+<concept_id>10010147.10010178.10010216</concept_id>
+<concept_desc>Computing methodologies~Philosophical/theoretical foundations of artificial intelligence</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+<concept>
+<concept_id>10010147.10010178.10010216.10010217</concept_id>
+<concept_desc>Computing methodologies~Cognitive science</concept_desc>
+<concept_significance>300</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{General and reference~Surveys and overviews}
+\ccsdesc[500]{Computing methodologies~Artificial intelligence}
+\ccsdesc[500]{Computing methodologies~Machine learning}
+\ccsdesc[300]{Computing methodologies~Machine learning approaches}
+\ccsdesc[300]{Computing methodologies~Philosophical/theoretical foundations of artificial intelligence}
+\ccsdesc[300]{Computing methodologies~Cognitive science}
+
+\keywords{machine intelligence, AI evaluation, construct validity, benchmarking, philosophy of artificial intelligence, causal reasoning, compositional generalization, psychometrics, world models, large language models}
+
+
+
+\maketitle
+
+%% =====================================================================
+\section{Introduction}
+\label{sec:intro}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Introduction of the question
+\textit{What is artificial intelligence?}
+%
+Researchers have debated this question for decades.
+%
+In 2007, \citet{legghutter2007} observed that ``\textit{a fundamental problem in artificial intelligence is that nobody really knows what intelligence is}.''
+%
+Nearly two decades later, deep learning~\cite{Goodfellow-et-al-2016} and foundation models~\cite{bommasani2021opportunities,chatgpt} have greatly expanded what artificial systems can do.
+%
+Their success, however, has not resolved what should count as intelligence.
+%
+That distinction---between the nature of intelligence and the methods used to build capable systems---motivates this survey.
+
+%% why we need this survey (why prior works/surveys are not good enough)
+The motivation for revisiting this question is in keeping with that of \citet{wang2019define}, who noted in 2019 that, despite the lack of a widely accepted definition of artificial intelligence, developments in deep learning made renewed attention worthwhile.
+%
+Foundation models have made the question more pressing.
+%
+Large language models, including multimodal and agentic systems, can now perform tasks that were beyond earlier generations of AI.
+%
+These developments have also renewed debate about artificial general intelligence (AGI), without resolving what such a claim would require.
+%
+A clearer account of competing definitions and standards of evidence can help researchers interpret current capabilities and assess future progress.
+
+
+
+
+% Concurrently, current evaluations reveal a persistent tension between the strong performance of modern AI systems and their unexpected limitations. The same models that can achieve medal-level performance in mathematical competitions~\citep{ai-mathematical-olympiad-progress-prize-3, trinh2024solving} and succeed in professional examinations in areas such as law and medicine~\citep{openai2024gpt4technicalreport} may still fail when faced with simple variations of tasks they previously appeared to understand. Even minor changes to benchmark problems that preserve their original meaning can cause substantial declines in accuracy~\citep{mirzadeh2025gsmsymbolicunderstandinglimitationsmathematical, hendrycks2021measuringmathematicalproblemsolving}. 
+% Similarly, explanations produced through reasoning processes that appear logical are not always reliable accounts of the actual computations behind the answers~\citep{turpin2023language}. 
+% Further claims argue that certain abilities emerge suddenly with increasing model scale~\citep{wei2022emergent} that have been questioned, with some arguing that these effects may partly result from limitations in evaluation methods rather than genuine changes in capability~\citep{schaeffer2023emergent}. 
+% Consequently, the same findings have been interpreted differently: some researchers view them as evidence of advanced reasoning, while others attribute them to sophisticated pattern matching or limitations in measurement. 
+% These disagreements reflect different assumptions about what constitutes a capability and what evidence is sufficient to establish it.
+
+
+% The cost of this fragmentation has risen sharply with the capabilities of large models. 
+% Frontier systems now achieve strong results on benchmarks once treated as durable proxies for deep competence, graduate-level scientific question answering~\citep{rein2024gpqa}, competition mathematics~\citep{dekoninck2026matharena}, expert software engineering~\citep{jimenez2024swebench}, and broad, deliberately saturation-resistant professional examinations~\citep{HLE2026}, so the field is exhausting the evaluation data by which progress was previously tracked\footnote{For continually updated standings, see public trackers such as the Hugging Face Open LLM Leaderboard~\citep{open-llm-leaderboard-v2} and LMSYS Chatbot Arena~\citep{chiang2024chatbot}.}.
+% However, at this level of performance, benchmark results can often support multiple interpretations. 
+% A score that appears to indicate expert-level competence may also be influenced by factors such as data contamination~\citep{magar-schwartz-2022-data}, reliance on superficial patterns, or retrieval of memorized information. 
+% Determining the correct interpretation requires a clear understanding of what the benchmark is intended to measure and what evidence is needed to support claims about intelligence.
+% As models continue to perform well on tasks previously viewed as evidence of intelligence, developing a clearer understanding of intelligence and its measure becomes increasingly important.
+
+
+% The need for such an account is now shared across the field. For most of the field's history, the definition could remain implicit because systems were narrow. For example, a chess engine or a parser was never a candidate for general intelligence, so what general intelligence is rarely had to be settled to interpret a result. 
+% At the same time, surveys of evaluation benchmarks and metrics take the construct being measured as given~\citep{chang2024survey}, and so cannot ask whether rival benchmarks measure the same thing. 
+% Treatments of single phenomena, such as emergent abilities~\citep{wei2022emergent}, in-context learning~\citep{dai-etal-2023-gpt}, and chain-of-thought~\citep{turpin2023language}, are without the view across research programs that would reveal the same pattern of claim and counterclaim recurring across all of them. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+% Point out the biggest feature of this survey - cross disciplines
+\citet{legg2007collectiondefinitionsintelligence} collected definitions of intelligence from several fields, while \citet{wang2019define} developed a particular account of intelligence.
+%
+This survey instead asks how different disciplines approach four connected questions---\textit{Ontology}, \textit{Measure}, the \textit{Human-Machine Gap}, and \textit{Implementation}.
+%
+These questions draw on philosophy, psychology, computer science, linguistics, and neuroscience.
+%
+Examining them together makes it easier to distinguish disagreements about definitions from disagreements about evidence or methods.
+
+A multidisciplinary review is particularly useful for three reasons:
+\begin{itemize}
+    \item \textbf{The same claims are assessed using different standards.}
+%
+    The development of foundation models has brought philosophical questions about understanding into direct contact with experimental results from computer science.
+%
+    Controlled studies of conversational imitation, for example, have renewed debate about what passing a Turing-style test establishes~\citep{Jones2026}.
+    \item \textbf{Strong performance can coexist with striking limitations.}
+%
+    Language models succeed on many demanding tasks while encountering difficulties in settings intended to test abstraction and generalization, including ARC-AGI~\citep{chollet2019measureintelligence, chollet2026arcagi2newchallengefrontier, foundation2026arcagi3newchallengefrontier}.
+%
+    Making sense of that contrast requires us to ask both what ability is being tested and whether the test captures it.
+    \item \textbf{Theoretical disagreements have practical consequences.}
+%
+    Different accounts of intelligence motivate different evaluations, learning objectives, and system designs.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% What we do in the survey
+Our goal is not simply to catalogue competing views.
+%
+We use a common analytical framework to examine what each research program claims, how that claim has been operationalized, and which theoretical or empirical results support or challenge it.
+%
+We study eight programs: \textit{behavioral-functional, optimization, predictive, causal, compositional-analogical, psychometric, anti-computationalist, and symbolic-nativist}.
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contribution summary and chapter organization
+The contributions of this survey are summarized as follows.
+\begin{itemize}
+\item \textbf{C1.} We present a structured, multidisciplinary review of natural and artificial intelligence through a two-axis taxonomy linking four central questions to eight research programs (\S\ref{sec:taxonomy}, Figure~\ref{fig:taxonomy}).
+\item \textbf{C2.} We connect each research program to influential and recent work on evaluation and implementation.
+%
+For each position, we organize supporting and opposing evidence around the four central questions examined in this survey (from \S\ref{sec:ontology} to~\ref{sec:impl}).
+\item \textbf{C3.} We identify a broader pattern that emerges from the taxonomy: debates about model capabilities often move from claims based on benchmark results to disputes over what those results actually measure.
+%
+We analyze this pattern through the lens of construct validity and explain why interpreting evaluations of artificial intelligence remains difficult (\S\ref{sec:cross}).
+\end{itemize}
+
+
+The remainder of the survey is organized as follows: \S\ref{sec:taxonomy} introduces the taxonomy; \S\ref{sec:ontology} through~\ref{sec:impl} examine the four central questions of Ontology, Measure, Human-Machine Gap, and Implementation; \S\ref{sec:cross} identifies recurring debates across programs; and \S\ref{sec:conc} concludes the survey by outlining directions for future work.
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%% ==============
+\section{Previous Surveys}~\label{sec:previous}
+Prior surveys of intelligence can be broadly divided into two groups: collections of definitions and reviews centered on a particular research tradition. 
+
+The first group collects definitions of intelligence without organizing them by the underlying question each definition answers.
+%
+\citet{legg2007collectiondefinitionsintelligence} remains an influential example, assembling more than seventy informal definitions from psychology, AI, and cognitive science.
+%
+\citet{legghutter2007} then formalize their own definition into the Legg-Hutter measure discussed in \S\ref{sec:formalmeasure}.
+%
+\citet{mitchell2024debates} reviews disagreements about definitions of AGI, but does not trace those disagreements across the four questions considered here.
+
+The second group develops a particular research tradition in depth.
+%
+\citet{wang2019define}, for example, defines intelligence as adaptation under limited knowledge and resources.
+%
+This provides a coherent account within AGI research, but does not compare it systematically with optimization-based, causal, and predictive accounts, as we do in \S\ref{sec:ontology}.
+%
+\citet{schmidhuber2025annotatedhistorymodernai} provides an annotated historical context of AI development, tracing changes in paradigms and learning methods over several decades.
+%
+Its emphasis, however, is the history of AI rather than competing definitions or implementation strategies.
+%
+Taken together, these works leave the connections between definitions, measures, and implementation methods less thoroughly explored.
+%
+Definitions without clear implications for evaluation or implementation are difficult to assess empirically.
+%
+Our taxonomy therefore treats Implementation as a question distinct from Ontology (\S\ref{sec:impl}), allowing us to examine how a theoretical position might inform the construction of a system. 
+%
+Other relevant reviews focus on evaluation benchmarks rather than definitions of intelligence.
+%
+Systematic reviews of construct validity~\citep{bean2026measuring} and capability-based benchmark taxonomies~\citep{chang2024survey} document construct validity problems of the kind discussed in \S\ref{sec:crit-benchmarks}, but typically assess a benchmark against its stated target.
+%
+They do not necessarily ask whether that target follows from a well-supported account of intelligence.
+%
+Table~\ref{tab:survey-coverage} compares the coverage of the selected surveys with that of the present review.
+%
+The comparison concerns the works included in the table, not every survey in the literature.
+
+% Define reusable color commands
+\newcommand{\yes}{\textcolor{green!60!black}{Yes}}
+\newcommand{\no}{\textcolor{red!70!black}{No}}
+\newcommand{\partialtxt}{\textcolor{orange!85!black}{Partial}}
+
+\begin{table}[t]
+\caption{Coverage of the four questions in selected prior surveys.}
+\label{tab:survey-coverage}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+\toprule
+Survey (Year) & Ontology & Measure & Human-Machine Gap & Implementation & Multidisciplinary \\
+\midrule
+\citet{legghutter2007} (2007) & \yes & \yes & \no & \partialtxt & \partialtxt \\
+\citet{wang2019define} (2019) & \yes & \partialtxt & \no & \partialtxt & \partialtxt \\
+\citet{mitchell2024debates} (2024) & \partialtxt & \no & \no & \no & \no \\
+\citet{chang2024survey} (2024) & \no & \yes & \no & \no & \no \\
+\citet{schmidhuber2025annotatedhistorymodernai} (2025) & \yes & \no & \no & \no & \partialtxt \\
+\citet{bean2026measuring} (2026) & \no & \yes & \no & \no & \no \\
+\rowcolor{gray!15}
+\textbf{This survey (2026)} & \textbf{\yes} & \textbf{\yes} & \textbf{\yes} & \textbf{\yes} & \textbf{\yes} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+
+%% =====================================================================
+\section{Taxonomy}~\label{sec:taxonomy}
+
+Figure~\ref{fig:taxonomy} places major views of intelligence on two axes.
+%
+Its rows represent four questions, while its colors identify the eight research programs considered in this survey.
+%
+We introduce the questions in \S\ref{subsec:four_key_questions} and the programs in \S\ref{subsec:eight_research_programs}.
+
+\subsection{Research Questions}~\label{subsec:four_key_questions}
+
+Our taxonomy is organized around four questions:
+\begin{itemize}
+\item \textbf{(I)~Ontology} asks \textit{what intelligence is}.
+%
+The answers range from formal mathematical definitions to philosophical and cognitive accounts of what intelligent systems must represent or be able to do.
+\item \textbf{(II)~Measure} concerns how intelligence can be identified and measured, including approaches based on imitation tests, benchmarks, and formal theories of measurement~\citep{turing1950, hernandezorallo2017, chollet2019measureintelligence}. 
+\item \textbf{(III)~Human-Machine Gap} asks whether machines can possess genuine intelligence, understanding, or intentionality.
+%
+It includes debates about strong AI and whether artificial systems can genuinely think or only simulate thought~\citep{searle1980, dreyfus1972}. 
+\item \textbf{(IV)~Implementation} addresses how intelligence can be built, assuming that such construction is possible.
+%
+Unlike the other questions, this question spans abstract models of intelligent behavior and concrete algorithms for building intelligent systems.
+\end{itemize}
+
+
+\vspace{2mm}
+\noindent \textbf{\textit{Remarks: History of the Questions}}
+
+The four questions have different intellectual histories, although they have often developed in parallel.
+%
+Their origins help explain why the same term, \textit{intelligence}, can carry different meanings across fields.
+
+% 1st question: Intelligence in its psychology veins
+(1) The study of intelligence predates artificial intelligence.
+%
+Early research in psychology examined how human cognitive abilities differ across individuals and how those differences can be measured~\citep{thorndike1926measurement, spearman1904}.
+%
+Philosophers and comparative psychologists also examined cognitive similarities and differences between humans and other animals.
+%
+These traditions raised questions about the nature of intelligence long before artificial systems became plausible candidates.
+
+% 2nd question
+(2) The development of general-purpose computing brought a new possibility into view: machines might carry out increasingly complex forms of reasoning.
+%
+The theoretical account of computability associated with Turing machines~\citep{turing1937machine} and subsequent developments in electronic computing, including EDVAC~\citep{neumann1993edvac}, provided part of this background.
+%
+Turing also asked whether machines could think~\citep{turing1950}.
+%
+In 1948, Norbert Wiener framed related questions in terms of communication and control under the name \textit{cybernetics}~\citep{wiener2019cybernetics}.
+%
+In the 1955 Dartmouth proposal, \citet{mccarthydartmouth} introduced the term \textit{artificial intelligence}.
+%
+Throughout this survey, we use \textit{artificial intelligence} and \textit{machine intelligence} interchangeably for intelligence attributed to artificial systems.
+%
+We use \textit{intelligence} more broadly, without restricting it to a particular substrate.
+%
+This terminology does not settle whether intelligence is substrate-independent; that remains part of the Human-Machine Gap discussed in Question III.
+%
+Turing's imitation game~\cite{turing1950} provided one way to investigate ``Can machines think?'' through observable behavior.
+%
+Rather than resolving the nature of thought, the test offered an operational criterion for evaluating machine behavior.
+%
+This distinction motivates our second question, Measure.
+
+% 3rd question
+(3) An operational test leaves a further question: \textit{Does behavioral indistinguishability imply genuine understanding?}
+%
+Searle's Chinese Room argument~\citep{searle1980} challenges that inference, while Dreyfus~\citep{dreyfus1972} questions whether formal symbolic procedures can capture situated human competence.
+%
+Functionalist approaches, including Dennett's~\citep{dennett1987}, offer different ways to understand mental states through their roles in cognition and behavior.
+%
+These debates motivate our third question, the Human-Machine Gap.
+
+% 4th question
+(4) Meanwhile, AI researchers developed working systems for specific tasks based on symbolic methods, statistics, machine learning, and mechanical engineering.
+%
+This raised a different question: \textit{How can intelligent behavior be implemented?}
+%
+Practical progress does not require every philosophical dispute to be settled, although theoretical assumptions still shape architectures, objectives, and evaluations.
+%
+We therefore treat Implementation as a separate question.
+
+%% TODO: Fuse the part into above.
+%The four questions we choose trace through the discussion and research for intelligence at different points in time. 
+%The measure of intelligence came first from psychometrics before AI existed~\citep{spearman1904}, then~\citet{turing1950} proposed that behavior can be used to measure machine intelligence. 
+%Ontology and questions on the human-machine gap then came from philosophy of mind and cognitive science, supplying terms like understanding before any real system existed to test them~\citep{chomsky1959, fodor1975language, searle1980, gardner1983}.
+%Lastly, scholars began implementing systems aimed at achieving intelligence, from early symbolic AI~\citep{newellsimon1976} to current large language models. Recently, as doubts have grown about whether large language models achieve genuine intelligence, researchers have begun to consider how intelligence should be defined and implemented.
+%%
+
+
+\vspace{2mm}
+\noindent \textit{\textbf{Why this taxonomy?}} 
+
+We considered organizing the literature by discipline, but this would obscure connections between researchers who ask similar questions using different methods.
+%
+A philosophical account of intelligence and a computational benchmark, for example, may address different aspects of the same problem.
+%
+Inspired by Marr's distinction between levels of analysis in vision~\citep{marr1982}, we group contributions by the questions they address rather than the fields in which they originated.
+
+
+\subsection{Research Programs}~\label{subsec:eight_research_programs}
+
+We organize existing approaches into eight research programs, each highlighting a different view of what intelligence involves and how it should be studied.
+
+The behavioral-functional program defines intelligence through observable performance. 
+%
+It focuses on the abilities a system demonstrates rather than the internal processes that produce them~\citep{turing1950, dennett1987}. 
+%
+The optimization program takes a more formal perspective, viewing intelligence as the ability to achieve goals under a defined objective. 
+%
+Such objectives can be expressed through concepts including reward~\citep{silver2021}, expected utility~\citep{gershman2015}, or rate reduction~\citep{ma2022}. 
+%
+One important feature of this approach is that the same formal framework can be used both to describe intelligent behavior and to guide the design of artificial agents~\citep{legghutter2007, russellnorvig2020, schmidhuber2010, silver2021, ma2022}.
+
+Other programs focus on the internal mechanisms that may give rise to intelligent behavior. 
+%
+Predictive approaches argue that cognition depends on generating predictions about the world and updating those predictions when they fail to match observations~\citep{friston2010, clark2013, hawkins2004, lecun2022}. 
+%
+The causal program argues that intelligence involves more than identifying statistical patterns, requiring systems to represent causal relationships, interventions, and possible outcomes~\citep{pearl2009, scholkopf2021}. 
+%
+The compositional-analogical program highlights the importance of structured representations and the ability to combine existing knowledge to produce new concepts and analogies~\citep{hofstadter2001, lake2017}.
+
+The psychometric program approaches intelligence by asking how it can be measured. 
+%
+Instead of starting with a theory of what intelligence must be, it examines patterns across measured abilities and attempts to identify their underlying structure. 
+%
+Classical psychometrics introduced the term general intelligence, or $g$, through factor analysis and hierarchical models of cognitive ability~\citep{spearman1904}. 
+%
+This view was later challenged by pluralist accounts, which argued that intelligence is better understood as multiple abilities rather than a single general factor~\citep{gardner1983}. 
+%
+Some computational approaches extend the measure-centered tradition beyond human testing, developing formal measures based on algorithmic complexity and task difficulty~\citep{hernandezorallo2017, chollet2019measureintelligence}.
+
+The remaining programs challenge assumptions that are common across many of these approaches. 
+%
+The anti-computationalist program argues that computation alone cannot account for genuine intelligence and points to the importance of embodiment, experience, and biological structure~\citep{searle1980, dreyfus1972}. 
+%
+The symbolic-nativist program accepts computation but argues that intelligent reasoning depends on structured and systematic representations~\citep{newellsimon1976, chomsky1959, fodorpylyshyn1988, marcus2020}. 
+%
+Alongside these eight programs, Figure~\ref{fig:taxonomy} also displays the anti-representational stance, which argues that intelligent behavior can arise through direct interaction with the environment without requiring explicit internal models~\citep{brooks1991}.
+%
+We discuss this anti-representational stance under Implementation without treating it as a ninth program: here it is primarily a proposal about how to build capable systems, not a general measure of intelligence.
+
+
+\include{taxonomy}
+
+
+
+
+
+
+
+%% =====================================================================
+\section{Question~I (Ontology): Definitions of Intelligence}
+\label{sec:ontology}
+This section examines the programs that make substantive claims about what intelligence is.
+%
+For each, we describe its central position, its use in contemporary machine learning, and the main evidence or objections bearing on it.
+%
+The primarily constructive and anti-computationalist positions receive fuller treatment under Implementation and the Human-Machine Gap, respectively.
+
+
+
+
+
+
+
+
+
+\subsection{Predictive Processing}
+\label{sec:pre-pro}
+
+For predictive processing accounts, prediction is central to cognition.
+%
+On one influential account, an agent minimizes a tractable bound on sensory surprise, called variational free energy, through perception (updating its internal model) and action (changing the observations it receives)~\citep{friston2010, clark2013}.
+%
+Decisions about future actions are guided by minimizing expected free energy, with pragmatic terms related to preferred outcomes and epistemic terms related to information gain.
+%
+Exploration can therefore be motivated by the same objective rather than specified as an entirely separate goal.
+%
+Writing $\mathcal{F}$ for variational free energy,
+\begin{equation}
+\label{eq:free-energy}
+\mathcal{F}
+= \underbrace{\mathrm{KL}\big(q(z) \,\|\, p(z)\big)}_{\text{complexity}}
+- \underbrace{\mathbb{E}_{q}\big[\log p(x \mid z)\big]}_{\text{accuracy}}
+= -\underbrace{\Big(\mathbb{E}_{q}\big[\log p(x \mid z)\big] - \mathrm{KL}\big(q(z) \,\|\, p(z)\big)\Big)}_{\text{ELBO}}.
+\end{equation}
+Here, $q(z)$ denotes the approximate posterior over latent causes, $p(z)$ the prior distribution, and $\mathrm{KL}(\cdot)$ the Kullback-Leibler divergence between the two. 
+%
+The objective balances an accuracy term, given by the expected log-likelihood of the observations under the latent variables, against a complexity term that measures the divergence between the posterior and the prior.
+%
+Consequently, minimizing $\mathcal{F}$ is mathematically equivalent to maximizing the evidence lower bound (ELBO) used in variational inference~\citep{kingma2022autoencodingvariationalbayes}.
+
+The Thousand Brains theory instead proposes many parallel sensorimotor models rather than a single predictive hierarchy. 
+%
+Each cortical column is proposed to learn a complete model of objects using grid-cell-like reference frames, with perception arising from consensus across these parallel models rather than from a single hierarchical estimate~\citep{hawkins2004, hawkins2021thousand}.
+%
+Although the theory has attracted attention within neuroscience, direct implementations in contemporary machine learning remain limited.
+
+The equivalence between minimizing variational free energy and maximizing the ELBO connects predictive processing with established methods in generative modeling.
+%
+Models trained with variational objectives may share mathematical features with active-inference systems even when their designers do not invoke the free energy principle.
+%
+This connection is useful, but mathematical correspondence alone does not establish a theory of cognition.
+%
+That requires empirical predictions that distinguish predictive processing from competing accounts.
+
+The literature most directly supporting this program centers on active inference and closely related approaches.
+%
+Active inference and expected free energy methods formulate exploration and control explicitly within the framework of the theory~\citep{fountas2020deepactiveinferenceagents, mazzaglia2021contrastive, tschantz2020scaling}. 
+%
+Related evidence comes from research on intrinsic motivation.
+%
+Although this literature begins from reward design rather than first principles, it arrives at the same distinction between epistemic and pragmatic objectives~\citep{houthooft2017vimevariationalinformationmaximizing, pmlr-v70-pathak17a, pmlr-v119-sekar20a}.
+%
+The broader literature on world models~\citep{ha2018recurrentworld, hafner2020dreamcontrollearningbehaviors}, however, is better understood as an implementation development than as direct evidence for the central claim, and we therefore discuss it separately in \S\ref{subsec:world-model}.
+%
+One criticism concerns the mathematical assumptions of the variational framework, including Markov blankets~\citep{bruineberg2022}.
+%
+Another is that the principle can be difficult to falsify when presented as a mathematical truth rather than an empirical hypothesis~\citep{andrews2021}.
+
+
+\subsection{Causality}
+\label{subsec:ontology-causality}
+The central claim of the causal program is that genuine understanding requires more than recognizing statistical regularities.
+%
+It also requires representing the effects of interventions and reasoning about counterfactual alternatives. 
+%
+On this view, a system that is limited to learning correlations has not yet achieved genuine reasoning~\citep{pearl2009}.
+%
+This idea is formalized through the structural causal model (SCM), in which each variable is determined by a function of its direct causes and an exogenous noise term. 
+%
+The resulting dependency structure forms a directed graph that supports different kinds of causal reasoning. 
+%
+\citet{pearl2018} organizes these into a ladder of causation with three levels of increasing expressive power. 
+%
+As depicted in Fig.~\ref{fig:causation}, the first level is association, expressed by the conditional probability $P(Y \mid X)$, which asks what observing $X$ tells us about $Y$. 
+%
+The second is intervention, represented by the do-operator $P(Y \mid \mathrm{do}(X))$, which asks how $Y$ would change if $X$ were actively set to a particular value. 
+%
+Formally, an intervention performs a surgery on the model by replacing the structural equation for $X$ with a fixed value and removing the incoming edges to that variable. 
+%
+When $X$ and $Y$ have common causes, intervening on $X$ can therefore lead to a different conclusion from observing $X$. 
+%
+The highest level is counterfactual reasoning. 
+%
+For example, $P(Y_{x'}\mid X=x,Y=y)$ asks what $Y$ would have been under an intervention setting $X$ to $x'$, given that $X=x$ and $Y=y$ were actually observed.
+%
+Such questions require a structural model together with assumptions about the exogenous variables.
+%
+Counterfactual inference proceeds by inferring the exogenous conditions of the observed case, changing the relevant structural equation, and calculating the resulting outcome.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,trim={0 1cm 0.3cm 0},clip]{figures/loc.pdf}
+    \caption{The three rungs of the ladder of causation, along with their corresponding activities and questions~\citep{pearl2009}.}
+    \label{fig:causation}
+\end{figure}
+
+
+An important feature of this framework is that the three levels cannot generally be reduced to one another. 
+%
+Information available at a lower rung does not uniquely determine quantities defined at a higher one. 
+%
+As a result, interventional and counterfactual effects cannot usually be recovered from observational data alone unless additional causal assumptions are introduced~\citep{bareinboim2022hierarchy}.
+%
+When these assumptions are represented as a causal graph, the do-calculus provides sound and complete rules for determining whether an interventional quantity can be identified from observational data and for expressing it in terms of observable distributions when this is possible~\citep{pearl2009}.  
+%
+From the causal perspective, interventional and counterfactual reasoning are not merely more accurate forms of prediction; they are distinct requirements for understanding.
+
+One line of research focuses on causal representation learning, which seeks to recover latent causal variables and their relationships directly from high-dimensional observations. 
+%
+The aim is to learn representations that support intervention-based reasoning even when the relevant causal variables are not specified in advance~\citep{scholkopf2021}. 
+%
+Another evaluates whether language models can perform the kinds of inference required by causal theory. 
+%
+CLadder~\citep{jin2023cladder}, for example, presents models with ten thousand questions generated from explicit causal graphs spanning all three levels of Pearl's hierarchy. 
+%
+The reported results suggest that language models solve some but not all of these questions.
+%
+Performance varies across forms of causal inference and prompting conditions; success on the benchmark does not by itself establish a general causal-reasoning procedure.
+
+Subsequent work has questioned whether these successes reflect genuine causal reasoning. 
+%
+When models are asked to infer causal structure from correlational evidence, rather than answer causal questions directly, performance drops to near-chance level, and models may fail to generalize to renamed variables or previously unseen graph structures.
+%
+These results suggest that the models rely primarily on learned statistical associations instead of applying a transferable causal inference procedure~\citep{jin2024largelanguagemodelsinfer}.
+%
+Language models consistently exhibit familiar causal fallacies, such as treating correlation or temporal order as sufficient evidence for causation, and these errors tend to follow superficial linguistic cues rather than the underlying causal structure~\citep{joshi-etal-2024-llms}.
+%
+The contrast illustrates a recurring issue examined in \S\ref{sec:cross}: benchmark success may support an attribution of causal reasoning, but tests of transfer and robustness can reveal a reliance on familiar linguistic patterns instead.
+
+\subsection{Symbolic and Nativist}
+\label{subsec:ontology-symbolic}
+
+The symbolic and nativist traditions both emphasize structure, but they make different claims.
+%
+Symbolic approaches argue that reasoning depends on operations over structured representations; nativist approaches further argue that some constraints on learning are present before experience.
+%
+For symbolic theories, reasoning involves computations over structured, language-like representations, sometimes described as a language of thought~\citep{fodor1975language}.
+%
+The modern formulation of this position begins with the physical symbol system hypothesis of \citet{newellsimon1976}, which argues that any physical system capable of constructing and manipulating symbolic expressions has the necessary and sufficient means for general intelligent action.
+%
+The key question, therefore, is not simply whether a system can fit patterns in data, but whether it has the appropriate representational machinery for thought. 
+%
+Later work argues that representations must support combinatorial structure and systematic generalization; nativist accounts additionally propose constraints that precede learning~\citep{fodorpylyshyn1988, chomsky1959, marcus2020}.
+%
+We discuss systematicity further in \S\ref{subsec:ontology-comp}.
+%
+Contemporary proponents of an ``algebraic mind'' similarly argue that statistical learners may approximate structured competence on familiar data while failing to generalize beyond it~\citep{marcus2019, marcus2020}.
+ 
+The poverty-of-the-stimulus argument holds that the linguistic input available to children does not fully determine the grammar they learn.
+%
+On this view, learners begin with innate constraints that narrow the range of possible grammatical explanations \citep{aec7bd17-a4c8-3578-b764-35112067fc74}.
+%
+A similar idea appears in modern machine learning through the concept of inductive bias, which describes the assumptions that allow a model to generalize beyond the examples it has seen.
+%
+The corresponding debate in machine learning is not whether learning requires some inductive bias, but how much prior structure is necessary and whether it must be specific to language.
+ 
+If human-like language ability depends on language-specific constraints, then systems trained only on realistic amounts of linguistic data should struggle to achieve similar abilities.
+%
+However, recent studies have shown that models trained on children-directed datasets can develop meaningful syntactic capabilities without being given explicit grammatical knowledge \citep{warstadt2023babylm, huebner-etal-2021-babyberta}. 
+%
+Instead of focusing only on whether models can learn from limited data, researchers now must consider whether these models are learning from the same kinds of information that children have during development. 
+%
+Nativist researchers argue that language models trained only on text lack important aspects of human learning, including interaction with the physical world, social experience, and broader developmental context. 
+ 
+\subsection{Compositionality and Analogy}
+\label{subsec:ontology-comp}
+The compositionality and analogy program emphasizes structured representations and two operations on them: combining components and mapping relations between domains.
+%
+The account of compositionality builds on the systematicity argument of \citet{fodorpylyshyn1988}, which identifies three features of human thought that any adequate theory of cognition must explain: systematicity, productivity, and compositionality.
+%
+Systematicity means that related cognitive abilities tend to occur together.
+%
+For instance, an agent that can represent a relation $aRb$ can typically also represent $bRa$, because the same constituents can be combined in a different order.
+%
+Productivity refers to the ability to generate and understand an unlimited number of thoughts from a finite set of primitives through recursive combination.
+%
+Compositionality is the related principle that the meaning of a complex representation depends on the meanings of its parts and the rules by which those parts are combined~\citep{fodorpylyshyn1988, marcus2019}. 
+%
+The analogical tradition emphasizes mappings that preserve relationships between a source and a target domain.
+%
+Such mappings can support transfer even when the domains differ in their surface features~\citep{hofstadter2001, Mitchell_2021}.
+%
+Both approaches require structured representations.
+%
+One emphasizes recombining familiar parts; the other emphasizes mapping relations between different domains.
+ 
+Compositionality can be expressed as a homomorphism: the meaning of a complex expression depends on its constituents and how they are combined~\citep{fodorpylyshyn1988}.
+%
+Structure-mapping theory instead describes analogy as a partial mapping $m \colon S \to T$ from a source $S$ to a target $T$.
+%
+The mapping preserves relevant relations while setting aside attributes that are not structurally important.
+%
+It favors correspondences among connected systems of relations over isolated similarities~\citep{gentner2017analogy, GENTNER1983155}.
+%
+Computational examples include constraint-satisfaction models and the Copycat architecture, which constructs analogies in a restricted domain~\citep{HOLYOAK1989295,holyoak1994analogy, Hofstadter1995TheCP}.
+%
+More recently, analogy has also been used as a way to improve problem-solving: a model generates related problems and solutions before attempting the target problem~\citep{yasunaga2024large}.
+
+ 
+On the compositional side, the supporting literature has often reformulated systematicity as compositional generalization, also known as the ability to handle novel combinations of familiar components correctly.
+%
+A substantial body of work reports that standard neural models struggle precisely with these unfamiliar recombinations, which is interpreted as evidence for the need for stronger structural representations~\citep{lake2018compskill, keysers2020measuringcompositionalgeneralizationcomprehensive, kim-linzen-2020-cogs}. 
+%
+Later studies show that sufficiently large or appropriately structured models can achieve considerable levels of compositional generalization, suggesting that some forms of structure can be learned rather than explicitly built in~\citep{csordas2021devil}.
+%
+Conceptually, the connectionist response argues that systematicity does not require classical symbolic architectures, because distributed representations can encode relational structure without explicit symbols. 
+ 
+
+The evidence on analogical reasoning remains mixed.
+%
+One study reported zero-shot performance at or above the human level on text-based matrix and letter-string tasks~\citep{Webb2022EmergentAR}.
+%
+Later studies found sharp performance drops on counterfactual variants that preserved the underlying relation while changing familiar surface patterns~\citep{hodel2024responseemergentanalogicalreasoning, lewis2024usingcounterfactualtasksevaluate}.
+%
+A subsequent study found that code-augmented models could handle these variants more successfully~\citep{webb2025evidence}.
+%
+These results do not yet settle whether the tasks isolate relational mapping.
+%
+Improving a system's score addresses the observed failure, but it may leave the validity of the task unchanged.
+%
+A different line of evidence examines how models represent and perform analogies.
+%
+Studies have traced the development of analogical reasoning during training~\citep{minegishi2026emergentanalogicalreasoningtransformers}, identified symbol-like processing stages associated with abstract reasoning~\citep{pmlr-v267-yang25c}, and found representational patterns related to the compositional complexity of inputs~\citep{lee-etal-2025-geometric}.
+%
+These findings may help distinguish competing explanations, although their interpretation also requires care.
+%
+An open question is whether analogical mapping requires a distinct mechanism or can emerge from more general forms of structured representation and learning.
+
+\subsection{Psychometric}
+Psychometric approaches examine whether performance across many tasks can be explained by a smaller set of underlying abilities.
+%
+Rather than prescribing those abilities in advance, they estimate their structure from observed performance.
+%
+Factor analysis models correlations among task scores using a smaller number of latent factors~\citep{spearman1904}.
+%
+Item response theory takes a complementary approach: it estimates the ability of a test-taker and the difficulty of individual items on a common scale~\citep{embretson2000irt}.
+%
+We return to these measures in \S\ref{sec:crit}.
+%
+Applying this approach to language models means asking whether benchmark scores reflect shared underlying abilities.
+%
+Factor analysis of benchmark suites, for example, tests whether observed differences among models can be summarized by a small number of dimensions.
+%
+Such a pattern is suggestive, but its interpretation depends on the tasks and models being compared.
+%
+A central observation is the \emph{positive manifold}: performance on different cognitive tests is usually positively correlated.
+%
+\citet{spearman1904} explained this by proposing a general factor $g$.
+%
+Pluralist and anti-realist accounts caution that a statistical factor need not correspond to a single underlying cognitive capacity~\citep{gardner1983, gould1996mismeasure}.
+%
+A dominant first factor is consistent with a single common cause, but it is equally consistent with many distinct processes that are positively correlated. 
+%
+Language-model benchmark scores often exhibit a similar positive manifold: models that perform well on one task tend to perform well on others.
+%
+Benchmarks may share formats, scoring conventions, and exposure to training data.
+%
+A common performance factor could therefore reflect some of these shared properties, including contamination~\citep{magar-schwartz-2022-data}, rather than a single general ability.
+
+Some break comparable data into several separate factors, such as reasoning, comprehension, and core language modeling~\citep{burnell2023revealingstructurelanguagemodel}, and the disagreement can be traced to which models and benchmarks were chosen~\citep{ye2026largelanguagemodelpsychometrics}.
+%
+Different factor structures can fit similar score data.
+%
+Determining what those factors mean therefore requires evidence about the measures themselves, not only additional factor analysis (\S\ref{sec:crit-benchmarks}).
+
+\subsection{Behavioral and Functional}
+The behavioral and functional program focuses on what systems do and how their behavior can be predicted, rather than beginning with claims about the physical nature of mental states.
+%
+Methodological behaviorism restricts evidence to observable behavior.
+%
+Functionalism, by contrast, describes mental states through their causal relationships with inputs, outputs, and other states, rather than through their physical composition.
+%
+The thesis of multiple realizability~\citep{Putnam1978-PUTTNO-4} holds that a mental state defined by its causal role could, in principle, be realized in different substrates, including biological and artificial ones.
+
+One influential expression of this approach is the intentional stance~\citep{dennett1987}.
+%
+On this account, attributing beliefs and goals to a system is a predictive posture.
+%
+An observer adopts this stance when treating a system as rational helps predict its behavior.
+%
+Dennett contrasts it with explanations based on physical mechanisms or design; its value lies in predictive usefulness, not in independently establishing the existence of mental states.
+%
+This position places considerable weight on the explanatory value of behavioral and functional descriptions.
+%
+It therefore offers a response to some objections to machine intelligence, although its adequacy remains contested.
+%
+For language models, critics argue that talk of beliefs and intentions can mislead when it substitutes for an account of how the system works.
+%
+Such language may encourage anthropomorphism rather than improve prediction, even by the intentional stance's own pragmatic standard~\citep{10.1145/3624724}.
+
+The standard objection is that behavioral equivalence underdetermines mechanism.
+%
+The classic case is an enormous lookup table that matches every input to a stored response, passing any finite behavioral test while performing no cognition at all~\citep{Block1981PsychologismAB}.
+%
+This thought experiment challenges purely behavioral criteria: matching responses does not necessarily show that a system uses the cognitive mechanisms attributed to it.
+%
+The objection also helps explain why researchers complement behavioral benchmarks with evidence about internal mechanisms, as discussed in \S\ref{sec:impl}.
+
+
+\begin{table}[t]
+\caption{Question~I (Ontology): central claims, evidence, and challenges.}
+\label{tab:ontology-framework}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\textwidth}{p{0.16\textwidth} Y Y Y}
+\toprule
+Program & View of intelligence & Evidence & Challenge \\
+\midrule
+Predictive Processing &
+Prediction and error minimization as components of cognition~\citep{friston2010, clark2013} &
+Active inference and learned world models~\citep{fountas2020deepactiveinferenceagents, hafner2020dreamcontrollearningbehaviors} &
+Alternative parallel-object account (Thousand Brains)~\citep{hawkins2021thousand} \\
+\addlinespace
+Causality &
+Interventions and counterfactuals beyond correlation~\citep{pearl2009, pearl2018} &
+CLadder tests the three causal levels~\citep{jin2023cladder} &
+Errors under variable changes and causal cues~\citep{jin2024largelanguagemodelsinfer, joshi-etal-2024-llms} \\
+\addlinespace
+Symbolic \& Nativist &
+Structured representations; innate learning constraints~\citep{newellsimon1976, fodorpylyshyn1988, chomsky1959} &
+Poverty-of-stimulus argument~\citep{aec7bd17-a4c8-3578-b764-35112067fc74} &
+Child-scale models acquire syntax without explicit rules~\citep{warstadt2023babylm, huebner-etal-2021-babyberta} \\
+\addlinespace
+Compositionality \& Analogy &
+Combining concepts and mapping relations~\citep{fodorpylyshyn1988, hofstadter2001} &
+LLM analogies and meta-learned systematicity~\citep{Webb2022EmergentAR, Lake2023-ut} &
+Mixed robustness on reworded and counterfactual tasks~\citep{lewis2024usingcounterfactualtasksevaluate, webb2025evidence} \\
+\addlinespace
+Psychometric &
+General ability inferred from task performance~\citep{spearman1904} &
+Positive manifold and $g$ in model benchmarks~\citep{burnell2023revealingstructurelanguagemodel} &
+Common factors need not identify causal mechanisms~\citep{gardner1983, gould1996mismeasure} \\
+\addlinespace
+Behavioral \& Functional &
+Intelligence assessed by observed capabilities~\citep{turing1950, dennett1987} &
+Controlled three-party Turing tests~\citep{10.1145/3715275.3732108} &
+Equivalent behavior need not imply shared mechanisms~\citep{Block1981PsychologismAB} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent \textbf{\textit{Remarks: Intelligence without Neurons}}
+
+Research on organisms without nervous systems complicates attempts to identify intelligence with neural computation alone.
+%
+Slime moulds have shown anticipatory responses to repeated environmental changes~\citep{Saigusa2008AmoebaeAP}, and habituation-like behavior has been reported in another non-neural system~\citep{vogel2016cellfusion}.
+%
+These findings do not settle whether such behavior constitutes intelligence, but they make the choice of definition consequential.
+
+
+%% =====================================================================
+\section{Question~II (Measure): How Can Artificial Intelligence Be Identified and Measured?}
+\label{sec:crit}
+The accounts reviewed in \S\ref{sec:ontology} influence how intelligence is evaluated.
+%
+Every measure rests on assumptions about what should count as evidence and what that evidence establishes.
+%
+Building benchmarks has become easier than interpreting what their scores say about intelligence.
+
+
+\subsection{Behavioral Criterion}
+\citet{turing1950} proposed the imitation game as a behavioral criterion for assessing machine intelligence.
+%
+Instead of trying to establish directly whether a machine thinks, the test asks whether a judge can distinguish its conversational behavior from a human's.
+%
+It therefore sets aside, rather than resolves, the philosophical issues discussed in \S\ref{sec:ontology} and \S\ref{sec:poss}.
+%
+A system may become more convincing without becoming more competent in the abilities we care about.
+%
+Success at imitation therefore need not establish the underlying capacity.
+
+Controlled studies now allow the classical behavioral criterion to be tested more directly.
+%
+In a three-party experiment, judges classified GPT-4~\citep{openai2024gpt4technicalreport} as human at rates consistent with chance~\citep{10.1145/3715275.3732108,Jones2026}.
+%
+The result suggests that conversational imitation has become a less discriminating test, but it does not by itself settle whether the model genuinely understands the conversation.
+%
+Alternative formulations target more specific abilities.
+%
+The mini Turing test proposed by \citet{pearl2018, 10.1145/1283920.2351636} focuses on causal explanations and interventional or counterfactual questions; related evaluations examine human-like navigation in games~\citep{pmlr-v139-devlin21a}.
+%
+The meta-Turing test instead asks systems to judge whether other agents are human~\citep{walsh2022metaturingtest}. 
+%
+Other variants extend the setting to long-term dialogue, where consistency and memory matter~\citep{wu-etal-2025-xturing}, or to speech interaction~\citep{li2026human}.
+%
+A generalized Turing test compares behavior across specified populations of agents rather than asking only whether one system can imitate one human reference~\citep{mitropolsky2026generalizedturingtestfoundation}.
+%
+These variants impose additional conditions on the original imitation game, reflecting concerns that conversational indistinguishability alone provides limited evidence about broader cognitive abilities.
+%
+The same question applies to these tests as to the benchmarks examined in \S\ref{sec:crit-benchmarks}: what ability does successful performance support?
+
+
+\subsection{Formal Measure}
+\label{sec:formalmeasure}
+The optimization program offers a formal alternative to behavioral tests.
+%
+Its measure of intelligence draws on two ideas from algorithmic information theory (AIT): Kolmogorov complexity and Solomonoff induction.
+%
+The Kolmogorov complexity $K(x)$ of an object is the length of the shortest program that produces $x$ on a fixed universal Turing machine.
+%
+Regular or highly patterned objects admit short descriptions, whereas incompressible objects do not~\citep{Kolmogorov1968ThreeAT}. 
+%
+Solomonoff induction gives a mathematical version of Occam's razor: hypotheses with shorter descriptions receive larger prior weights, roughly of order $2^{-K(\cdot)}$.
+%
+Under suitable assumptions, predictions based on the universal prior converge to those of a computable data-generating process~\citep{Solomonoff1964AFT1, Solomonoff1964AFT2}.
+%
+Together, these ideas provide a way to weight environments according to their description length, without relying on a fixed human-selected benchmark suite. 
+
+\citet{legghutter2007} begin with an informal definition: ``intelligence measures an agent's general ability to achieve goals in a wide range of environments.''
+%
+They formalize this idea through a scalar quantity $\Upsilon$ for an agent $\pi$, defined by its expected reward across computable environments.
+%
+The formalization is given by
+\begin{equation}
+  \Upsilon(\pi) = \sum_{\mu \in \mathcal{E}} 2^{-K(\mu)}\, V^{\pi}_{\mu} = V^{\pi}_{\xi},
+\end{equation}
+%
+where $K(\mu)$ denotes the Kolmogorov complexity of environment $\mu$, $V^{\pi}_{\mu}$ denotes the expected reward obtained by agent $\pi$ in $\mu$, and $V^{\pi}_{\xi}$ denotes the expected value under the universal mixture $\xi$, which weights environments according to $2^{-K(\mu)}$.
+%
+This prior gives greater weight to environments with shorter descriptions.
+%
+AIXI is defined as the policy that maximizes $\Upsilon$~\citep{hutter2005universal}, which illustrates the intended ideal: an agent evaluated across a broad, complexity-weighted range of environments rather than against a fixed set of benchmark tasks.
+ 
+The measure has three consequential limitations.
+%
+First, $\Upsilon$ is incomputable, since the Kolmogorov complexity term $K(\mu)$~\citep{Kolmogorov1968ThreeAT} and the infinite sum are incomputable, so no procedure can evaluate the measure exactly. 
+%
+Second, it does not explicitly penalize the computation time or memory used by an agent, even though these constraints can affect its performance.
+%
+Third, its values depend on the universal reference machine used to define $K(\mu)$~\citep{leike2015computeaixi}.
+%
+Whereas the invariance theorem guarantees that reference machine choice shifts Kolmogorov complexity only by an additive constant, no analogous invariance theorem is known for $\Upsilon$ itself, and an adversarial choice of reference machine can reorder the measure's verdicts, rendering the intelligence ranking dependent on a convention the theory does not fix~\citep{pmlr-v40-Leike15}. 
+%
+One response is resource-aware reformulation, in anytime and bounded-optimality accounts that ask what is achievable under a stated time or compute budget~\citep{HERNANDEZORALLO20101508, hernandezorallo2017}.
+%
+A different response is to approximate resource-intensive ideals with computable agents, as discussed under Implementation in \S\ref{sec:impl}.
+%
+Such approximations do not evaluate $\Upsilon$ exactly.
+%
+$\Upsilon$ therefore serves in this taxonomy as a theoretical reference point rather than a usable measure. 
+%
+Practical criteria need not approximate the same definition of intelligence.
+
+
+\subsection{Psychometrics}
+\label{sec:crit-psycho}
+\paragraph{Universal psychometrics.}
+\label{paragraph:universal}
+The idea of measuring ability against an absolute scale of difficulty, rather than relative to a population, predates modern machine learning.
+%
+In the 1920s, \citet{thorndike1926measurement} developed the \textbf{CAVD} scale based on the principle that if intelligence exists, it should be measurable on a continuous scale. 
+%
+The test combined four types of tasks, sentence \textbf{C}ompletion, \textbf{A}rithmetic, \textbf{V}ocabulary, and following \textbf{D}irections, into a single score.
+%
+This basic design, which combines several tasks into a single overall measure, resembles today's benchmark suites discussed in \S\ref{sec:crit-benchmarks}.
+%
+The comparison also reveals a limitation of many modern benchmark suites: they combine task scores without an independent explanation of how item difficulty relates to the targeted ability.
+%
+Universal psychometrics seeks a difficulty scale that does not depend only on the particular test population.
+%
+A different line of work takes almost the opposite approach by comparing AI systems directly with humans using established psychological tests.
+%
+One recent example adapts Cattell-Horn-Carroll (CHC) theory~\citep{MCGREW20091}, the modern successor to Carroll's factor-analytic model~\citep{carroll1993}, into ten cognitive ability domains and evaluates frontier models using tests designed for well-educated adults rather than machine-specific benchmarks \citep{hendrycks2025definitionagi}.
+%
+Another derives ten ability domains from a broader synthesis of cognitive psychology and neuroscience rather than CHC theory alone \citep{burnell2026measuringprogressagicognitive}.
+%
+Instead of asking where a system lies on an intrinsic, population-independent scale, they ask how closely the system matches human performance on validated cognitive tests.
+
+Early work proposed an anytime intelligence test that assigns difficulty using algorithmic information theory and adapts its administration to the agent's performance and resource constraints~\citep{HERNANDEZORALLO20101508}.
+%
+The approach was extended to a wider range of agents~\citep{HERNANDEZORALLO201450} and developed into a broader framework for sampling tasks across levels of difficulty~\citep{hernandezorallo2017}.
+%
+Later studies estimated item difficulty and discrimination alongside model ability~\citep{
+MARTINEZPLUMED201918}.
+%
+Early experiments found that the complexity-graded tests available at the time did not reliably distinguish reinforcement-learning agents from humans~\citep{10.1007/978-3-642-22887-2_13}, an internal demonstration that an instrument's validity is an empirical question rather than a consequence of its design.
+%
+Later work has examined expert-level suites probing the difficult end of the task space~\citep{HLE2026}, systematic surveys of what existing benchmarks discriminate~\citep{srivastava2023beyond}, and mappings from benchmark performance to human abilities and occupational tasks~\citep{10.1613/jair.1.12647}.
+
+
+Item response theory supports population-independent interpretation of parameters only under modeling assumptions, including dimensionality and local independence~\citep{embretson2000irt,doi:10.1177/0013164404273942}.
+%
+These assumptions deserve particular scrutiny in evaluations of language models.
+%
+Applications of item response theory to language-model evaluation often use unidimensional models despite evidence that capabilities are multidimensional~\citep{ye2026largelanguagemodelpsychometrics, Ravenda2025RethinkingPT}.
+%
+Some studies also omit model-fit diagnostics and focus on predictive accuracy alone~\citep{li2026adaptive}.
+%
+Other analyses find weak separation among leading models or rankings that change across benchmarks intended to test similar capabilities~\citep{10.1609/aaai.v40i41.40814}.
+%
+Calibration sets of models may be small, share architectures or training corpora, and respond similarly to items derived from the same templates.
+%
+These dependencies can distort estimated ability and difficulty.
+%
+In practice, then, estimated difficulty can depend on which models are included.
+%
+Shared blind spots or contamination may be mistaken for properties of the items.
+
+
+\paragraph{Skill-acquisition efficiency.}
+\label{paragraph:arc}
+In contrast to performance-based definitions, \citet{chollet2019measureintelligence} emphasizes skill-acquisition \emph{efficiency} relative to a stated set of priors and experience, an idea explored through the Abstraction and Reasoning Corpus (ARC-AGI).
+%
+Its tasks are intended to reward generalization from limited examples rather than reliance on memorized solutions (Fig.~\ref{fig:arcagi_tasks}).
+%
+The successor benchmarks extend the same principle, while widening what is measured: ARC-AGI-2 broadens the task distribution and raises the demand for compositional reasoning~\citep{chollet2026arcagi2newchallengefrontier}, and as demonstrated in Fig.~\ref{fig:arc3}, ARC-AGI-3 moves from static to interactive tasks, shifting the evaluated construct from one-shot problem-solving ability to interactive skill acquisition over an episode~\citep{foundation2026arcagi3newchallengefrontier}.
+%
+The ARC approach has also motivated related benchmarks, including tests of spatial and semantic concepts~\citep{moskvichev2023the}, synthetic ARC-style tasks~\citep{li2025combining}, and evaluations of systematicity~\citep{mondorf2026compositionalarc}.
+%
+For more information on the ARC-AGI benchmarks and similar benchmarks for evaluating abstract reasoning and generalization, we refer the reader to a recent survey~\citep{bratus2026a}. 
+
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\columnwidth}
+        \centering
+        \includegraphics[width=0.65\columnwidth]{figures/arc12.pdf}
+        \caption{ARC-AGI 1 (top)~\citep{chollet2025arcprize2024technical} and ARC-AGI 2 (bottom)~\citep{chollet2026arcagi2newchallengefrontier}.}
+        \label{fig:arc12}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\columnwidth}
+        \centering
+        \includegraphics[
+            trim={0.6cm 0.4cm 0.4cm 0.4cm},
+            clip,
+            width=\columnwidth
+        ]{figures/arc3.pdf}
+        \caption{Two interactive public tasks, \texttt{tu93} and \texttt{r11l}, from ARC-AGI 3~\citep{foundation2026arcagi3newchallengefrontier}.}
+        \label{fig:arc3}
+    \end{subfigure}
+    \caption{Evolution of ARC-AGI benchmarks~\cite{chollet2025arcprize2024technical, chollet2026arcagi2newchallengefrontier, foundation2026arcagi3newchallengefrontier}, progressing from static tasks (a) to interactive tasks (b).}
+    \label{fig:arcagi_tasks}
+\end{figure}
+
+
+Studies of ARC-AGI have questioned whether apparent reasoning failures can be separated from difficulties in visual perception.
+%
+For example,~\citet{wang2026reasoningbenchmarktestreasoning} argue that performance differences between humans and frontier vision-language models on ARC-style tasks are driven mainly by visual perception rather than reasoning.
+%
+Their analysis tests whether the visual demands of the tasks are being mistaken for limits in abstract reasoning.
+%
+Whether this is a defect or a feature is itself contested: a vision-native approach that treats ARC as image-to-image translation, rather than as a language or program-synthesis task, reaches roughly human-level accuracy with a small model trained from scratch~\citep{hu2025arcvisionproblem}, which suggests to its authors that ARC's visual character is intrinsic to the task rather than a confound on a reasoning measure.
+%
+Both interpretations recognize that visual processing affects performance.
+%
+They disagree about whether it belongs to the intended ability or acts as a confounding factor.
+%
+This is a question of construct validity.
+
+\subsection{Benchmark-driven Evaluation and Validity Crisis}
+\label{sec:crit-benchmarks}
+A recurring challenge in benchmark evaluation is the difference between performance on particular tasks and the underlying ability those tasks are intended to measure.
+%
+Several problems arise from this gap, and addressing one does not necessarily resolve the others. 
+%
+The most familiar is contamination.
+%
+When benchmark questions appear in a model's pretraining data, high scores can reflect memorization rather than the capability the benchmark is intended to measure.
+%
+This effect is visible in a rewritten mathematics benchmark that removes contaminated items, where the performance of leading models drops substantially~\citep{NEURIPS2024_53384f20}. 
+%
+LiveBench addresses the same issue by continually releasing new evaluation sets that are unlikely to have appeared during pretraining~\citep{white2025livebench}.
+%
+Yet contamination is only part of the problem.
+%
+A benchmark can be completely uncontaminated and still fail to measure the construct it claims to evaluate.
+%
+A recent large-scale review concludes that this problem is widespread~\citep{bean2026measuring}.
+%
+The ARC perception example in \S\ref{paragraph:arc} illustrates one such case.
+%
+Studies of factual knowledge provide another: a model may store a fact without reliably retrieving it, and successful retrieval does not guarantee that it can compare or combine that information~\citep{AL2023-knowledge1, AL2023-knowledge2}.
+%
+A single aggregate score can obscure these different abilities. 
+%
+Other studies show that benchmark performance often depends on superficial properties such as answer ordering or prompt wording rather than the underlying content~\citep{ICLR2024_54dd9e0c, sclar2024quantifying}. 
+%
+Even carefully designed benchmarks change once they become optimization targets.
+%
+Models improve on the benchmark itself without a corresponding improvement in the intended capability, a phenomenon that appeared earlier in this survey in the context of reward model over-optimization~\citep{gao2023scaling} and motivated the continual revision of ARC-AGI~\citep{chollet2026arcagi2newchallengefrontier}. 
+%
+There is also a more subtle source of distortion, in which continuous improvements in model performance can appear as sudden qualitative jumps when they are measured with discontinuous evaluation metrics~\citep{schaeffer2023emergent}.
+
+Dynamic benchmarks reduce the risk of contamination by continually introducing new test items~\citep{white2025livebench}.
+%
+Item response theory replaces raw accuracy with estimates of item difficulty and model ability, although, as discussed in \S\ref{paragraph:universal}, those estimates still depend on the population used for calibration~\citep{MARTINEZPLUMED201918}.
+%
+Preference-based evaluation avoids fixed answer keys by comparing model outputs directly, but this shifts the uncertainty to the judgments of the evaluators themselves~\citep{NEURIPS2023_91f18a12}.
+%
+Other approaches assess how efficiently a model acquires new capabilities relative to its prior knowledge rather than reporting absolute performance alone~\citep{chollet2019measureintelligence}.
+%
+These proposals leave a common question unresolved: what does a benchmark score establish?
+
+Contamination, shortcut use, metric artifacts, and problems of construct validity are related but not identical.
+%
+Each complicates what can be inferred from a benchmark score.
+%
+A high score is often taken as evidence for a capability, although memorization, superficial cues, metric design, or optimization against the benchmark itself may also contribute.
+%
+This is closely related to the distinction between tasks and abilities that motivates universal psychometrics~\citep{hernandezorallo2017}.
+%
+Psychometricians reviewing language model evaluation have raised similar concerns independently~\citep{ye2026largelanguagemodelpsychometrics}, and broader discussions of machine learning evaluation have argued for moving beyond aggregate benchmark scores for the same reason~\citep{burnell2023rethink}.
+%
+For evaluations intended to support broad claims about intelligence, we propose three desirable properties in Table~\ref{tab:conditions}, offering an illustrative comparison of how the criteria discussed here address them.
+%
+First, item difficulty should reflect the intended capability as much as possible, rather than incidental features of the dataset.
+%
+This concern motivates efforts to separate task difficulty from the particular population being tested~\citep{HERNANDEZORALLO20101508, MARTINEZPLUMED201918}.
+%
+Second, evaluation should limit the influence of memorization, for example through renewed or protected test items; repeated revisions of ARC-AGI reflect a related concern~\citep{chollet2026arcagi2newchallengefrontier}.
+%
+Third, each reported score should be linked to a clearly stated capability claim, together with plausible tests that could challenge that interpretation.
+%
+The Legg-Hutter definition offers an explicit formal target in an idealized setting~\citep{legghutter2007}, although practical benchmarks need not adopt that definition.
+%
+No criterion in the comparison fully resolves all three issues in practice.
+%
+The larger problem is not simply that benchmarks become too easy, but that their scores can be difficult to interpret as evidence of the intended capability.
+
+
+\begin{table}[h]
+\caption{Construct-validity considerations for machine-intelligence criteria.}
+\label{tab:conditions}
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lccc}
+\toprule
+Criterion & Intrinsic difficulty & Contamination resistance & Explicit objective \\
+\midrule
+Imitation game~\citep{turing1950} & No & No & No \\
+Legg-Hutter measure~\citep{legghutter2007} & Yes & No & Yes \\
+Psychometrics~\citep{hernandezorallo2017} & Partial & No & Partial \\
+ARC-AGI~\citep{chollet2019measureintelligence} & Partial & Yes & No \\
+Challenging benchmarks~\citep{white2025livebench,HLE2026} & No & Partial & No \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\begin{table}[t]
+\caption{Question~II (Measure): approaches, evidence, and limitations.}
+\label{tab:measurement-framework}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\textwidth}{p{0.16\textwidth} Y Y Y}
+\toprule
+Program & Key idea & Evidence & Challenge \\
+\midrule
+Behavioral &
+Human-machine indistinguishability in conversation~\citep{turing1950} &
+Controlled three-party GPT-4 test~\citep{10.1145/3715275.3732108} &
+Imitation is limited; Extended with causal, meta-, and generalized tests~\citep{pearl2018, walsh2022metaturingtest, mitropolsky2026generalizedturingtestfoundation} \\
+\addlinespace
+Formal Measure &
+Goal achievement across computable environments~\citep{legghutter2007} &
+Solomonoff induction and Kolmogorov complexity~\citep{Solomonoff1964AFT1, Kolmogorov1968ThreeAT} &
+Incomputability and reference-machine dependence; resource limits~\citep{leike2015computeaixi, pmlr-v40-Leike15} \\
+\addlinespace
+Psychometric &
+Latent ability, item difficulty, and skill-acquisition efficiency~\citep{hernandezorallo2017, chollet2019measureintelligence} &
+IRT difficulty estimates; ARC-AGI discourages memorization~\citep{MARTINEZPLUMED201918, chollet2019measureintelligence} &
+Weak separation in early tests; possible visual confounds in ARC~\citep{10.1007/978-3-642-22887-2_13, wang2026reasoningbenchmarktestreasoning} \\
+\addlinespace
+Benchmark-driven &
+Performance across designed task suites &
+Refreshed tasks and contamination controls~\citep{white2025livebench, NEURIPS2024_53384f20} &
+Contamination, shortcuts, and metric artifacts~\citep{magar-schwartz-2022-data, sclar2024quantifying, schaeffer2023emergent} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Question~III (Human-Machine Gap): Can a Machine Be Genuinely Intelligent?}
+\label{sec:poss}
+
+This section examines whether the capabilities exhibited by artificial systems are sufficient for genuine intelligence or understanding.
+%
+The question is not only what machines can do, but whether computational success establishes the kinds of mental capacities sometimes attributed to them.
+%
+Two influential objections raise different concerns: whether manipulating symbols can produce understanding and whether intelligence requires embodied interaction with the world.
+
+
+\subsection{Meaning and Model Understanding}
+\label{subsec:understanding}
+The first position argues that following formal rules for manipulating symbols is not enough to produce understanding. 
+%
+\citet{searle1980} illustrated this claim through the Chinese Room thought experiment. 
+%
+A person who does not understand Chinese sits inside a room and follows a rulebook that allows them to produce fluent Chinese responses to Chinese questions.
+%
+From the outside, the room behaves exactly as though it understands the language and could pass any behavioral test of comprehension. 
+%
+According to Searle, the rule-following process does not itself establish understanding, even if the resulting answers are indistinguishable from those of a fluent speaker.
+%
+The symbols are manipulated solely according to their formal properties, without any grasp of their meaning.
+%
+The important feature of the argument for our purposes is that it explicitly grants behavioral success while denying understanding.
+
+The original intuition has since been reformulated into a question that can be investigated empirically.
+%
+The symbol grounding problem asks how the internal symbols of a computational system acquire meaning instead of receiving their interpretation only from an external observer~\citep{HARNAD1990335}.
+%
+Applied to modern machine learning, the question becomes whether a language model trained only on text can ever learn meaning rather than merely capturing statistical regularities in language, given that it never observes the communicative intentions behind the text it processes~\citep{bender-koller-2020-climbing}.
+%
+One philosophical analysis argues that text-trained models can acquire meaning if learning gives internal states a function of tracking features of the world~\citep{Coelho_Mollo_2026}. 
+%
+Other authors go further by questioning whether external reference is even necessary for meaning. 
+%
+On this view, meaning arises from the conceptual roles that representations occupy within the broader computational system, and those roles can, in principle, emerge from linguistic data alone~\citep{piantadosi2022meaning}. 
+%
+A broader review of the available evidence likewise concludes that the representations learned by contemporary language models are not obviously different from the structured and grounded representations that earlier critiques assumed they could never possess~\citep{10.1098/rsta.2022.0041}. 
+%
+Further empirical work provides complementary evidence, with one study showing that language models trained only on text develop internal representations of colour whose geometry closely matches perceptually grounded colour spaces~\citep{abdou-etal-2021-language}.
+%
+Another study finds that sufficiently large text-only models can infer spatial concepts such as ``left'' and ``right'' in a grid-world setting from a small number of examples and generalize to related concepts.
+%
+Smaller models did not show the same level of generalization in the reported experiments~\citep{patel2022mapping}.
+%
+These studies suggest that language-only training can yield representations of some world-related structure without direct sensory experience.
+%
+They therefore speak to one version of the grounding problem without resolving Searle's philosophical objection to equating symbolic processing with understanding.
+
+\subsection{Grounding and Embodiment}
+\label{subsec:embodiment}
+A second position holds that intelligence depends on embodied and situated skills, which Dreyfus calls \emph{embodied coping}, that cannot be fully captured by explicit symbolic rules.
+%
+From this perspective, much of human intelligence comes from tacit skills that are shaped by experience and interaction with the environment.
+%
+This view motivated the criticism that symbolic AI would struggle with the commonsense abilities that humans use naturally in everyday life~\citep{dreyfus1972}.
+%
+This argument involves two related but distinct claims.
+%
+The first is that genuine intelligence requires embodiment and an agent's ongoing engagement with the world. 
+%
+The second is that symbolic systems based on manually specified rules will fail to achieve the flexible competence associated with human cognition. 
+%
+Classical rule-based systems did encounter many such difficulties, although their later history complicates this explanation. 
+%
+Statistical learning addressed some shortcomings of hand-coded symbolic systems without requiring physical embodiment.
+%
+Systems trained mainly on text or video have demonstrated abilities that resemble aspects of commonsense understanding, challenging the claim that such competence necessarily depends on physical interaction with the world.
+
+For example, models trained on videos of objects in motion can predict familiar physical scenes accurately.
+%
+A more controlled analysis suggests that some accurate video predictions depend on superficial visual cues, such as color and apparent velocity, rather than generalizing the underlying physical relationships.
+%
+Performance drops under distribution shifts and new combinations of familiar conditions~\citep{kang2025how}.
+%
+This research builds on earlier benchmarks for physical and causal reasoning in video~\citep{CLEVRER2020ICLR,mao2025clevrerhumansdescribingphysicalcausal}.
+%
+Other evaluations report similar gaps between performance on familiar scenes and robust physical reasoning~\citep{chow2025physbenchbenchmarkingenhancingvisionlanguage,tung2023physion,bansal2026videophy,motamed2026physics}.
+%
+Taken together, these findings show that success on familiar visual data does not guarantee generalization to unfamiliar physical situations.
+%
+This is consistent with concerns about grounding, although it does not establish that physical embodiment is necessary.
+%
+A related concern appears in multimodal learning.
+%
+Although multimodal models are proposed as a route to perceptual grounding, comparisons with human behavior find differences in how they represent affordances and spatial orientation~\citep{jones-etal-2024-multimodal}.
+%
+Additional sensory modalities may help, but these studies do not establish that multimodal training alone produces human-like physical understanding.
+
+\subsection{What Could Move a Possibility Claim?}
+The embodiment argument in \S\ref{subsec:embodiment} predicts that some abilities depend on interaction with the physical world.
+%
+The Chinese Room argument~\citep{searle1980} in \S\ref{subsec:understanding} is different in that it accepts that a machine may behave like it understands while arguing that behavior alone is not enough to show genuine understanding.
+%
+Behavioral benchmarks alone cannot settle that philosophical question. 
+%
+Instead, researchers have tried to turn philosophical arguments into questions that can be tested, including physical law extrapolation and symbol grounding. 
+%
+The practical work of building capable systems can proceed without resolving this philosophical question.
+%
+Still, the distinction matters when researchers interpret a system's success as evidence of genuine understanding.
+
+\begin{table}[t]
+\caption{Question~III (Human-Machine Gap): competing positions.}
+\label{tab:possibility-framework}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\textwidth}{p{0.16\textwidth} Y Y Y}
+\toprule
+Position & Key claim & Evidence & Challenge \\
+\midrule
+Meaning \& Understanding &
+Symbol manipulation alone cannot establish understanding~\citep{searle1980} &
+The symbol grounding problem~\citep{HARNAD1990335} &
+Text-only models learn color and spatial concepts~\citep{abdou-etal-2021-language, patel2022mapping, piantadosi2022meaning} \\
+\addlinespace
+Grounding \& Embodiment &
+Intelligence requires situated physical and social interaction~\citep{dreyfus1972} &
+Commonsense failures in early symbolic AI~\citep{dreyfus1972} &
+Non-embodied competence, but fragile transfer under changed cues~\citep{kang2025how, motamed2026physics} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+
+
+%% =====================================================================
+\section{Question~IV (Implementation): Building Intelligent Models}
+\label{sec:impl}
+
+This section turns to the practical question of how intelligent systems are built.
+%
+Much of the recent progress in AI has come from scaling computation, data, and model size during pretraining~\citep{kaplan2020scalinglawsneurallanguage, hoffmann2022trainingcomputeoptimallargelanguage}, and more recently from increasing computation at inference time~\citep{openai2026openaio1card, muennighoff2025s1simpletesttimescaling}.
+%
+Scaling has expanded the range of tasks models can perform, but it does not by itself explain which abilities the models have acquired.
+%
+This tension echoes the ``bitter lesson''~\citep{sutton2019bitter}: general methods that effectively use computation have often outperformed approaches built around hand-designed knowledge.
+%
+At the same time, the mechanisms surveyed below impose different forms of structure.
+%
+Whether those structures will remain useful as models and datasets grow is an empirical question~\citep{wei2022emergent}.
+%
+We therefore examine concrete learning objectives and architectures, together with the evidence for their strengths and limitations.
+
+\subsection{Formal Optimization}
+
+One influential view treats intelligence as the optimization of a formally specified objective.
+%
+On this view, sufficiently effective optimization of a suitable objective may produce a wide range of intelligent behavior.
+%
+Different proposals disagree about which objective is appropriate.
+
+
+
+
+\paragraph{Reward-based mechanisms.}
+
+Reinforcement learning provides one implementation of goal-directed optimization.
+%
+The reward-is-enough hypothesis argues that maximizing cumulative reward in a sufficiently rich environment could produce many abilities associated with intelligence~\citep{silver2021}.
+%
+The strongest empirical evidence comes from domains where the reward function is well defined.
+%
+In games, the rules provide unambiguous outcomes, allowing reinforcement learning combined with search to achieve and surpass human-level performance~\citep{Silver2016}.
+%
+Similar ideas now underpin the alignment of large language models, where a learned reward model approximates human preferences and guides behavior through reinforcement learning~\citep{ouyang2022traininglanguagemodelsfollow}.
+%
+The same perspective also connects naturally to the formal framework discussed in \S\ref{sec:formalmeasure}. 
+%
+The Monte Carlo approximation of AIXI provides a computable approximation to the universal reward-maximizing agent, although only in relatively small domains~\citep{2016945.2016949}.
+
+These achievements support reward-based learning as a powerful method, but do not establish that reward maximization alone is sufficient for general intelligence.
+%
+The theoretical literature has clarified the assumptions under which that conclusion follows: rather than taking the reward formulation for granted, several authors derive it from rationality and preference axioms, beginning with general reinforcement learning~\citep{sunehag2011axioms}, extending to analyses of temporal discounting~\citep{pitis2019rethinking}, and identifying necessary and sufficient conditions under which preferences can be represented by a Markov reward function~\citep{shakerinava2022utility}.
+%
+More recent analyses make explicit the assumptions needed to represent preferences as reward functions~\citep{bowling2023settleing}.
+%
+Thus, the explanatory reach of a reward-based account depends on which goals and preferences admit that representation.
+%
+A complementary expressivity result, developed by two proponents of the original hypothesis, proves that under natural definitions of tasks, some objectives cannot be expressed by any Markov reward function~\citep{abel2021expressivity}.
+%
+One response argues for explicitly multi-objective formulations where a single scalar reward is inadequate~\citep{vamplew2023scalar}.
+%
+The empirical record points in the same direction.
+%
+Reinforcement learning has been most successful in settings where an appropriate reward function can be specified directly. 
+%
+The broader claim, however, concerns open-ended environments in which perception, language, and social interaction would all need to emerge from optimization, precisely the settings where defining an adequate reward becomes most difficult. 
+%
+The problem is evident in language-model alignment, where the reward function must first be learned from human preferences.
+%
+Optimizing that learned reward too aggressively leads to reward over-optimization, causing behavior to diverge from the preferences the reward model was intended to capture~\citep{gao2023scaling}.
+
+
+\paragraph{Computational rationality.} Rationality is a central concept in theories of decision-making~\citep{knauff2021handbook}.
+\citet{vonneumann1944} formalize choices in terms of expected utility maximization.
+%
+This perspective carries directly into the area of artificial intelligence, where \citet{russellnorvig2020, RUSSELL199757} define the rational agent as one that, for every possible percept sequence, selects the action that achieves the best expected outcome. 
+
+In realistic settings, however, computing an optimal action takes time and resources.
+%
+An agent must therefore decide not only which task action to take, but also which additional computations are worth performing.
+%
+\citet{RUSSELL1991361} formalized the idea as metareasoning, the problem of selecting computations rather than task actions.
+%
+They introduced the notion of the value of computation, according to which deliberation should continue only when its expected benefit exceeds its computational cost. 
+%
+Extending this perspective, \citet{russell1995boundedoptimal} argued that perfect rationality is an unattainable ideal for any physical agent.
+%
+Instead, they proposed bounded optimality, in which an agent is evaluated relative to the best behavior achievable under its computational constraints rather than against an infeasible standard of perfect decision-making.
+%
+These ideas are later unified by~\citet{gershman2015} under the framework of computational rationality.
+%
+Computational rationality models decisions under limited processing resources.
+%
+Building on it, \citet{Lieder_Griffiths_2020} describe cognitive strategies as approximately optimal responses to those constraints.
+%
+The resulting predictions can be tested empirically.
+%
+Related work applies these ideas across AI, economics, neuroscience, and linguistics.
+%
+\citet{desabbata2025rationalmetareasoninglargelanguage} frame inference itself as a metareasoning problem, allowing a model to decide whether the expected benefit of additional reasoning justifies its computational cost.
+%
+Rather than assuming that longer reasoning traces always improve performance, computation is allocated only when it is expected to be worthwhile.
+%
+A related study finds that reasoning models spend inconsistent amounts of computation when evaluating unfamiliar games, and that closer agreement with game-theoretic solutions does not necessarily imply closer agreement with human judgments~\citep{collins2026evaluating}.
+
+
+
+\paragraph{Compression.} Some accounts treat compression as central to intelligence~\citep{ilya2023compress,jackrae2023compress,adam2022compress,3Blue1Brown}. A formal starting point is algorithmic information theory and the Minimum Description Length (MDL) principle~\citep{rissanen1978modeling}.
+The intuition is that useful compression requires a model to capture regularities in data, sometimes including structure relevant to prediction or explanation.
+%
+The stronger claim that compression constitutes intelligence remains contested.
+%
+Solomonoff induction gives the thesis its mathematical form~\citep{Solomonoff1964AFT1, Solomonoff1964AFT2}, while initiatives such as the Hutter Prize give it a practical expression by tying progress toward artificial general intelligence to optimal lossless data compression~\citep{hutterprize}.
+%
+The same framework also extends to active learning.
+%
+\citet{schmidhuber2010, idsiaArtificialCuriosity} cast intrinsically motivated exploration, or ``curiosity'', as a drive to discover data that reduces an agent's subjective description length, a formulation that continues in curiosity-driven research~\citep{sun2011planning, pmlr-v70-pathak17a, amayuelas2026planningexplorecuriositydrivenplanning}.
+
+Compression-based explanations have also attracted renewed attention in deep learning.
+%
+Minimizing cross-entropy in autoregressive language modeling is closely related to minimizing expected code length under a predictive code.
+%
+Some researchers interpret advanced language-model capabilities as consequences of learning increasingly effective compressed representations~\citep{deletang2024language, huang2024compression, conklin2026learning}.
+%
+Related work studies how much factual information language models can store per parameter in controlled synthetic settings~\citep{AL2024-knowledge3}.
+%
+The results show why compression matters, but they do not establish it as a complete account of reasoning. 
+%
+Other work has evaluated models using ideas from Kolmogorov complexity~\citep{shaw2026bridging, yoran2025kolmogorov,10.5555/3692070.3692702}.
+%
+A stronger claim, that compression alone accounts for intelligence, faces important objections. 
+%
+As highlighted by \citet{chollet2019measureintelligence}, defining intelligence purely as static algorithmic compression ignores the dynamic efficiency of skill acquisition required in open-ended environments. 
+%
+Moreover, a representation that is optimal for compression need not preserve every feature required for acting in a changing environment. 
+%
+The open question is whether compression explains cognition itself or instead provides a useful objective within a broader learning system.
+
+\paragraph{Rate reduction.} The Information Bottleneck (IB) framework~\citep{tishby2000informationbottleneckmethod, michael2018on} formalizes representation learning as an information-theoretic optimization problem that minimizes the mutual information $I(X; Z)$ between the input $X$ and the representation $Z$ (compression), while maximizing the mutual information $I(Y; Z)$ between $Z$ and the target labels $Y$ (relevance), formulated via the Lagrangian objective $\min_{\theta} I(X; Z) - \beta I(Y; Z)$. 
+In contrast to this label-dependent and probabilistic trade-off,~\citet{ma2022, chan2021redunetwhiteboxdeepnetwork} define a novel intrinsic geometric objective called \emph{rate reduction} and derive white-box transformer architectures directly from its optimization.
+%
+The principle of maximal coding rate reduction ($\mathrm{MCR}^2$) selects representations $Z(\theta)$ that maximize 
+
+\begin{equation}
+\label{eq:mcr2}
+\max_{\theta}\;\Delta R\big(Z(\theta)\big) \;=\; R\big(Z(\theta)\big) \;-\; R^{c}\big(Z(\theta)\big),
+\end{equation}
+
+where $R(Z)$ is the coding rate of the full representation (the number of bits needed to encode all features to a given precision), and $R^{c}(Z)$ is the summed coding rate of the representation partitioned into its classes or structured subsets. 
+%
+Maximizing this difference encourages representations that distinguish different groups while keeping examples within a group relatively compact.
+%
+Whether it achieves that separation depends on the data and the optimization procedure.
+%
+A distinctive feature of this approach is its attempt to derive network components by unrolling optimization steps, rather than choosing them entirely by engineering convention.
+%
+Each layer of the resulting network implements an incremental step of rate reduction, making the model ``white-box'' in the sense that every internal operator has a derived, explicitly interpretable role. 
+
+
+This framework has found applications well beyond its original formulation.
+%
+It has been used for unsupervised manifold clustering~\citep{tong2023unsupervised}, generative modeling through closed-loop transcription architectures~\citep{dai2023closedloop}, and explaining how object segmentation can emerge in minimal white-box transformers~\citep{yu2023emergence}. 
+%
+The same coding-rate objective has also been used to simplify self-supervised methods such as DINO~\citep{caron2021emerging} by replacing several heuristic design choices with a principled regularization objective~\citep{wu2025simplifying}.
+%
+Related work applies it to autoregressive language models, where it improves the interpretability at the neuron level~\citep{bai2025improving}. 
+%
+The results suggest that $\mathrm{MCR}^2$ can be useful in several representation-learning settings, while motivating further study of what its mathematical interpretation explains~\citep{buchanan2026principlespracticedeeprepresentation}.
+%
+Until recently, these white-box transformers had mainly been competitive at modest scales.
+%
+Scaling them toward conventional transformers required architectural choices not directly specified by the rate-reduction objective, including larger sparsification blocks, decoupled association matrices, and residual connections~\citep{yang2024scaling}.
+%
+These additions do not invalidate the underlying theory, but they do make it harder to argue that the architecture follows directly from first principles. 
+%
+Moreover, most applications of $\mathrm{MCR}^2$ have remained in vision or other relatively small-scale settings.
+%
+Its extension to language models has so far focused on improving neuron-level interpretability rather than language modeling performance~\citep{bai2025improving}.
+
+
+
+
+
+
+
+\subsection{Compositional and Symbolic Mechanisms}
+While ontology treats systematicity as a proposed property of intelligent reasoning, implementation asks how such behavior can be learned or built into a system.
+%
+There are two broad approaches.
+%
+One builds compositional structure explicitly through symbolic operations, program induction, or modular and neuro-symbolic architectures~\citep{marcus2020, lake2017, garcez2023nesy}.
+%
+The other asks whether end-to-end learning can acquire systematic generalization from data, training objectives, and scale without predefined symbolic components.
+
+\paragraph{Meta-learning.}
+Meta-learning, or ``learning to learn''~\citep{Schmidhuber1987EvolutionaryPI, Thrun-1998-16516, finn2017modelagnosticmetalearningfastadaptation}, trains a model across tasks rather than only on examples from one fixed task~\citep{wang2017learningreinforcementlearn, Hochreiter2001}.
+%
+This can encourage it to adapt rapidly to new combinations of familiar components.
+%
+Early sequence models performed poorly on benchmarks designed to test recombinations of familiar linguistic components outside the training distribution~\citep{lake2018compskill, keysers2020measuringcompositionalgeneralizationcomprehensive, kim-linzen-2020-cogs, bahdanau2020closureassessingsystematicgeneralization}.
+%
+These systemic failures were subsequently organized by \citet{ijcai2020p708} into a comprehensive taxonomy detailing the distinct aspects of compositionality, which are systematicity, productivity, substitutivity, localism, and overgeneralization.
+
+Research has addressed these limitations in several ways.
+%
+One approach augments training data with new combinations of familiar components~\citep{andreas2020good, weyrich2022compositional}.
+%
+The second introduces rigid architectural constraints, such as permutation equivariance or decoupled routing, to explicitly build the required algebraic invariances into the model~\citep{gordon2020permutation, li2023compositional}. 
+%
+Other studies show that tuning and training otherwise standard transformers can substantially improve compositional generalization without explicit symbolic components~\citep{csordas2021devil, ontanon2022making, drakard2024logical}.
+
+In one demonstration, \citet{Lake2023-ut} trained a non-symbolic sequence-to-sequence model to generalize systematically to new combinations.
+%
+Their Meta-Learning for Compositionality (MLC) procedure uses a stream of related tasks; its results challenge the claim that explicit symbolic machinery is always necessary for the abilities discussed by~\citet{fodorpylyshyn1988}.
+%
+Related research investigates how sequence models acquire reusable computations during in-context learning~\citep{pmlr-v202-von-oswald23a, dai-etal-2023-gpt, olsson2022incontextlearninginductionheads}.
+
+\paragraph{Neuro-symbolic methods.}
+As discussed in \S\ref{subsec:ontology-symbolic}, symbolic theories emphasize structured representations.
+%
+Neuro-symbolic methods make that structure explicit by combining learned components with symbolic operations, although different systems integrate the two at different stages of computation~\citep{garcez2023nesy}.
+%
+In the classical arrangement, the neural and symbolic parts remain separate and communicate through discrete interfaces.
+%
+Neural module networks assemble reusable differentiable modules according to a task's symbolic layout, so composition is a property of the architecture while the layout itself is produced symbolically~\citep{Andreas_2016_CVPR}, and the neuro-symbolic concept learner learns visual concepts with a neural front end but answers questions by executing an explicit symbolic program over them~\citep{mao2018the}.
+%
+These architectures support compositional reasoning but can restrict end-to-end optimization when discrete intermediate decisions block gradient flow.
+
+Later work attempted to remove this limitation by making symbolic reasoning differentiable.
+%
+Logic Tensor Networks replaced classical logic with fuzzy semantics~\citep{BADREDDINE2022103649nesy}, and DeepProbLog introduced probabilistic semantics while retaining logical inference within an end-to-end learning framework~\citep{manhaeve2018deepproblogneuralprobabilisticlogic}.
+%
+DreamCoder pushed the idea further by allowing the symbolic vocabulary itself to grow during learning through program induction in a domain-specific language~\citep{ellis2023dream}. 
+%
+AlphaGeometry~\citep{trinh2024solving} combines a language model that proposes auxiliary constructions with a symbolic prover that checks deductions.
+%
+This division of labor achieved strong results on Olympiad geometry problems.
+
+These systems demonstrate that explicitly structured representations support strong compositional generalization, but they do not resolve whether such structure is necessary.
+%
+End-to-end models now achieve many of the same behaviors without symbolic components, while neuro-symbolic systems achieve them by building symbolic structure directly into the architecture.
+%
+Neuro-symbolic methods also depend heavily on representations supplied by the designer. 
+%
+Their logical predicates, program primitives, and domain-specific languages are typically defined before learning begins.
+%
+DreamCoder reduces this dependence by learning higher-level abstractions during training, although the search still takes place within a language specified by the designer~\citep{ellis2023dream}. 
+%
+AlphaGeometry illustrates the same dependence from another perspective.
+%
+Its symbolic vocabulary and inference rules come from a mathematical domain that was formalized long before the system was developed, and even then the domain-specific language covers only around two-thirds of Olympiad geometry problems~\citep{trinh2024solving}.
+
+A further issue is that symbolic representations are not necessarily the concepts they are intended to represent.
+%
+Neuro-symbolic models can achieve high predictive accuracy while grounding their symbols in incorrect concepts, making the symbolic layer less interpretable than its design suggests~\citep{NEURIPS2023_e560202b}.
+%
+Current work is addressing some of these problems by relaxing assumptions about symbol independence and modeling dependencies between symbols directly~\citep{pmlr-v235-van-krieken24a, krieken2025neurosymbolic}. 
+%
+These developments improve the robustness of the learned representations, but they do not establish that the symbols themselves are correctly grounded, which remains the central unresolved question for symbolic approaches.
+
+
+
+\subsection{Predictive and World Models} 
+\label{subsec:world-model}
+The predictive program introduced in \S\ref{sec:pre-pro} also motivates practical architectures for learning and using models of an environment.
+%
+The term ``world model'' covers several approaches.
+%
+Some predict observations, while others predict abstract representations.
+%
+The difference affects what can reasonably be inferred from their successes.
+%
+A generative world model learns environment dynamics from experience and predicts future observations or latent states, often conditioned on actions.
+%
+An agent can then evaluate possible actions through imagined rollouts rather than interacting with the environment for every trial~\citep{ha2018recurrentworld, hafner2020dreamcontrollearningbehaviors}.
+%
+A related approach predicts future states in a learned representation space without generating observations themselves~\citep{lecun2022, matsuo2022worldmodel}.
+
+
+\begin{figure}[t]
+    \centering
+    \begin{subfigure}{0.48\columnwidth}
+        \centering
+        \includegraphics[trim={0 0.2cm 0.2cm 0},clip,width=0.85\columnwidth]{figures/gm.pdf}
+        \caption{Generative model architecture that is widely used for video generative world models such as Genie~\citep{bruce2024geniegenerativeinteractiveenvironments}, Cosmos~\cite{nvidia2026cosmos3omnimodalworld}, and Sora~\cite{openaiSoraSystem}.}
+        \label{fig:generative_model}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\columnwidth}
+        \centering
+        \includegraphics[width=0.85\columnwidth]{figures/jepa.pdf}
+        \caption{Joint Embedding Predictive Architecture (JEPA)~\citep{lecun2022}, which predicts latent representations of target observations from latent representations rather than reconstructing observations directly.}
+        \label{fig:jepa_model}
+    \end{subfigure}
+\caption{Two approaches to predictive world modeling. Generative models (a) predict observations or their latent codes; JEPA-style models (b)~\cite{lecun2022} instead predict learned representations without directly reconstructing the input.}
+    \label{fig:generative_vs_jepa}
+\end{figure}
+
+\paragraph{Generative world models and imagination-based agents.}
+\label{para:gm}
+ \citet{ha2018recurrentworld} presented an early influential world model combining a variational autoencoder, which compresses each observation into a compact latent code, with a recurrent dynamics model that predicts how the code evolves under the agent's actions.
+%
+ A controller can then learn from rollouts generated by the model rather than interacting with the environment for every update.
+%
+ The Dreamer line developed this idea into a scalable agent family~\citep{hafner2020dreamcontrollearningbehaviors}.
+%
+ It learns a latent dynamics model by reconstruction, jointly training the representation, transition, and reward components under a variational objective, and optimizes behavior by rolling out trajectories in latent space and backpropagating value gradients through the imagined futures, which turns the world model into a differentiable simulator for policy learning. 
+ 
+ More recently, the generative program has been extended from models of a single environment to foundation-scale models of interaction with physical environments, whether virtual or real.
+%
+ Genie~\citep{bruce2024geniegenerativeinteractiveenvironments} infers discrete latent actions from unlabelled internet video and learns to predict future frames conditioned on them, yielding an action-controllable environment that a user can play by supplying the actions at inference time.
+%
+ Sora~\citep{openaiVideoGeneration, openaiSoraSystem} scales diffusion over spacetime patches of video into what its developers present as a general-purpose simulator of visual scenes, while Cosmos~\citep{nvidia2025cosmosworldfoundationmodel, nvidia2026worldsimulationvideofoundation, nvidia2026cosmos3omnimodalworld} offers a family of world foundation models pre-trained on massive web-scale video corpora as a substrate for downstream physical-AI applications.
+%
+In this broader use, a world model can serve as an interactive simulator or as a component in an individual agent.
+ 
+Generative world models face two related limitations.
+%
+First, predicting observations requires a model to represent details that may matter for visual quality but not for understanding the dynamics of a scene.
+%
+High reconstruction fidelity therefore need not imply that the model has learned the relevant physical relationships.
+%
+Second, empirical studies suggest that visual realism and physical understanding can diverge.
+%
+Models that produce convincing videos may still perform poorly on tests of physical prediction~\citep{motamed2026physics}.
+%
+Similar concerns have emerged in physical-commonsense evaluations~\citep{bansal2025videophy,bansal2026videophy} and in controlled extrapolation tests, where models often rely on surface cues instead of the governing physical law~\citep{kang2025how} (\S\ref{sec:poss}).
+%
+This does not imply that physical regularities cannot be learned from video.
+%
+A model designed around developmental violation-of-expectation experiments, for example, learns aspects of intuitive physics from visual input~\citep{Piloto2022IntuitivePL}.
+%
+Rather, realistic next-frame prediction and physical understanding are different achievements.
+%
+Large-scale interactive video models thus provide compelling demonstrations of generative capability, but stronger tests are needed to establish what they have learned about the world.
+
+\paragraph{Joint-embedding predictive architectures.}
+\citet{lecun2022} propose energy-based models (EBMs) as one component of a broader architecture for autonomous intelligent systems.
+%
+Unlike probabilistic models, EBMs do not attempt to explicitly represent a normalized probability distribution.
+%
+Instead, they assign a scalar energy $E_\theta(x,y) \in \mathbb{R}$ to each configuration of variables, where lower energy corresponds to greater compatibility.
+%
+Training shapes the energy landscape such that observed configurations receive lower energy than incompatible ones:
+Compatible pairs $(x,y)$ are assigned lower energy than incompatible pairs $(x,y')$, ideally satisfying $E_\theta(x,y) < E_\theta(x,y')$.
+%
+Unlike a normalized probabilistic model, an EBM can be trained by comparing energies without explicitly computing the partition function
+$Z_\theta(x) = \int_{\mathcal{Y}} e^{-E_\theta(x,y)}\,\mathrm{d}y$ required to define a conditional distribution $p_\theta(y \mid x)=e^{-E_\theta(x,y)}/Z_\theta(x)$
+over the observation space~\citep{Dawid_2024}.
+%
+Avoiding the need to model every detail of raw observations can be useful when much of that detail is irrelevant or unpredictable.
+%
+While the generative model architecture discussed in \ref{para:gm} (shown in Fig.~\ref{fig:generative_model}) reconstructs future observations in pixel space, the Joint-Embedding Predictive Architecture (JEPA) illustrated in Fig.~\ref{fig:jepa_model} applies this principle by defining energy in a learned representation space rather than directly in observation space.
+%
+Encoders map the context $x$ and target observation $y$ into embeddings,
+$s_x=f_\theta(x)$ and $s_y=f_{\bar\theta}(y)$, respectively.
+%
+The target encoder may share parameters with the context encoder or, more commonly, be updated as an exponential moving average of it. 
+%
+In the latter case, $\bar\theta$ is not directly optimized through gradient descent and therefore is not included among the trainable parameters.
+%
+A predictor $g_\phi$ then estimates the target embedding from the context embedding, and the energy is defined as the prediction error:
+
+\begin{equation}
+E_{\theta,\phi}(x,y) \;=\; \min_{z \in \mathcal{Z}}\,
+\bigl\lVert g_\phi(s_x, z) - s_y \bigr\rVert_2^2 .
+\label{eq:jepa-energy}
+\end{equation}
+
+Here, $z$ represents uncertainty about the target not captured by the context.
+%
+Predicting in representation space allows an encoder to discard some input details, but the latent variable must be constrained: otherwise, it could simply encode the target and make prediction trivial.
+%
+The predictive objective also admits degenerate solutions.
+%
+Equation~\ref{eq:jepa-energy} does not, by itself, require the learned representation to retain useful information.
+%
+For example, if the predictor can output a constant embedding, a constant encoder $f_\theta\equiv c$ can achieve zero prediction error.
+%
+A slowly updated target encoder may reduce instability but does not guarantee that collapse is avoided~\citep{mo2024cjepa}.
+%
+Additional constraints are therefore often needed.
+
+Equipped with such regularization, JEPAs have been applied to diverse domains, including images \citep{assran2023selfsupervisedlearningimagesjointembedding}, video \citep{bardes2024vjepa, assran2025vjepa2selfsupervisedvideo}, and world modeling \citep{psenka2026parallel, nam2026causaljepa}, with related applications summarized elsewhere \citep{klindt2026lejepa}.
+%
+Common regularizers such as VicReg~\citep{bardes2022vicreg} control properties of the embedding distribution, including variance and covariance.
+%
+These constraints do not necessarily exclude all forms of dimensional collapse~\citep{jing2022understanding}.
+%
+A recent line of theoretical work instead constrains the full embedding law.
+%
+By the Cram\'er-Wold theorem~\citep{cramerwold}, a probability distribution on $\mathbb{R}^d$ is uniquely determined by the family of its one-dimensional projections $\langle u, s \rangle$ over all directions $u \in \mathbb{S}^{d-1}$.
+%
+Recent methods use random one-dimensional projections to constrain the embedding distribution toward a target law.
+%
+This approach is motivated by the fact that the full family of projections characterizes a multivariate distribution.
+%
+Under stated assumptions, it offers stronger anti-collapse guarantees; an isotropic Gaussian is a common target because it maximizes entropy at fixed variance~\citep{balestriero2025lejepaprovablescalableselfsupervised, maes2026leworldmodelstableendtoendjointembedding, kuang2026rectified, huang2026semantic, wu2026visregvarianceinvariancesketchingregularizationjepa}.
+
+Avoiding collapse is necessary, but not sufficient for useful representations.
+%
+A model can preserve information and still prioritize features that are easy to predict rather than those needed for planning or reasoning.
+%
+Analyses of encoder collapse~\citep{mo2024cjepa} and dimensional collapse~\citep{jing2022understanding} show why regularization matters, but not whether the learned features are useful downstream.
+%
+For example, predictive objectives may favor persistent but task-irrelevant features~\citep{littwin2024}, allowing visual distractors to dominate~\citep{sobal2022jointembeddingpredictivearchitectures}.
+%
+Related difficulties have been reported with pretrained encoders~\citep{toso2026learninginvariantvisualrepresentations} and shortcut prediction strategies~\citep{nam2026causaljepa}.
+%
+A central question is therefore how to establish that a predictive representation captures information relevant to downstream understanding and control.
+%
+Identifiability results for LeJEPA show recovery of the underlying latent variables under specific assumptions, including a Gaussian latent world and stationary additive-noise dynamics~\citep{klindt2026lejepa}.
+%
+The theoretical guarantee therefore applies to a restricted setting.
+%
+Other analyses suggest that the objective may act partly through implicit density estimation~\citep{balestriero2025gaussianembeddingsjepassecretly}.
+%
+Proposed ways to assess useful representations include surrogate metrics for probing and planning~\citep{thilak2024lidar, balestriero2025lejepaprovablescalableselfsupervised} and generalization bounds connecting pretraining risk to planning regret~\citep{cui2026generalizationtheoryjepabasedworld}.
+
+
+\subsection{Causal Mechanisms}
+
+The causal program described in \S\ref{subsec:ontology-causality} has inspired a corresponding line of work on causal representation learning.
+%
+Its formal foundation is the structural causal model (SCM), written as $\mathcal{M} = (\mathbf{U}, \mathbf{V}, \mathcal{F}, P(\mathbf{U}))$, where $\mathbf{U}$ is the set of exogenous variables treated as given, $\mathbf{V}$ is the set of endogenous variables the model explains, $\mathcal{F}$ is the set of structural functions generating them, and $P(\mathbf{U})$ is a distribution over the exogenous variables that is the model's only source of randomness.
+%
+Every endogenous variable $V_i \in \mathbf{V}$ is generated by a deterministic mechanism, $$V_i = f_i(\mathrm{PA}_i, U_i),$$ where $f_i \in \mathcal{F}$ is that variable's structural function, $\mathrm{PA}_i$ denotes its causal parents, the other endogenous variables that are its direct causes, and $U_i$ is its own exogenous noise term.
+%
+All uncertainty in the system enters through $U_i$ rather than through $f_i$ itself, which is what later lets an intervention be represented as replacing one equation, $V_i = f_i(\mathrm{PA}_i, U_i)$, with a constant assignment $V_i = v$, while every other variable's equation is left untouched~\citep{pearl2009}.
+%
+This framework leads to the three levels of causal queries~\citep{pearl2018} described in \S\ref{subsec:ontology-causality}: association $P(y\mid x)$, intervention $P(y\mid\mathrm{do}(x))$, and counterfactuals such as $P(Y_{x'}\mid X=x,Y=y)$.
+%
+Given a causal graph and suitable assumptions, do-calculus determines whether some interventional quantities can be identified from observed distributions~\citep{pearl2009, shpitser2008}.
+%
+The hierarchy is more than a convenient way of organizing causal questions.
+%
+The causal hierarchy theorem shows that, for almost every SCM, observational, interventional, and counterfactual reasoning remain genuinely distinct.
+%
+Observational data alone, regardless of its quantity, cannot determine interventional or counterfactual quantities without additional assumptions~\citep{NEURIPS2021_5989add1, bareinboim2022hierarchy}. 
+%
+This has implications for evaluation as well as modeling.
+%
+Success on associational questions cannot, by itself, establish competence at answering interventions or counterfactuals.
+
+This immediately creates the central implementation problem.
+%
+SCMs assume that the relevant causal variables are already available, whereas learning systems observe only high-dimensional data.
+%
+\emph{Causal representation learning} (CRL) attempts to bridge this gap by recovering intervention-ready latent variables $\mathbf{z}$ and their causal structure from observations $\mathbf{x}=g(\mathbf{z})$, where $g$ is an unknown nonlinear mixing function~\citep{scholkopf2021, 10.1145/3501714.3501755}.
+%
+Long before CRL became an established research area, nonlinear independent component analysis (ICA) had already shown that recovering latent sources from i.i.d.\ observations is fundamentally unidentifiable because infinitely many latent decompositions induce the same observational distribution~\citep{hyvarinen1999nonlinear}.
+%
+A closely related impossibility result later emerged for unsupervised disentanglement learning~\citep{locatello2019challenging}.
+%
+As a result, virtually every positive identifiability result relies on introducing additional information.
+%
+Auxiliary variables restore identifiability in nonlinear ICA by rendering latent sources conditionally independent~\citep{hyvarinen2019auxiliary, khemakhem2020ivae}.
+%
+Multiple views and data augmentations can separate content from style~\citep{vonkuegelgen2021ssl}.
+%
+Weak supervision using paired observations before and after interventions identifies latent variables under relatively mild assumptions~\citep{brehmer2022weakly}.
+%
+Temporal information together with known or inferred intervention regimes makes it possible to recover latent blocks and their causal relationships~\citep{lippe2022citris}.
+%
+More recent work has shown that, given observations collected across multiple environments, both the latent variables and the causal graph can be recovered, up to permutation and element-wise reparameterization, using only sparse interventions affecting roughly one or two latent variables at a time~\citep{pmlr-v202-ahuja23a, varici2024linear, buchholz2023linear, zhang2023soft, vonkuegelgen2023nonparametric, varici2025score}.
+
+The emphasis on causal structure also shapes how these methods are evaluated.
+%
+If the objective is to recover independent causal mechanisms rather than statistical regularities, then evaluation must focus on properties that reflect that distinction.
+%
+The principles of independent causal mechanisms and sparse mechanism shifts predict that interventions modify only a small number of mechanisms at once, so models that recover the correct causal variables should adapt rapidly when the environment changes~\citep{scholkopf2021, parascandolo2018icm}.
+%
+Adaptation speed has therefore become both a practical training objective and a proxy for whether the learned representation captures the underlying causal factorization~\citep{bengio2020meta}.
+%
+At a more direct level, CRL methods are typically evaluated by comparing recovered latent variables with ground truth factors using measures such as the mean correlation coefficient, together with conventional graph recovery metrics.
+%
+Even so, recent reviews point to substantial inconsistencies in how these benchmarks are constructed and interpreted across the literature~\citep{causalverse2025}.
+%
+At the level of complete systems, evaluation increasingly extends beyond latent recovery itself.
+%
+Benchmarks such as CLadder test whether language models can answer questions spanning all three levels of the causal hierarchy~\citep{jin2023cladder}.
+%
+Other work argues that success on these tasks often reflects the retrieval of causal language patterns rather than genuine causal inference~\citep{zevcevic2023causal, kiciman2024causal}.
+
+A central limitation of causal representation learning is the strength of the assumptions required for identifying latent causal variables.
+%
+Recovering those variables from high-dimensional data is often impossible without additional information.
+%
+Even when identifiability conditions hold, successful estimation and generalization are not guaranteed.
+%
+Existing identifiability results usually rely on strong assumptions, including explicit interventions, multiple environments with known relationships, or temporal information that is unavailable in many realistic settings. 
+%
+The causal hierarchy makes clear why observational information alone generally cannot resolve higher-level causal questions~\citep{bareinboim2022hierarchy}.
+%
+This result is related to, but distinct from, identifying latent variables from high-dimensional observations.
+%
+Much of the recent literature has therefore focused on reducing, rather than eliminating, these requirements.
+%
+Current approaches investigate weak supervision without explicit labels~\citep{brehmer2022weakly}, exploit structural sparsity in partially observed systems~\citep{xu2024sparsity}, group observational variables before causal discovery~\citep{morioka2024grouping}, and extend score-based methods to settings with soft or unknown interventions~\citep{varici2025score}.
+%
+Identifiability guarantees do not necessarily translate into reliable estimation from finite datasets~\citep{welch2024identifiability}.
+
+
+
+\subsection{Cross-program Mechanisms}
+\label{subsec:cross-program}
+Modern systems increasingly combine mechanisms associated with different research programs.
+%
+These hybrids help test whether the mechanisms offer complementary practical benefits, although their success cannot by itself establish a unified theory of intelligence.
+%
+The clearest example is the combination of predictive processing with compositional representations.
+%
+Object-centric world models introduce slot-structured latent representations into a predictive learning objective, allowing an agent to model a scene as a collection of interacting objects rather than as a single undifferentiated state.
+%
+Predictive objectives help agents learn how states change, but do not specify how an environment should be decomposed into entities.
+%
+Compositional approaches instead emphasize reusable objects and relations, while leaving open how much of that structure must be built into a model and how much can be learned.
+
+Motivated by the binding problem, namely the difficulty of flexibly representing multiple entities within a single distributed representation~\citep{greff2020binding}, an encoder first decomposes a scene into $K$ exchangeable slots, $\mathbf{z}_t = (z_t^1, \dots, z_t^K)$.
+%
+In most implementations, this decomposition is learned through the competitive iterative attention mechanism introduced by Slot Attention~\citep{locatello2020slot, jiang2024slot, jiang2023slot}.
+%
+A relational dynamics module then predicts the future state of each slot by modeling its interactions with the others.
+%
+Contrastively Structured World Models provided one of the earliest explicit formulations of this approach by factorizing the transition according to $\hat{z}_{t+1}^{k} = z_t^{k} + \Delta_\theta^{k}(\mathbf{z}_t, a_t)$, where interaction terms are computed with a graph neural network and the model is trained using a contrastive objective in latent space rather than pixel reconstruction~\citep{kipf2020cswm}.
+%
+This work can be regarded as an early object-centric approach to prediction in representation space, related to the JEPA-style methods discussed earlier in \S\ref{subsec:world-model}.
+%
+Variants of this design have been explored in settings including entity-abstracted planning~\citep{pmlr-v100-veerapaneni20a, zhao2022compositional, piriyakulkij2026poeworld}, Transformer-based slot dynamics~\citep{wu2023slotformerunsupervisedvisualdynamics}, and object-centric model-based agents derived from the Dreamer family~\citep{10.3389/fnbot.2025.1585386}.
+
+Recent developments have extended this hybrid in two important directions.
+%
+One direction extends slot-based representations beyond synthetic environments.
+%
+By grouping features from pretrained self-supervised encoders, recent approaches have made slot-based object representations more practical for real-world data~\citep{seitzer2023bridging}.
+%
+Building on this advance, slot-structured world models have been applied to goal-conditioned planning at scales comparable to conventional latent world models, with action representations composed directly with object slots to predict future states~\citep{feng2026learning}.
+%
+The second concerns integration with other research programs.
+%
+Object-level masking has been incorporated into JEPA training to discourage shortcut solutions based on local patch prediction~\citep{nam2026causaljepa}.
+%
+Object-centric encoders have also been shown to facilitate causal representation learning by providing the object-level variables assumed by causal models~\citep{mansouri2024object}.
+%
+In parallel, neurosymbolic approaches bind object slots to symbolic predicates, producing compositional world models that combine structured perception with symbolic reasoning~\citep{sehgal2024neurosymbolic}.
+
+Recent theoretical analyses identify conditions under which object-centric representations become provably identifiable and support compositional generalization.
+%
+Under particular assumptions, for example, that each pixel is generated from a single object's latent state and the decoder respects this structure, object slots may be identifiable up to permutation and slot-wise reparameterization~\citep{brady2023object}.
+%
+Other results identify conditions supporting generalization to unseen combinations of familiar components~\citep{wiedemer2023compositional}.
+%
+Comparable guarantees have been established specifically for object-centric autoencoders~\citep{wiedemer2024provable}.
+%
+At the same time, kernel-based analyses demonstrate that compositional structure alone is not enough.
+%
+Whether it improves generalization depends on the downstream task and learning setting rather than following automatically from the architecture itself~\citep{lippl2025when}.
+
+Compositional generalization is typically measured by testing models on unseen combinations of familiar components, novel object cardinalities, or recombinations of learned dynamics.
+%
+Dedicated benchmarks have adopted this perspective for world models, including causal and counterfactual reasoning tasks involving colliding objects~\citep{CLEVRER2020ICLR} and physical prediction benchmarks that compare object-centric representations directly with unstructured alternatives~\citep{bear2022physionevaluatingphysicalprediction,tung2023physion}. 
+%
+Although object-centric models often outperform unstructured baselines on synthetic out-of-distribution compositions, these gains do not consistently transfer to more realistic settings.
+%
+Reported improvements vary substantially across downstream tasks and evaluation protocols~\citep{dittadi2022generalizationrobustnessimplicationsobjectcentric}.
+
+These hybrid methods illustrate that predictive and structured representations can be combined effectively.
+%
+Their success does not establish which general theory of intelligence, if any, best explains that success.
+
+
+\noindent\textit{Remarks: Anti-representational and embodied mechanisms.}
+%TODO: Remarks or not?
+\label{par:anti-rep}
+\citet{brooks1991} questioned one of the basic assumptions of classical AI.
+%
+He argued that intelligent behavior does not require an internal model of the world because ``the world is its own best model''. 
+%
+In the subsumption architecture, behavior emerges from direct links between perception and action instead of symbolic reasoning or explicit planning.
+%
+Simple sensor-to-actuator controllers are organized in layers, with higher layers overriding lower ones when necessary.
+%
+Although each controller performs only a simple function, the resulting robots can walk, avoid obstacles, and navigate cluttered environments. 
+%
+At a time when planner-based robots were often slow and unreliable, these systems showed that many tasks could be solved through direct interaction with the environment rather than internal modeling.
+
+The influence of this idea can still be seen in modern robotics, although not in the form Brooks originally envisioned. 
+%
+Embodied learning remains influential, but many contemporary robots rely on learned representations rather than rejecting internal models altogether.
+%
+Vision-language-action models are a clear example of this trend~\citep{brohan2023rt2visionlanguageactionmodelstransfer, kim24openvla, nvidia2025gr00tn1openfoundation}. 
+%
+Rather than replacing internal representations, they combine them with embodied interaction.
+%
+Whether the remaining gaps, especially long-horizon planning and abstract reasoning, require richer internal representations or simply more capable embodied systems remains an open question.
+
+\begin{table}[t]
+\caption{Question~IV (Implementation): mechanisms and limitations.}
+\label{tab:implementation-framework}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\textwidth}{p{0.16\textwidth} Y Y Y}
+\toprule
+Program & Key idea & Evidence & Challenge \\
+\midrule
+Formal Optimization &
+Reward, rationality, or compression objectives~\citep{silver2021, ma2022} &
+Game-playing and compression-based language modeling~\citep{Silver2016, deletang2024language} &
+Objective choice and unintended reward optimization~\citep{bowling2023settleing, gao2023scaling} \\
+\addlinespace
+Compositional \& Symbolic Mechanisms &
+Explicit or learned structure~\citep{marcus2020, garcez2023nesy, lake2019meta} &
+Meta-learning and neural-symbolic AlphaGeometry~\citep{Lake2023-ut, trinh2024solving} &
+Unfamiliar combinations remain difficult; training can help~\citep{lake2018compskill, csordas2021devil} \\
+\addlinespace
+Predictive \& World Models &
+Learned dynamics for prediction and planning~\citep{ha2018recurrentworld, lecun2022} &
+Dreamer, Genie, and JEPA-style prediction~\citep{hafner2020dreamcontrollearningbehaviors, bruce2024geniegenerativeinteractiveenvironments, bardes2024vjepa} &
+Weak physical generalization; task-irrelevant features~\citep{motamed2026physics, kang2025how, sobal2022jointembeddingpredictivearchitectures} \\
+\addlinespace
+Causal Mechanisms &
+Latent variables supporting interventions~\citep{scholkopf2021} &
+Identification with auxiliary information or intervention assumptions~\citep{hyvarinen2019auxiliary, pmlr-v202-ahuja23a} &
+Non-identifiability from observations alone~\citep{hyvarinen1999nonlinear} \\
+\addlinespace
+Cross-program Hybrids &
+Combining complementary mechanisms~\citep{kipf2020cswm} &
+Object-centric and vision-language-action models~\citep{kipf2020cswm, brohan2023rt2visionlanguageactionmodelstransfer} &
+Limited transfer beyond controlled tasks~\citep{dittadi2022generalizationrobustnessimplicationsobjectcentric} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%% =====================================================================
+\section{Findings Across Programs}
+\label{sec:cross}
+Across several research programs, benchmark results have prompted a recurring dispute.
+%
+Strong performance is taken as evidence of a capability; later work finds alternative explanations, such as memorization, reliance on superficial cues, or sensitivity to small changes in the task~\citep{mirzadeh2025gsmsymbolicunderstandinglimitationsmathematical, turpin2023language}.
+%
+The resulting debate is not only about the score, but also about the capability the test was supposed to measure.
+
+The emergence debate starts with early work that argued that new abilities appeared abruptly once models exceeded a particular scale \citep{wei2022emergent}. 
+%
+That interpretation was later challenged by showing that the apparent discontinuities were created by the evaluation metric itself.
+%
+A capability that improves gradually can appear to emerge suddenly when performance is converted into a binary pass-or-fail score \citep{schaeffer2023emergent}.
+
+The literature on causal reasoning arrived at the same issue more gradually.
+%
+Early results on formal benchmarks were taken as evidence that language models could perform causal reasoning \citep{jin2023cladder}.
+%
+Later studies questioned that interpretation by showing that performance dropped to chance when variables were renamed, or causal relationships were inverted \citep{jin2024largelanguagemodelsinfer}.
+%
+Other work found that models often relied on familiar but incorrect patterns of causal inference instead of consistent causal reasoning \citep{joshi-etal-2024-llms}.
+
+Video generation models can predict familiar scenes accurately, yet some controlled studies find that apparent success depends on visual shortcuts rather than a transferable understanding of physical dynamics~\citep{kang2025how}.
+%
+Similar conclusions have emerged from earlier controlled benchmarks \citep{CLEVRER2020ICLR, mao2025clevrerhumansdescribingphysicalcausal, tung2023physion, chow2025physbenchbenchmarkingenhancingvisionlanguage} and from independent follow-up evaluations \citep{bansal2026videophy}.
+%
+Further evidence suggests that visually realistic prediction and physical understanding can improve independently of one another \citep{motamed2026physics}.
+
+Research on analogical reasoning follows much the same trajectory.
+%
+Initial studies reported human-level performance on analogy problems without task-specific training \citep{Webb2022EmergentAR}.
+%
+Later work demonstrated that these systems often failed on reworded problems that preserved the underlying relational structure \citep{hodel2024responseemergentanalogicalreasoning, lewis2024usingcounterfactualtasksevaluate}.
+%
+A subsequent study recovered much of this performance by augmenting the model with code execution \citep{webb2025evidence}.
+%
+The result improved performance on those tests, but it did not resolve what their scores reveal about analogical reasoning.
+
+
+
+Under controlled conditions, recent systems have passed the classical Turing test \citep{10.1145/3715275.3732108, Jones2026}.
+%
+Alternative versions of the Turing test impose additional conditions because conversational indistinguishability alone leaves broader abilities unresolved (\S\ref{sec:crit}).
+%
+Some of those proposals appeared before the recent demonstrations.
+%
+A similar progression appears in compositional generalization.
+%
+Early failures on novel combinations of familiar components were interpreted as evidence that explicit compositional structure was necessary \citep{lake2018compskill, keysers2020measuringcompositionalgeneralizationcomprehensive, kim-linzen-2020-cogs}.
+%
+Later work showed that much of this gap could be reduced through larger models and improved training \citep{csordas2021devil}.
+%
+Even so, there is still no consensus that these benchmarks capture the notion of compositionality that motivated the original argument.
+%
+Table~\ref{tab:dialectic} summarizes the five debates.
+
+
+These cases do not demonstrate a single kind of benchmark failure.
+%
+Emergent-ability studies examine metric dependence; causal and analogical tests probe transfer; and world-model studies ask whether visual prediction entails physical understanding.
+%
+Their common difficulty is drawing a defensible inference from observed performance to an intended ability.
+%
+Researchers can disagree about whether a model has a capability while taking for granted that the benchmark measures it.
+%
+Yet many widely used benchmarks are designed primarily to compare systems, not to validate a particular cognitive construct.
+%
+Such scores may be useful for comparison without settling what cognitive or computational process produced them (\S\ref{sec:crit-benchmarks}).
+
+\begin{table*}[t]
+\caption{Five recurring debates about what machine performance establishes.}
+\label{tab:dialectic}
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{p{0.17\textwidth} Y Y}
+\toprule
+Debate & Initial claim & Challenge \\
+\midrule
+Emergent abilities &
+Capabilities appear abruptly with scale~\citep{wei2022emergent, srivastava2023beyond} &
+Metric choice can produce apparent jumps~\citep{schaeffer2023emergent} \\
+\addlinespace
+Causal reasoning &
+Strong formal causal-task performance~\citep{jin2023cladder,kiciman2024causal} &
+Failures after renaming variables or reversing relations~\citep{jin2024largelanguagemodelsinfer,joshi-etal-2024-llms} \\
+\addlinespace
+Physical world models &
+Plausible predictions and simulated environments~\citep{ha2018recurrentworld,hafner2020dreamcontrollearningbehaviors,bruce2024geniegenerativeinteractiveenvironments} &
+Visual shortcuts and weak physical generalization~\citep{kang2025how,chow2025physbenchbenchmarkingenhancingvisionlanguage,bansal2026videophy,tung2023physion} \\
+\addlinespace
+Analogical reasoning &
+Human-level task performance without task-specific training~\citep{Webb2022EmergentAR} &
+Rewording failures; recovery with stronger systems~\citep{hodel2024responseemergentanalogicalreasoning,lewis2024usingcounterfactualtasksevaluate,webb2025evidence} \\
+\addlinespace
+Compositional generalization &
+Early failures suggested a need for explicit structure~\citep{lake2018compskill,keysers2020measuringcompositionalgeneralizationcomprehensive,kim-linzen-2020-cogs,bahdanau2020closureassessingsystematicgeneralization} &
+Scale and training recover much of the gap~\citep{csordas2021devil,ontanon2022making,Lake2023-ut} \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+Factor analyses of language model performance have reached different conclusions about whether the observed variation reflects a single underlying ability or several distinct ones \citep{burnell2023revealingstructurelanguagemodel, ye2026largelanguagemodelpsychometrics}.
+%
+This mirrors a long-standing debate in psychometrics over human intelligence, where disagreement persists about whether the general factor $g$~\citep{spearman1904} represents a real cognitive capacity or simply summarizes correlations across many tests.
+
+
+Two responses deserve particular attention.
+%
+The first supplements benchmark scores with evidence about the computations models perform.
+%
+Recent work on analogical reasoning has examined when analogical reasoning emerges during training \citep{minegishi2026emergentanalogicalreasoningtransformers} and has identified patterns in model representations that vary with the compositional complexity of the input \citep{pmlr-v267-yang25c, lee-etal-2025-geometric}. 
+%
+These mechanistic studies are informative, but their methods also require validation (\S\ref{sec:impl}).
+%
+The second response is to specify the intended ability before designing the test, including observations that would count against the claim (\S\ref{sec:crit}).
+%
+Future work may show that improved models resolve some disputes, or that stronger evaluations change the pattern we have identified.
+%
+For now, reliable progress requires both capable systems and evidence that justifies the claims made about them, while construct validity is central to that task (\S\ref{sec:crit-benchmarks}).
+
+
+
+
+
+%% =====================================================================
+\section{Conclusion}
+%
+\label{sec:conc}
+This survey examined how intelligence has been defined, measured, and implemented across philosophy, psychology, cognitive science, neuroscience, and machine learning.
+%
+We organized the literature around four questions --- Ontology, Measure, Human-Machine Gap, and Implementation based on eight research programs, without assuming that one definition settles every debate.
+%
+This framework lets us compare theoretical claims, the evidence that supports them, objections, and implications for building artificial systems.
+
+The interpretation of machine capabilities remains a recurrent source of disagreement.
+%
+Strong benchmark results can support a claim about a model's abilities, but later work may reveal reliance on memorization, superficial cues, or features of the evaluation itself.
+%
+A score supports a capability claim only to the extent that the test design and alternative explanations justify it.
+%
+Better connections between theory, evaluation, and implementation would make progress easier to interpret.
+
+\subsection{Key Takeaways}
+\paragraph{No single discipline answers every question about intelligence.}
+The programs reviewed here originate in different fields, including philosophy of mind, psychology, neuroscience, and computer science.
+%
+Computational methods have produced powerful systems, but they do not by themselves settle how intelligence should be defined or what evidence would establish genuine understanding.
+%
+The relevant disciplines need not agree on a single definition to make their assumptions and evidence more explicit.
+
+\paragraph{Some disagreements concern definitions, not only empirical results.}
+Our analysis across Questions I-IV (\S\ref{sec:ontology}-\S\ref{sec:impl}) suggests that researchers sometimes disagree about what should count as intelligence before they disagree about whether a model exhibits it.
+%
+Earlier discussions by \citet{legg2007collectiondefinitionsintelligence} and \citet{wang2019define} make a similar point.
+%
+The observation often associated with Tesler---``Intelligence is whatever machines haven't done yet''~\citep{tesler1970}---captures how judgments can shift as formerly difficult tasks become routine.
+%
+\citet{chollet2019measureintelligence} discusses a related pattern in the history of AI.
+%
+A parallel distinction between questions that admit settled answers and those that remain philosophical appears in \citet{russell1997problems}.
+%
+These observations suggest that definitions may evolve with scientific understanding; they do not make careful definitions or testable claims any less important.
+
+\paragraph{Theoretical accounts can guide implementations.}
+The research programs do not provide interchangeable recipes for building intelligent systems.
+%
+They emphasize different mechanisms, such as prediction, structured representation, goal-directed optimization, and causal reasoning.
+%
+Combinations of these mechanisms require empirical testing.
+
+\subsection{Future Work}
+\label{subsec:future-work}
+\paragraph{Explore combinations of complementary programs.}
+A practical next step is to compare mechanisms motivated by different programs, both separately and in combination.
+%
+Compositional world modeling (\S\ref{subsec:cross-program}) offers one example: predictive approaches motivate learning from changes in the environment, while compositional approaches emphasize reusable structure.
+%
+Whether that combination improves generalization remains an empirical question.
+
+\paragraph{Specify what an evaluation is meant to measure.}
+Construct validity should be considered when a measure is designed, not only after unexpected results appear (\S\ref{sec:crit-benchmarks}).
+%
+Researchers should state the target ability, explain why the tasks provide evidence for it, and test alternative explanations such as contamination or shortcuts.
+%
+Table~\ref{tab:conditions} summarizes useful considerations, including interpretable difficulty and contamination resistance.
+%
+Their relevance and feasibility depend on the kind of evaluation.
+
+\paragraph{Test theories through concrete implementations.}
+Recent progress reflects increases in model scale, data, and computation alongside advances in architectures and training.
+%
+This is broadly consistent with the argument that methods making effective use of computation can outperform heavily hand-designed approaches~\citep{sutton2019bitter}.
+%
+The programs reviewed here nevertheless suggest hypotheses worth testing in concrete systems.
+%
+For example, causal objectives, compositional representations, and predictive learning may provide benefits that cannot be explained by scale alone.
+
+
+%% =====================================================================
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{main}
+
+
+\end{document}

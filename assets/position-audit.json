@@ -1,0 +1,670 @@
+{
+  "checked_on": "2026-11-03",
+  "scope": "37 named contributors and all 41 repeated/static taxonomy assignments; manuscript structure plus primary-source attribution checks. Not a claim that the taxonomy is uniquely correct or that the underlying theories are established.",
+  "manuscript_sha256": "870d6c83eabbc07538493a81d020d2d5da7883159b62afc930c3b33d618009ec",
+  "records": [
+    {
+      "person_id": "friston",
+      "name": "Karl Friston",
+      "manuscript_citation_keys": [
+        "friston2010"
+      ],
+      "primary_source": "https://pubmed.ncbi.nlm.nih.gov/20068583/",
+      "assessment": "supported with the stated scope",
+      "qualification": "Free-energy principle; active inference is a related account of perception and action.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-predictive",
+          "section": "predictive-processing",
+          "position": "Free-energy principle"
+        }
+      ]
+    },
+    {
+      "person_id": "clark",
+      "name": "Andy Clark",
+      "manuscript_citation_keys": [
+        "clark2013"
+      ],
+      "primary_source": "https://pubmed.ncbi.nlm.nih.gov/23663408/",
+      "assessment": "supported with the stated scope",
+      "qualification": "Predictive-processing account; not identical to every formulation of Friston’s principle.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-predictive",
+          "section": "predictive-processing",
+          "position": "Predictive processing"
+        }
+      ]
+    },
+    {
+      "person_id": "hawkins",
+      "name": "Jeff Hawkins",
+      "manuscript_citation_keys": [
+        "hawkins2004",
+        "hawkins2021thousand"
+      ],
+      "primary_source": "https://thousandbrains.org/about/faq/",
+      "assessment": "supported with the stated scope",
+      "qualification": "Parallel sensorimotor models and reference frames. Related alternative within the manuscript’s predictive section; not a claim that Hawkins endorses active inference.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-predictive",
+          "section": "predictive-processing",
+          "position": "Thousand Brains (parallel models)"
+        }
+      ]
+    },
+    {
+      "person_id": "pearl",
+      "name": "Judea Pearl",
+      "manuscript_citation_keys": [
+        "pearl2009",
+        "pearl2018"
+      ],
+      "primary_source": "https://arxiv.org/abs/1801.04016",
+      "assessment": "supported with the stated scope",
+      "qualification": "Causal models support intervention and counterfactual reasoning under causal assumptions.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-causal",
+          "section": "causal",
+          "position": "Interventions and counterfactuals"
+        }
+      ]
+    },
+    {
+      "person_id": "newell",
+      "name": "Allen Newell",
+      "manuscript_citation_keys": [
+        "newellsimon1976"
+      ],
+      "primary_source": "https://www.contrib.andrew.cmu.edu/~kk3n/80-300/newell-simon1976.pdf",
+      "assessment": "supported with the stated scope",
+      "qualification": "Coauthor with Simon of the physical symbol system hypothesis.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-symbolic",
+          "section": "symbolic-nativist",
+          "position": "Physical symbol systems"
+        }
+      ]
+    },
+    {
+      "person_id": "simon",
+      "name": "Herbert A. Simon",
+      "manuscript_citation_keys": [
+        "newellsimon1976"
+      ],
+      "primary_source": "https://www.contrib.andrew.cmu.edu/~kk3n/80-300/newell-simon1976.pdf",
+      "assessment": "supported with the stated scope",
+      "qualification": "Symbol-system attribution is to the joint paper; Simon’s broader work also includes bounded rationality.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-symbolic",
+          "section": "symbolic-nativist",
+          "position": "Physical symbol systems"
+        }
+      ]
+    },
+    {
+      "person_id": "fodor",
+      "name": "Jerry Fodor",
+      "manuscript_citation_keys": [
+        "fodor1975language",
+        "fodorpylyshyn1988"
+      ],
+      "primary_source": "https://ruccs.rutgers.edu/images/personal-zenon-pylyshyn/proseminars/Proseminar13/ConnectionistArchitecture.pdf",
+      "assessment": "supported with the stated scope",
+      "qualification": "Language of thought and combinatorial representations; systematicity argument coauthored with Pylyshyn.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-symbolic",
+          "section": "symbolic-nativist",
+          "position": "Language of thought"
+        },
+        {
+          "taxonomy_node": "ontology-compositional",
+          "section": "compositional-analogical",
+          "position": "Systematicity"
+        }
+      ]
+    },
+    {
+      "person_id": "pylyshyn",
+      "name": "Zenon Pylyshyn",
+      "manuscript_citation_keys": [
+        "fodorpylyshyn1988"
+      ],
+      "primary_source": "https://ruccs.rutgers.edu/images/personal-zenon-pylyshyn/proseminars/Proseminar13/ConnectionistArchitecture.pdf",
+      "assessment": "supported with the stated scope",
+      "qualification": "Systematicity supports combinatorial cognitive-level representations in the joint argument.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-compositional",
+          "section": "compositional-analogical",
+          "position": "Systematicity"
+        }
+      ]
+    },
+    {
+      "person_id": "chomsky",
+      "name": "Noam Chomsky",
+      "manuscript_citation_keys": [
+        "chomsky1959"
+      ],
+      "primary_source": "https://chomsky.info/1967____/",
+      "assessment": "supported with the stated scope",
+      "qualification": "Innate structure constraining language acquisition; not a blanket thesis about every form of learning.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-symbolic",
+          "section": "symbolic-nativist",
+          "position": "Innate constraints on language learning"
+        }
+      ]
+    },
+    {
+      "person_id": "marcus",
+      "name": "Gary Marcus",
+      "manuscript_citation_keys": [
+        "marcus2019",
+        "marcus2020"
+      ],
+      "primary_source": "https://arxiv.org/abs/2002.06177",
+      "assessment": "supported with the stated scope",
+      "qualification": "Structured representations and hybrid learning/reasoning systems.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-symbolic",
+          "section": "symbolic-nativist",
+          "position": "Structured representations"
+        },
+        {
+          "taxonomy_node": "implementation-compositional",
+          "section": "neurosymbolic",
+          "position": "Neuro-symbolic structure"
+        }
+      ]
+    },
+    {
+      "person_id": "hofstadter",
+      "name": "Douglas Hofstadter",
+      "manuscript_citation_keys": [
+        "hofstadter2001",
+        "Hofstadter1995TheCP"
+      ],
+      "primary_source": "https://www.media.mit.edu/cogmac/lcc/hofstadter.html",
+      "assessment": "supported with the stated scope",
+      "qualification": "Analogy as a central cognitive process; Copycat is one computational model.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-compositional",
+          "section": "compositional-analogical",
+          "position": "Analogy"
+        }
+      ]
+    },
+    {
+      "person_id": "gentner",
+      "name": "Dedre Gentner",
+      "manuscript_citation_keys": [
+        "GENTNER1983155",
+        "gentner2017analogy"
+      ],
+      "primary_source": "https://doi.org/10.1207/s15516709cog0702_3",
+      "assessment": "supported with the stated scope",
+      "qualification": "Structure mapping aligns relational systems across domains.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-compositional",
+          "section": "compositional-analogical",
+          "position": "Structure mapping"
+        }
+      ]
+    },
+    {
+      "person_id": "spearman",
+      "name": "Charles Spearman",
+      "manuscript_citation_keys": [
+        "spearman1904"
+      ],
+      "primary_source": "https://psychclassics.yorku.ca/Spearman/",
+      "assessment": "supported with the stated scope",
+      "qualification": "General factor g inferred from correlations across measured performances.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-psychometric",
+          "section": "psychometric-concept",
+          "position": "General factor, g"
+        }
+      ]
+    },
+    {
+      "person_id": "gardner",
+      "name": "Howard Gardner",
+      "manuscript_citation_keys": [
+        "gardner1983"
+      ],
+      "primary_source": "https://www.howardgardner.com/about",
+      "assessment": "supported with the stated scope",
+      "qualification": "Multiple intelligences is a pluralist challenge to standard psychometric conceptions, not endorsement of Spearman’s g.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-psychometric",
+          "section": "psychometric-concept",
+          "position": "Multiple intelligences (pluralist critique)"
+        }
+      ]
+    },
+    {
+      "person_id": "dennett",
+      "name": "Daniel Dennett",
+      "manuscript_citation_keys": [
+        "dennett1987"
+      ],
+      "primary_source": "https://mitpress.mit.edu/9780262540537/the-intentional-stance/",
+      "assessment": "supported with the stated scope",
+      "qualification": "Intentional stance predicts behavior by attributing beliefs and goals; not methodological behaviorism.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-behavioral",
+          "section": "behavioural-functional",
+          "position": "Intentional stance"
+        }
+      ]
+    },
+    {
+      "person_id": "putnam",
+      "name": "Hilary Putnam",
+      "manuscript_citation_keys": [
+        "Putnam1978-PUTTNO-4"
+      ],
+      "primary_source": "https://web.stanford.edu/~paulsko/papers/PutnamNMS.pdf",
+      "assessment": "supported with the stated scope",
+      "qualification": "Historical functionalist proposal and multiple realizability; do not present it as a summary of his entire later philosophy.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-behavioral",
+          "section": "behavioural-functional",
+          "position": "Functionalism / multiple realizability"
+        }
+      ]
+    },
+    {
+      "person_id": "dreyfus",
+      "name": "Hubert Dreyfus",
+      "manuscript_citation_keys": [
+        "dreyfus1972"
+      ],
+      "primary_source": "https://mitpress.mit.edu/9780262540674/what-computers-still-cant-do/",
+      "assessment": "supported with the stated scope",
+      "qualification": "Embodied, situated know-how and critique of classical symbolic AI; empirical failures do not themselves prove embodiment logically necessary.",
+      "assignments": [
+        {
+          "taxonomy_node": "gap-embodiment",
+          "section": "embodiment",
+          "position": "Embodied coping"
+        }
+      ]
+    },
+    {
+      "person_id": "searle",
+      "name": "John Searle",
+      "manuscript_citation_keys": [
+        "searle1980"
+      ],
+      "primary_source": "https://cse.buffalo.edu/~rapaport/Papers/Papers.by.Others/Searle/searle80.html",
+      "assessment": "supported with the stated scope",
+      "qualification": "Chinese Room challenges the sufficiency of programs for understanding; it is not a general proof that no physical machine could think.",
+      "assignments": [
+        {
+          "taxonomy_node": "gap-meaning",
+          "section": "meaning-grounding",
+          "position": "Chinese Room"
+        }
+      ]
+    },
+    {
+      "person_id": "harnad",
+      "name": "Stevan Harnad",
+      "manuscript_citation_keys": [
+        "HARNAD1990335"
+      ],
+      "primary_source": "https://arxiv.org/abs/cs/9906002",
+      "assessment": "supported with the stated scope",
+      "qualification": "Grounding problem and proposed grounding in nonsymbolic sensory/category representations; not wholesale rejection of computational modeling.",
+      "assignments": [
+        {
+          "taxonomy_node": "gap-meaning",
+          "section": "meaning-grounding",
+          "position": "Symbol grounding"
+        }
+      ]
+    },
+    {
+      "person_id": "bender",
+      "name": "Emily M. Bender",
+      "manuscript_citation_keys": [
+        "bender-koller-2020-climbing"
+      ],
+      "primary_source": "https://aclanthology.org/2020.acl-main.463/",
+      "assessment": "supported with the stated scope",
+      "qualification": "Form–meaning argument coauthored with Alexander Koller, scoped to learning from form alone.",
+      "assignments": [
+        {
+          "taxonomy_node": "gap-meaning",
+          "section": "meaning-grounding",
+          "position": "Form–meaning distinction (with Koller)"
+        }
+      ]
+    },
+    {
+      "person_id": "turing",
+      "name": "Alan Turing",
+      "manuscript_citation_keys": [
+        "turing1950"
+      ],
+      "primary_source": "https://doi.org/10.1093/mind/LIX.236.433",
+      "assessment": "supported with the stated scope",
+      "qualification": "Imitation game as an operational proposal; not proof that conversational equivalence establishes all forms of understanding.",
+      "assignments": [
+        {
+          "taxonomy_node": "measure-behavioral",
+          "section": "turing-variants",
+          "position": "Imitation game"
+        }
+      ]
+    },
+    {
+      "person_id": "chollet",
+      "name": "François Chollet",
+      "manuscript_citation_keys": [
+        "chollet2019measureintelligence"
+      ],
+      "primary_source": "https://arxiv.org/abs/1911.01547",
+      "assessment": "supported with the stated scope",
+      "qualification": "Skill-acquisition efficiency relative to priors, experience, scope and generalization difficulty; distinct from a static task score.",
+      "assignments": [
+        {
+          "taxonomy_node": "measure-psychometric",
+          "section": "psychometric-measurement",
+          "position": "Skill-acquisition efficiency"
+        }
+      ]
+    },
+    {
+      "person_id": "hernandez-orallo",
+      "name": "José Hernández-Orallo",
+      "manuscript_citation_keys": [
+        "hernandezorallo2017",
+        "HERNANDEZORALLO20101508"
+      ],
+      "primary_source": "https://josephorallo.webs.upv.es/allminds/",
+      "assessment": "supported with the stated scope",
+      "qualification": "Universal psychometrics across human, animal and artificial agents.",
+      "assignments": [
+        {
+          "taxonomy_node": "measure-psychometric",
+          "section": "psychometric-measurement",
+          "position": "Universal psychometrics"
+        }
+      ]
+    },
+    {
+      "person_id": "legg",
+      "name": "Shane Legg",
+      "manuscript_citation_keys": [
+        "legghutter2007"
+      ],
+      "primary_source": "https://arxiv.org/abs/0712.3329",
+      "assessment": "supported with the stated scope",
+      "qualification": "Universal intelligence measure coauthored with Hutter.",
+      "assignments": [
+        {
+          "taxonomy_node": "measure-formal",
+          "section": "formal-measures",
+          "position": "Universal intelligence"
+        }
+      ]
+    },
+    {
+      "person_id": "hutter",
+      "name": "Marcus Hutter",
+      "manuscript_citation_keys": [
+        "legghutter2007",
+        "hutter2005universal"
+      ],
+      "primary_source": "https://www.hutter1.net/ai/uaibook.htm",
+      "assessment": "supported with the stated scope",
+      "qualification": "Universal intelligence is a measure; AIXI is an idealized agent framework. Keep the concepts distinct.",
+      "assignments": [
+        {
+          "taxonomy_node": "measure-formal",
+          "section": "formal-measures",
+          "position": "Universal intelligence; AIXI agent"
+        }
+      ]
+    },
+    {
+      "person_id": "russell",
+      "name": "Stuart Russell",
+      "manuscript_citation_keys": [
+        "russellnorvig2020",
+        "RUSSELL199757"
+      ],
+      "primary_source": "https://aima.cs.berkeley.edu/contents.html",
+      "assessment": "supported with the stated scope",
+      "qualification": "Rational-agent framework in AIMA; not a claim that every present or later view of Russell endorses a fixed known objective.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-optimization",
+          "section": "formal-optimization",
+          "position": "Rational agents"
+        }
+      ]
+    },
+    {
+      "person_id": "norvig",
+      "name": "Peter Norvig",
+      "manuscript_citation_keys": [
+        "russellnorvig2020"
+      ],
+      "primary_source": "https://aima.cs.berkeley.edu/contents.html",
+      "assessment": "supported with the stated scope",
+      "qualification": "Rational-agent framework coauthored with Russell.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-optimization",
+          "section": "formal-optimization",
+          "position": "Rational agents"
+        }
+      ]
+    },
+    {
+      "person_id": "schmidhuber",
+      "name": "Jürgen Schmidhuber",
+      "manuscript_citation_keys": [
+        "schmidhuber2010",
+        "ha2018recurrentworld"
+      ],
+      "primary_source": "https://arxiv.org/abs/0812.4360",
+      "assessment": "supported with the stated scope",
+      "qualification": "Curiosity reward is compression improvement, not compressibility alone. Recurrent world-model work is joint with David Ha.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-optimization",
+          "section": "formal-optimization",
+          "position": "Compression progress and curiosity"
+        },
+        {
+          "taxonomy_node": "implementation-predictive",
+          "section": "world-models",
+          "position": "Learned world models"
+        }
+      ]
+    },
+    {
+      "person_id": "ma",
+      "name": "Yi Ma",
+      "manuscript_citation_keys": [
+        "ma2022",
+        "chan2021redunetwhiteboxdeepnetwork"
+      ],
+      "primary_source": "https://jmlr.org/papers/v23/21-0631.html",
+      "assessment": "supported with the stated scope",
+      "qualification": "Maximal coding rate reduction is a representation-learning objective developed with collaborators; not by itself a demonstrated complete definition of intelligence.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-optimization",
+          "section": "formal-optimization",
+          "position": "Maximal coding rate reduction (MCR²)"
+        }
+      ]
+    },
+    {
+      "person_id": "silver",
+      "name": "David Silver",
+      "manuscript_citation_keys": [
+        "silver2021",
+        "Silver2016"
+      ],
+      "primary_source": "https://web.eecs.umich.edu/~baveja/Papers/RewardIsEnough.pdf",
+      "assessment": "supported with the stated scope",
+      "qualification": "Reward-is-enough hypothesis coauthored with Singh, Precup and Sutton; hypothesis, not established sufficiency theorem.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-optimization",
+          "section": "formal-optimization",
+          "position": "Reward-is-enough hypothesis"
+        }
+      ]
+    },
+    {
+      "person_id": "sutton",
+      "name": "Richard S. Sutton",
+      "manuscript_citation_keys": [
+        "silver2021"
+      ],
+      "primary_source": "https://web.eecs.umich.edu/~baveja/Papers/RewardIsEnough.pdf",
+      "assessment": "supported with the stated scope",
+      "qualification": "Same joint reward hypothesis; reinforcement learning successes alone do not establish its general claim.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-optimization",
+          "section": "formal-optimization",
+          "position": "Reward-is-enough hypothesis"
+        }
+      ]
+    },
+    {
+      "person_id": "scholkopf",
+      "name": "Bernhard Schölkopf",
+      "manuscript_citation_keys": [
+        "scholkopf2021"
+      ],
+      "primary_source": "https://arxiv.org/abs/2102.11107",
+      "assessment": "supported with the stated scope",
+      "qualification": "Coauthor of causal representation-learning framework; latent causal variables and assumptions for recovery.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-causal",
+          "section": "causal-representation",
+          "position": "Causal representation learning"
+        }
+      ]
+    },
+    {
+      "person_id": "bengio",
+      "name": "Yoshua Bengio",
+      "manuscript_citation_keys": [
+        "scholkopf2021"
+      ],
+      "primary_source": "https://arxiv.org/abs/2102.11107",
+      "assessment": "supported with the stated scope",
+      "qualification": "Coauthor of the same causal representation-learning paper; not the sole originator of the approach.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-causal",
+          "section": "causal-representation",
+          "position": "Causal representation learning"
+        }
+      ]
+    },
+    {
+      "person_id": "ha",
+      "name": "David Ha",
+      "manuscript_citation_keys": [
+        "ha2018recurrentworld"
+      ],
+      "primary_source": "https://worldmodels.github.io/",
+      "assessment": "supported with the stated scope",
+      "qualification": "Learned generative dynamics for control and imagined rollouts, joint with Schmidhuber.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-predictive",
+          "section": "world-models",
+          "position": "Learned world models"
+        }
+      ]
+    },
+    {
+      "person_id": "lecun",
+      "name": "Yann LeCun",
+      "manuscript_citation_keys": [
+        "lecun2022"
+      ],
+      "primary_source": "https://arxiv.org/abs/2301.08243",
+      "assessment": "supported with the stated scope",
+      "qualification": "JEPA predicts learned embeddings; it is not pixel reconstruction. I-JEPA paper includes LeCun among multiple authors.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-predictive",
+          "section": "world-models",
+          "position": "Predictive representations / JEPA"
+        }
+      ]
+    },
+    {
+      "person_id": "lake",
+      "name": "Brenden Lake",
+      "manuscript_citation_keys": [
+        "lake2017",
+        "lake2018compskill",
+        "Lake2023-ut"
+      ],
+      "primary_source": "https://doi.org/10.1038/s41586-023-06668-3",
+      "assessment": "supported with the stated scope",
+      "qualification": "Compositional generalization and neural meta-learning with Marco Baroni. Placement does not classify him as exclusively symbolic or nativist.",
+      "assignments": [
+        {
+          "taxonomy_node": "ontology-compositional",
+          "section": "compositional-analogical",
+          "position": "Compositional generalization"
+        },
+        {
+          "taxonomy_node": "implementation-compositional",
+          "section": "neurosymbolic",
+          "position": "Neural meta-learning for compositionality"
+        }
+      ]
+    },
+    {
+      "person_id": "brooks",
+      "name": "Rodney Brooks",
+      "manuscript_citation_keys": [
+        "brooks1991"
+      ],
+      "primary_source": "https://people.csail.mit.edu/brooks/papers/representation.pdf",
+      "assessment": "supported with the stated scope",
+      "qualification": "Behavior-based robotics without a central symbolic world model. Computational engineering stance, not anti-computationalism or rejection of intelligent robots.",
+      "assignments": [
+        {
+          "taxonomy_node": "implementation-embodied",
+          "section": "embodied-vla",
+          "position": "Anti-representational robotics"
+        }
+      ]
+    }
+  ]
+}

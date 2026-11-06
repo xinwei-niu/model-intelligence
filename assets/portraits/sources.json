@@ -1,0 +1,480 @@
+{
+  "friston": {
+    "name": "Karl Friston",
+    "page": "https://www.fil.ion.ucl.ac.uk/~karl/",
+    "source": "https://doi.org/10.1093/cercor/bhaf234",
+    "remote": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/2d64/12421888/4c35ab786174/bhaf234f1.jpg",
+    "src": "assets/portraits/friston-licensed.jpg",
+    "credit": {
+      "Artist": "Zeidman et al.; photograph creator not separately credited",
+      "Credit": "Zeidman et al. (2025), Cerebral Cortex 35(8), bhaf234. © The Author(s) 2025. Published by Oxford University Press.",
+      "LicenseShortName": "CC BY 4.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  },
+  "clark": {
+    "name": "Andy Clark",
+    "page": "https://www.x-spect.org/andy-clark.html",
+    "source": "https://commons.wikimedia.org/wiki/File:Andy_Clark.jpg",
+    "remote": "https://upload.wikimedia.org/wikipedia/commons/7/75/Andy_Clark.jpg",
+    "src": "assets/portraits/clark-licensed.jpg",
+    "credit": {
+      "Artist": "Howard Rheingold",
+      "Credit": "Howard Rheingold, 2012 interview; still via Wikimedia Commons, uploaded by Tupak9, 2026.",
+      "LicenseShortName": "CC BY 4.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/4.0"
+    }
+  },
+  "hawkins": {
+    "name": "Jeff Hawkins",
+    "page": "https://en.wikipedia.org/wiki/Jeff_Hawkins",
+    "src": "assets/portraits/hawkins.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Jeff_Hawkins_by_Jeff_Kubina.jpeg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Jeff_Hawkins_by_Jeff_Kubina.jpeg/250px-Jeff_Hawkins_by_Jeff_Kubina.jpeg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "flickr",
+      "Artist": "Jeff Kubina from the milky way galaxy",
+      "LicenseShortName": "CC BY-SA 2.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    }
+  },
+  "pearl": {
+    "name": "Judea Pearl",
+    "page": "https://bayes.cs.ucla.edu/jp_home.html",
+    "src": "assets/portraits/pearl-licensed.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Judea_Pearl_at_NIPS_2013_(11781981594)_(cropped).jpg",
+    "remote": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Judea_Pearl_at_NIPS_2013_%2811781981594%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": {
+      "Artist": "Better Than Bacon",
+      "Credit": "Judea Pearl at NIPS 2013",
+      "LicenseShortName": "CC BY 2.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    }
+  },
+  "newell": {
+    "name": "Allen Newell",
+    "page": "https://en.wikipedia.org/wiki/Allen_Newell",
+    "src": "assets/portraits/newell.jpg",
+    "source": "https://en.wikipedia.org/wiki/File:Allen_Newell.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/en/thumb/f/f4/Allen_Newell.jpg/250px-Allen_Newell.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "https://stanfordmag.org/contents/if-you-love-what-computers-can-do-thank-these-folks",
+      "LicenseShortName": "Fair use"
+    }
+  },
+  "simon": {
+    "name": "Herbert A. Simon",
+    "page": "https://en.wikipedia.org/wiki/Herbert_A._Simon",
+    "src": "assets/portraits/simon-licensed.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Herbert_simon_tan_d.jpg",
+    "remote": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Herbert_simon_tan_d.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "credit": {
+      "Artist": "Richard Rappaport",
+      "Credit": "Own work",
+      "LicenseShortName": "CC BY 3.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    }
+  },
+  "fodor": {
+    "name": "Jerry Fodor",
+    "page": "https://en.wikipedia.org/wiki/Jerry_Fodor",
+    "src": "assets/portraits/fodor.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Jerry_Fodor.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Jerry_Fodor.jpg/250px-Jerry_Fodor.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "http://en.wikipedia.org/wiki/Image:Jerry_Fodor_in_2007.jpg",
+      "Artist": "en:User:Pealco",
+      "LicenseShortName": "Public domain",
+      "AttributionRequired": "false"
+    }
+  },
+  "pylyshyn": {
+    "name": "Zenon Pylyshyn",
+    "page": "https://psych.rutgers.edu/people/faculty-emeriti/115-zenon-pylyshyn",
+    "source": "https://psych.rutgers.edu/people/faculty-emeriti/115-zenon-pylyshyn",
+    "remote": "https://psych.rutgers.edu/images/stories/people/faculty/pylyshyn.jpg",
+    "src": "assets/portraits/pylyshyn.jpg",
+    "credit": {
+      "Artist": "Rutgers University",
+      "LicenseShortName": "See source for rights"
+    }
+  },
+  "chomsky": {
+    "name": "Noam Chomsky",
+    "page": "https://en.wikipedia.org/wiki/Noam_Chomsky",
+    "src": "assets/portraits/chomsky.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Noam_Chomsky_portrait_2017_retouched.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Noam_Chomsky_portrait_2017_retouched.jpg/250px-Noam_Chomsky_portrait_2017_retouched.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "File:Noam Chomsky portrait 2017 retouched.png via File:Noam_Chomsky_portrait_2017.jpg",
+      "Artist": "Σ, retouched by Wugapodes and Jonnmann",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    }
+  },
+  "marcus": {
+    "name": "Gary Marcus",
+    "page": "https://en.wikipedia.org/wiki/Gary_Marcus",
+    "src": "assets/portraits/marcus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Gary_Marcus_at_Web_Summit_2022.jpeg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Gary_Marcus_at_Web_Summit_2022.jpeg/250px-Gary_Marcus_at_Web_Summit_2022.jpeg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "PO2_5268",
+      "Artist": "Web Summit",
+      "LicenseShortName": "CC BY 2.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    }
+  },
+  "hofstadter": {
+    "name": "Douglas Hofstadter",
+    "page": "https://en.wikipedia.org/wiki/Douglas_Hofstadter",
+    "src": "assets/portraits/hofstadter.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Douglas_Hofstadter,_Stanford_2006_(crop).jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Douglas_Hofstadter%2C_Stanford_2006_%28crop%29.jpg/250px-Douglas_Hofstadter%2C_Stanford_2006_%28crop%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "https://www.flickr.com/photos/null0/271946418/",
+      "Artist": "\"null0\"",
+      "LicenseShortName": "CC BY-SA 2.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    }
+  },
+  "gentner": {
+    "name": "Dedre Gentner",
+    "page": "https://psychology.northwestern.edu/people/faculty/core/profiles/dedre-gentner.html",
+    "source": "https://psychology.northwestern.edu/people/faculty/core/profiles/dedre-gentner.html",
+    "remote": "https://psychology.northwestern.edu/images/people/faculty/gentner,-dedre-168x210.gif",
+    "src": "assets/portraits/gentner.gif",
+    "credit": {
+      "Artist": "Northwestern University",
+      "LicenseShortName": "See source for rights"
+    }
+  },
+  "spearman": {
+    "name": "Charles Spearman",
+    "page": "https://www.york.ac.uk/depts/maths/histstat/spearman_biog.htm",
+    "src": "assets/portraits/spearman.gif",
+    "source": "https://www.york.ac.uk/depts/maths/histstat/spearman_biog.htm",
+    "remote": "https://www.york.ac.uk/depts/maths/histstat/people/spearman.gif",
+    "credit": {
+      "Artist": "University of York, History of Statistics archive",
+      "LicenseShortName": "See source for rights"
+    }
+  },
+  "gardner": {
+    "name": "Howard Gardner",
+    "page": "https://en.wikipedia.org/wiki/Howard_Gardner",
+    "src": "assets/portraits/gardner.png",
+    "source": "https://commons.wikimedia.org/wiki/File:Howard_Gardner_(2013)_(cropped).png",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Howard_Gardner_%282013%29_%28cropped%29.png/250px-Howard_Gardner_%282013%29_%28cropped%29.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Citizen University: Howard Gardner- \"Can We Raise Good Citizens?\" HD",
+      "Artist": "Citizen University",
+      "LicenseShortName": "CC BY 3.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    }
+  },
+  "dennett": {
+    "name": "Daniel Dennett",
+    "page": "https://en.wikipedia.org/wiki/Daniel_Dennett",
+    "src": "assets/portraits/dennett.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Daniel_Dennett_2.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Daniel_Dennett_2.jpg/250px-Daniel_Dennett_2.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Own work",
+      "Artist": "Dmitry Rozhkov",
+      "LicenseShortName": "CC BY-SA 3.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    }
+  },
+  "putnam": {
+    "name": "Hilary Putnam",
+    "page": "https://en.wikipedia.org/wiki/Hilary_Putnam",
+    "src": "assets/portraits/putnam.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Hilary_Putnam.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Hilary_Putnam.jpg/250px-Hilary_Putnam.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Artist": "Unknown author Unknown author",
+      "LicenseShortName": "CC BY-SA 2.5",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/2.5"
+    }
+  },
+  "dreyfus": {
+    "name": "Hubert Dreyfus",
+    "page": "https://en.wikipedia.org/wiki/Hubert_Dreyfus",
+    "src": "assets/portraits/dreyfus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Hubert_Dreyfus_(cropped).jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Hubert_Dreyfus_%28cropped%29.jpg/250px-Hubert_Dreyfus_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "E-Mail",
+      "Artist": "Jörg Noller",
+      "LicenseShortName": "CC BY-SA 3.0 de",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en"
+    }
+  },
+  "searle": {
+    "name": "John Searle",
+    "page": "https://en.wikipedia.org/wiki/John_Searle",
+    "src": "assets/portraits/searle.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:John_Searle_speaking_at_Google_4_(cropped).jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/John_Searle_speaking_at_Google_4_%28cropped%29.jpg/250px-John_Searle_speaking_at_Google_4_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Own work",
+      "Artist": "FranksValli",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    }
+  },
+  "harnad": {
+    "name": "Stevan Harnad",
+    "page": "https://en.wikipedia.org/wiki/Stevan_Harnad",
+    "src": "assets/portraits/harnad.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Harnad-kara1.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Harnad-kara1.jpg/250px-Harnad-kara1.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "https://scontent-a-lga.xx.fbcdn.net/hphotos-xpa1/t1.0-9/10423819_10201845049558642_575603672137181898_n.jpg",
+      "Artist": "Guillaum Gibault",
+      "LicenseShortName": "CC BY 3.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    }
+  },
+  "bender": {
+    "name": "Emily M. Bender",
+    "page": "https://en.wikipedia.org/wiki/Emily_M._Bender",
+    "src": "assets/portraits/bender.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Emily_M_Bender_CHM_Mountain_View_March_2025.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Emily_M_Bender_CHM_Mountain_View_March_2025.jpg/250px-Emily_M_Bender_CHM_Mountain_View_March_2025.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Own work",
+      "Artist": "King of Hearts",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    }
+  },
+  "turing": {
+    "name": "Alan Turing",
+    "page": "https://en.wikipedia.org/wiki/Alan_Turing",
+    "src": "assets/portraits/turing-npg-nc.jpg",
+    "source": "https://artsandculture.google.com/asset/alan-turing-elliott-and-fry/vAHJ2TKpiVYs8Q?hl=en",
+    "remote": "https://lh3.googleusercontent.com/ci/AL18g_QPRTJtaiPhZQbhUr4q4YelGz8L71hl9Qwb9RfJhdY4TLIhf3TXx1dnlr__5walPf0P-ld5bg",
+    "credit": {
+      "Artist": "Elliott & Fry",
+      "ObjectName": "Alan Turing, 29 March 1951",
+      "Credit": "© National Portrait Gallery, London. Published by The National Museum of Computing on Google Arts & Culture.",
+      "LicenseShortName": "CC BY-NC-ND 3.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-nc-nd/3.0/"
+    }
+  },
+  "chollet": {
+    "name": "François Chollet",
+    "page": "https://en.wikipedia.org/wiki/François_Chollet",
+    "src": "assets/portraits/chollet.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Fchollet.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Fchollet.jpg/250px-Fchollet.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Own work",
+      "Artist": "Ramosset",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    }
+  },
+  "hernandez-orallo": {
+    "name": "José Hernández-Orallo",
+    "page": "https://josephorallo.webs.upv.es/",
+    "source": "https://josephorallo.webs.upv.es/",
+    "remote": "https://josephorallo.webs.upv.es/J.H.Orallo-SMALL.jpg",
+    "src": "assets/portraits/hernandez-orallo.jpg",
+    "credit": {
+      "Artist": "José Hernández-Orallo",
+      "LicenseShortName": "See source for rights"
+    }
+  },
+  "legg": {
+    "name": "Shane Legg",
+    "page": "https://en.wikipedia.org/wiki/Shane_Legg",
+    "src": "assets/portraits/legg.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Shane_Legg.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Shane_Legg.jpg/250px-Shane_Legg.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Own work",
+      "Artist": "Libor.burian",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    }
+  },
+  "hutter": {
+    "name": "Marcus Hutter",
+    "page": "https://en.wikipedia.org/wiki/Marcus_Hutter",
+    "src": "assets/portraits/hutter.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Marcus_Hutter.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Marcus_Hutter.jpg/250px-Marcus_Hutter.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Own work",
+      "Artist": "Marcus Hutter",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    }
+  },
+  "russell": {
+    "name": "Stuart Russell",
+    "page": "https://en.wikipedia.org/wiki/Stuart_J._Russell",
+    "src": "assets/portraits/russell.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Stuart_Russell_01.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Stuart_Russell_01.jpg/250px-Stuart_Russell_01.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Own work",
+      "Artist": "Bengt Oberger",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    }
+  },
+  "norvig": {
+    "name": "Peter Norvig",
+    "page": "https://en.wikipedia.org/wiki/Peter_Norvig",
+    "src": "assets/portraits/norvig-color.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Peter_Norvig_speaking_at_University_of_California,_Berkeley.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Peter_Norvig_speaking_at_University_of_California%2C_Berkeley.jpg/500px-Peter_Norvig_speaking_at_University_of_California%2C_Berkeley.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Peter Norvig speaking at University of California, Berkeley Uploaded by Dcoetzee",
+      "Artist": "Derrick Coetzee",
+      "LicenseShortName": "CC0",
+      "AttributionRequired": "false",
+      "LicenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    }
+  },
+  "schmidhuber": {
+    "name": "Jürgen Schmidhuber",
+    "page": "https://en.wikipedia.org/wiki/Jürgen_Schmidhuber",
+    "src": "assets/portraits/schmidhuber.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Jürgen_Schmidhuber,_2017_(cropped).jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/J%C3%BCrgen_Schmidhuber%2C_2017_%28cropped%29.jpg/250px-J%C3%BCrgen_Schmidhuber%2C_2017_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "https://www.flickr.com/photos/itupictures/34343385563",
+      "Artist": "ITU/R.Farrell",
+      "LicenseShortName": "CC BY 2.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    }
+  },
+  "ma": {
+    "name": "Yi Ma",
+    "page": "https://people.eecs.berkeley.edu/~yima/",
+    "source": "https://people.eecs.berkeley.edu/~yima/",
+    "remote": "https://people.eecs.berkeley.edu/~yima/image/YiMa4.jpg",
+    "src": "assets/portraits/ma.jpg",
+    "credit": {
+      "Artist": "Yi Ma / UC Berkeley",
+      "LicenseShortName": "See source for rights"
+    }
+  },
+  "silver": {
+    "name": "David Silver",
+    "page": "https://www.davidsilver.uk/",
+    "source": "https://www.davidsilver.uk/",
+    "remote": "https://davidstarsilver.wordpress.com/wp-content/uploads/2026/04/0399.jpg?w=1024",
+    "src": "assets/portraits/silver.jpg",
+    "credit": {
+      "Artist": "David Silver",
+      "LicenseShortName": "See source for rights"
+    }
+  },
+  "sutton": {
+    "name": "Richard S. Sutton",
+    "page": "https://en.wikipedia.org/wiki/Richard_S._Sutton",
+    "src": "assets/portraits/sutton.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:SD_2025_-_Richard_Sutton_01_(cropped).jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/SD_2025_-_Richard_Sutton_01_%28cropped%29.jpg/250px-SD_2025_-_Richard_Sutton_01_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Own work",
+      "Artist": "Xuthoria",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "AttributionRequired": "true",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    }
+  },
+  "scholkopf": {
+    "name": "Bernhard Schölkopf",
+    "page": "https://www.mpg.de/390909/intelligent-systems-tuebingen-schoelkopf",
+    "source": "https://commons.wikimedia.org/wiki/File:Bernhard_Sch%C3%B6lkopf.png",
+    "remote": "https://upload.wikimedia.org/wikipedia/commons/1/11/Bernhard_Sch%C3%B6lkopf.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+    "src": "assets/portraits/scholkopf-licensed.png",
+    "credit": {
+      "Artist": "Latest Thinking",
+      "Credit": "Machine Learning and the Search for Exoplanets",
+      "LicenseShortName": "CC BY 3.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    }
+  },
+  "bengio": {
+    "name": "Yoshua Bengio",
+    "page": "https://en.wikipedia.org/wiki/Yoshua_Bengio",
+    "src": "assets/portraits/bengio.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:ICLR_2025_-_Yoshua_Bengio_02.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/ICLR_2025_-_Yoshua_Bengio_02.jpg/250px-ICLR_2025_-_Yoshua_Bengio_02.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Own work",
+      "Artist": "Xuthoria",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    }
+  },
+  "ha": {
+    "name": "David Ha",
+    "page": "https://sakana.ai/company-info/",
+    "source": "https://sakana.ai/company-info/",
+    "remote": "https://sakana.ai/company-info/david.jpg",
+    "src": "assets/portraits/ha.jpg",
+    "credit": {
+      "Artist": "Sakana AI"
+    }
+  },
+  "lecun": {
+    "name": "Yann LeCun",
+    "page": "https://en.wikipedia.org/wiki/Yann_LeCun",
+    "src": "assets/portraits/lecun.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Laura_Chaubard_&_Yann_Le_Cun_-_2024_(53814052697)_(cropped).jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Laura_Chaubard_%26_Yann_Le_Cun_-_2024_%2853814052697%29_%28cropped%29.jpg/250px-Laura_Chaubard_%26_Yann_Le_Cun_-_2024_%2853814052697%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+    "credit": {
+      "Credit": "Executive master de l'Ecole polytechnique",
+      "Artist": "Jérémy Barande",
+      "LicenseShortName": "CC BY-SA 2.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    }
+  },
+  "lake": {
+    "name": "Brenden Lake",
+    "page": "https://lake-lab.github.io/people/",
+    "source": "https://lake-lab.github.io/people/",
+    "remote": "https://lake-lab.github.io/images/bios/lake-princeton.jpg",
+    "src": "assets/portraits/lake.jpg",
+    "credit": {
+      "Artist": "Brenden Lake / Human & Machine Intelligence Lab",
+      "LicenseShortName": "See source for rights"
+    }
+  },
+  "brooks": {
+    "name": "Rodney Brooks",
+    "page": "https://en.wikipedia.org/wiki/Rodney_Brooks",
+    "src": "assets/portraits/brooks-color.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Rodney_Brooks_ML40.jpg",
+    "remote": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Rodney_Brooks_ML40.jpg/500px-Rodney_Brooks_ML40.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "credit": {
+      "Artist": "Staff photographer; Science History Institute",
+      "Credit": "Science History Institute .",
+      "LicenseShortName": "CC BY-SA 3.0",
+      "AttributionRequired": "true",
+      "Attribution": "Science History Institute",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    }
+  }
+}

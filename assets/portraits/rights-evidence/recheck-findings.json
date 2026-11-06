@@ -1,0 +1,40 @@
+{
+  "spearman": {
+    "source": "https://www.npg.org.uk/collections/search/use-this-image/?mkey=mw235835",
+    "finding": "Walter Stoneman’s 1931 portrait, NPG x185412, has a free noncommercial Creative Commons download option. Download form requests an email address; not submitted. Recheck exact downloaded-image license and retain full frame if NoDerivatives applies.",
+    "next_step": "Obtain the free licensed file through the NPG download form with a user-provided email, or find a directly downloadable licensed alternative."
+  },
+  "silver": {
+    "source": "https://davidstarsilver.wordpress.com/teaching/",
+    "finding": "Silver explicitly licenses the linked 2015 reinforcement-learning course materials, including video lectures, CC BY-NC 4.0, excluding third-party content. Lecture 1’s poster contains no portrait; its public sample stills show the lecturer too small for a suitable headshot. The homepage portrait is outside this course grant.",
+    "next_step": "Extract a usable lecturer frame from the licensed course video and retain David Silver/UCL/Google DeepMind credit and NC notice, or obtain a separate photo grant."
+  },
+  "hernandez-orallo": {
+    "source": "https://jorallo.github.io/",
+    "finding": "Current personal homepage still offers no portrait reuse grant. SINC’s CC BY news illustration is not a photograph of Hernández-Orallo; it cannot fill the portrait slot."
+  },
+  "ma": {
+    "source": "https://people.eecs.berkeley.edu/~yima/index.html",
+    "finding": "Correct Berkeley/HKU researcher verified. No reuse grant for the personal headshot found. Open-license search results for other Yi Ma researchers were excluded."
+  },
+  "ha": {
+    "source": "https://sakana.ai/company-info/",
+    "finding": "Company biography identifies the correct researcher, but no general reuse grant for the headshot established. Same-name poker-player photographs were excluded."
+  },
+  "lake": {
+    "source": "https://www.cs.princeton.edu/news/between-machine-and-human-learning-brenden-lake-sketches-new-picture-intelligence",
+    "finding": "Princeton portrait is credited to David Kelly Crow; a public redistribution license was not established. An open license for a paper does not cover this unrelated news photograph."
+  },
+  "gentner": {
+    "source": "https://casbs.stanford.edu/people/dedre-gentner",
+    "finding": "Additional institutional portrait located; no explicit photograph reuse grant established. Licenses on her articles and seminar reports were not assumed to cover unrelated profile images."
+  },
+  "pylyshyn": {
+    "source": "https://loop.frontiersin.org/people/37042/bio",
+    "finding": "Additional author profile located; profile site reserves rights. Open-access article licensing was not assumed to cover its separate profile photograph."
+  },
+  "newell": {
+    "source": "https://commons.wikimedia.org/wiki/File:Herbert_A._Simon_and_Allen_Newell_Chess_Match_(cropped).jpg",
+    "finding": "Chess-match candidate still relies on territorial public-domain arguments and a Flickr reuploader. No new worldwide rights-holder grant established. AI-generated portrait candidates were excluded."
+  }
+}
